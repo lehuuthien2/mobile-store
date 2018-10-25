@@ -241,8 +241,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="copy-right">
 			<p>&copy; 2013 Mobile Store. All Rights Reserved | Design by  <a href="http://w3layouts.com/">W3Layouts</a></p>
 		</div>
-		</div>
+dfgdgdfgjdfgj		</div>
 		</div>
 	</body>
 </html>
-
