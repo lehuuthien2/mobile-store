@@ -1,0 +1,139 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Mobilestore Website Template | single :: W3layouts</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <meta name="keywords"
+          content="Mobilestore iphone web template, Android web template, Smartphone web template, free webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design"/>
+    <link href='//fonts.googleapis.com/css?family=Londrina+Solid|Coda+Caption:800|Open+Sans' rel='stylesheet'
+          type='text/css'>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jqzoom.pack.1.0.1.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen"/>
+    <script src="js/imagezoom.js"></script>
+    <!-- FlexSlider -->
+    <script defer src="js/jquery.flexslider.js"></script>
+    <script>
+        // Can also be used with $(document).ready()
+        $(window).load(function () {
+            $('.flexslider').flexslider({
+                animation: "slide",
+                controlNav: "thumbnails"
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="wrap">
+    <!----start-Header---->
+    <div class="header">
+        <div class="search-bar">
+            <form>
+                <input type="text"><input type="submit" value="Search"/>
+            </form>
+        </div>
+        <div class="clear"></div>
+        <div class="header-top-nav">
+            <ul>
+                <li><a href="#">Register</a></li>
+                <li><a href="#">Login</a></li>
+                <li><a href="#">Delivery</a></li>
+                <li><a href="#">Checkout</a></li>
+                <li><a href="#">My account</a></li>
+                <li><a href="#"><span>shopping cart&nbsp;&nbsp;: </span></a><label> &nbsp;noitems</label></li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<div class="clear"></div>
+<div class="top-header">
+    <div class="wrap">
+        <!----start-logo---->
+        <div class="logo">
+            <a href="index.blade.php"><img src="images/logo.png" title="logo"/></a>
+        </div>
+        <!----end-logo---->
+        <!----start-top-nav---->
+        <div class="top-nav">
+            <ul>
+                <li><a href="index.blade.php">Home</a></li>
+                <li><a href="about.blade.php">About</a></li>
+                <li><a href="store.php">Store</a></li>
+                <li><a href="store.php">Featured</a></li>
+                <li><a href="blog.php">Blog</a></li>
+                <li><a href="contact.php">Contact</a></li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<!----End-top-nav---->
+<!----End-Header---->
+<div class="cart-payment">
+    <div class="content">
+        <p>GIỎ HÀNG CỦA BẠN</p>
+        <div class="product-infor">
+            <img  name="img-product" src="images/XS/img1.png" alt="">
+            <p>Product name</p><br>
+            <p>Giá :</p>
+        </div>
+        <div class="customer-infor">
+            <p>Thông tin khách hàng</p>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer">
+    <div class="wrap">
+        <div class="section group">
+            <div class="col_1_of_4 span_1_of_4">
+                <h3>Our Info</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, quis nostrud exercitation ullamco laboris
+                    nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+                    esse cillum dolore eu fugiat nulla pariatur.</p>
+            </div>
+            <div class="col_1_of_4 span_1_of_4">
+                <h3>Latest-News</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+            </div>
+            <div class="col_1_of_4 span_1_of_4">
+                <h3>Store Location</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                <h3>Order-online</h3>
+                <p>080-1234-56789</p>
+                <p>080-1234-56780</p>
+            </div>
+            <div class="col_1_of_4 span_1_of_4 footer-lastgrid">
+                <h3>News-Letter</h3>
+                <form>
+                    <input type="text"><input type="submit" value="go"/>
+                </form>
+                <h3>Follow Us:</h3>
+                <ul>
+                    <li><a href="#"><img src="images/twitter.png" title="twitter"/>Twitter</a></li>
+                    <li><a href="#"><img src="images/facebook.png" title="Facebook"/>Facebook</a></li>
+                    <li><a href="#"><img src="images/rss.png" title="Rss"/>Rss</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="wrap">
+        <div class="copy-right">
+            <p>&copy; 2013 Mobile Store. All Rights Reserved | Design by <a href="http://w3layouts.com/">W3Layouts</a>
+            </p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,21 +1,15 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>Mobilestore Website Template | Home :: W3layouts</title>
-    <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <title>Mobilestore </title>
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css" media="all"/>
     <meta name="keywords"
           content="Mobilestore iphone web template, Android web template, Smartphone web template, free webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design"/>
     <link href='//fonts.googleapis.com/css?family=Londrina+Solid|Coda+Caption:800|Open+Sans' rel='stylesheet'
           type='text/css'>
-    <link rel="stylesheet" href="css/responsiveslides.css">
-    <script src="js/jquery.min.js"></script>
-    <script src="js/responsiveslides.min.js"></script>
+    <link rel="stylesheet" href="{{asset('css/responsiveslides.css')}}">
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/responsiveslides.min.js') }}"></script>
     <script>
         // You can also use "$(window).load(function() {"
         $(function () {
@@ -35,8 +29,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <div class="clear"></div>
         <div class="header-top-nav">
             <ul>
-                {{--<li><a href="#">Register</a></li>--}}
-                {{--<li><a href="#">Login</a></li>--}}
+                <li><a href="#">Register</a></li>
+                <li><a href="#">Login</a></li>
                 {{--<li><a href="#">Delivery</a></li>--}}
                 {{--<li><a href="#">Checkout</a></li>--}}
                 {{--<li><a href="#">My account</a></li>--}}
@@ -55,20 +49,26 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         </div>
         <!----end-logo---->
         <!----start-top-nav---->
-        <div class="top-nav">
+        <div class="top-nav" style="">
             <ul>
-                <li><a href="{{ route('guests.index') }}">Home</a></li>
-                <li><a href="about.php">About</a></li>
-                <li><a href="store.php">Store</a></li>
-                <li><a href="store.php">Featured</a></li>
-                <li><a href="blog.php">Blog</a></li>
-                <li><a href="contact.php">Contact</a></li>
+                <li><a href="{{ route('guests.index') }}">TRANG CHỦ</a></li>
+                <li><a href="about.php">HÃNG SẢN XUẤT</a>
+                    <ul>
+
+                    </ul>
+                </li>
+                <li><a href="store.php">PHỤ KIỆN</a></li>
+                <li><a href="store.php">TIN TỨC</a></li>
+                <li><a href="store.php">KHUYẾN MÃI</a></li>
+                <li><a href="contact.php">LIÊN HỆ</a></li>
+                <li>
+                    <div class="search-bar" style="">
+                        <form>
+                            <input type="text"><input type="submit" value="Search"/>
+                        </form>
+                    </div>
+                </li>
             </ul>
-        </div>
-        <div class="search-bar">
-            <form>
-                <input type="text"><input type="submit" value="Search"/>
-            </form>
         </div>
         <div class="clear"></div>
     </div>
@@ -92,142 +92,188 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <div class="wrap">
     <div class="content">
         <div class="top-3-grids">
+            <h4 style="font-size: 2em; color: #575757; margin-top: 20px;">Sản phẩm nổi bật</h4>
             <div class="section group">
                 <div class="grid_1_of_3 images_1_of_3">
-                    <a href="product_detail.php"><img src="images/grid-img1.jpg"></a>
+                    <a href="single.php"><img src="images/grid-img1.jpg"></a>
                     <h3>Lorem Ipsum is simply dummy text </h3>
                 </div>
                 <div class="grid_1_of_3 images_1_of_3 second">
-                    <a href="product_detail.php"><img src="images/grid-img2.jpg"></a>
+                    <a href="single.php"><img src="images/grid-img2.jpg"></a>
                     <h3>Lorem Ipsum is simply dummy text </h3>
                 </div>
                 <div class="grid_1_of_3 images_1_of_3 theree">
-                    <a href="product_detail.php"><img src="images/grid-img3.jpg"></a>
+                    <a href="single.php"><img src="images/grid-img3.jpg"></a>
                     <h3>Lorem Ipsum is simply dummy text </h3>
                 </div>
             </div>
         </div>
 
         <div class="content-grids">
-            <h4>Deals of the day</h4>
+            <h4>Sản phẩm bán chạy</h4>
             <div class="section group">
                 <div class="grid_1_of_4 images_1_of_4 products-info">
                     <img src="images/m1.jpg">
-                    <a href="product_detail.php">Duis aute irure dolor in reprehenderit sed do eiusmod tempor incididunt</a>
+                    <a href="single.php">Duis aute irure dolor in reprehenderit sed do eiusmod tempor incididunt</a>
                     <h3>$260</h3>
-                    <ul>
-                        <li><a class="cart" href="product_detail.php"> </a></li>
-                        <li><a class="i" href="product_detail.php"> </a></li>
-                        <li><a class="Compar" href="product_detail.php"> </a></li>
-                        <li><a class="Wishlist" href="product_detail.php"> </a></li>
-                    </ul>
+                        {{--<li><a class="i" href="single.php"> </a></li>--}}
+                        {{--<li><a class="Compar" href="single.php"> </a></li>--}}
+                        {{--<li><a class="Wishlist" href="single.php"> </a></li>--}}
                 </div>
                 <div class="grid_1_of_4 images_1_of_4 products-info">
                     <img src="images/m2.jpg">
-                    <a href="product_detail.php">Duis aute irure dolor in reprehenderit sed do eiusmod tempor incididunt</a>
+                    <a href="single.php">Duis aute irure dolor in reprehenderit sed do eiusmod tempor incididunt</a>
                     <h3>$150</h3>
                     <ul>
-                        <li><a class="cart" href="product_detail.php"> </a></li>
-                        <li><a class="i" href="product_detail.php"> </a></li>
-                        <li><a class="Compar" href="product_detail.php"> </a></li>
-                        <li><a class="Wishlist" href="product_detail.php"> </a></li>
+                        <li><a class="cart" href="single.php"> </a></li>
+                        <li><a class="i" href="single.php"> </a></li>
+                        <li><a class="Compar" href="single.php"> </a></li>
+                        <li><a class="Wishlist" href="single.php"> </a></li>
                     </ul>
                 </div>
                 <div class="grid_1_of_4 images_1_of_4 products-info">
                     <img src="images/m7.jpg">
-                    <a href="product_detail.php">Duis aute irure dolor in reprehenderit sed do eiusmod tempor incididunt</a>
+                    <a href="single.php">Duis aute irure dolor in reprehenderit sed do eiusmod tempor incididunt</a>
                     <h3>$130</h3>
                     <ul>
-                        <li><a class="cart" href="product_detail.php"> </a></li>
-                        <li><a class="i" href="product_detail.php"> </a></li>
-                        <li><a class="Compar" href="product_detail.php"> </a></li>
-                        <li><a class="Wishlist" href="product_detail.php"> </a></li>
+                        <li><a class="cart" href="single.php"> </a></li>
+                        <li><a class="i" href="single.php"> </a></li>
+                        <li><a class="Compar" href="single.php"> </a></li>
+                        <li><a class="Wishlist" href="single.php"> </a></li>
                     </ul>
                 </div>
                 <div class="grid_1_of_4 images_1_of_4 products-info">
                     <img src="images/m4.jpg">
-                    <a href="product_detail.php">Duis aute irure dolor in reprehenderit sed do eiusmod tempor incididunt</a>
+                    <a href="single.php">Duis aute irure dolor in reprehenderit sed do eiusmod tempor incididunt</a>
                     <h3>$460</h3>
                     <ul>
-                        <li><a class="cart" href="product_detail.php"> </a></li>
-                        <li><a class="i" href="product_detail.php"> </a></li>
-                        <li><a class="Compar" href="product_detail.php"> </a></li>
-                        <li><a class="Wishlist" href="product_detail.php"> </a></li>
+                        <li><a class="cart" href="single.php"> </a></li>
+                        <li><a class="i" href="single.php"> </a></li>
+                        <li><a class="Compar" href="single.php"> </a></li>
+                        <li><a class="Wishlist" href="single.php"> </a></li>
                     </ul>
                 </div>
             </div>
+            <h4>Điện thoại Iphone</h4>
             <div class="section group">
                 <div class="grid_1_of_4 images_1_of_4 products-info">
                     <img src="images/m2.jpg">
-                    <a href="product_detail.php">Duis aute irure dolor in reprehenderit sed do eiusmod tempor incididunt</a>
+                    <a href="single.php">Duis aute irure dolor in reprehenderit sed do eiusmod tempor incididunt</a>
                     <h3>$260</h3>
                     <ul>
-                        <li><a class="cart" href="product_detail.php"> </a></li>
-                        <li><a class="i" href="product_detail.php"> </a></li>
-                        <li><a class="Compar" href="product_detail.php"> </a></li>
-                        <li><a class="Wishlist" href="product_detail.php"> </a></li>
+                        <li><a class="cart" href="single.php"> </a></li>
+                        <li><a class="i" href="single.php"> </a></li>
+                        <li><a class="Compar" href="single.php"> </a></li>
+                        <li><a class="Wishlist" href="single.php"> </a></li>
                     </ul>
                 </div>
                 <div class="grid_1_of_4 images_1_of_4 products-info">
                     <img src="images/m6.jpg">
-                    <a href="product_detail.php">Duis aute irure dolor in reprehenderit sed do eiusmod tempor incididunt</a>
+                    <a href="single.php">Duis aute irure dolor in reprehenderit sed do eiusmod tempor incididunt</a>
                     <h3>$100</h3>
                     <ul>
-                        <li><a class="cart" href="product_detail.php"> </a></li>
-                        <li><a class="i" href="product_detail.php"> </a></li>
-                        <li><a class="Compar" href="product_detail.php"> </a></li>
-                        <li><a class="Wishlist" href="product_detail.php"> </a></li>
+                        <li><a class="cart" href="single.php"> </a></li>
+                        <li><a class="i" href="single.php"> </a></li>
+                        <li><a class="Compar" href="single.php"> </a></li>
+                        <li><a class="Wishlist" href="single.php"> </a></li>
                     </ul>
                 </div>
                 <div class="grid_1_of_4 images_1_of_4 products-info">
                     <img src="images/m7.jpg">
-                    <a href="product_detail.php">Duis aute irure dolor in reprehenderit sed do eiusmod tempor incididunt</a>
+                    <a href="single.php">Duis aute irure dolor in reprehenderit sed do eiusmod tempor incididunt</a>
                     <h3>$180</h3>
                     <ul>
-                        <li><a class="cart" href="product_detail.php"> </a></li>
-                        <li><a class="i" href="product_detail.php"> </a></li>
-                        <li><a class="Compar" href="product_detail.php"> </a></li>
-                        <li><a class="Wishlist" href="product_detail.php"> </a></li>
+                        <li><a class="cart" href="single.php"> </a></li>
+                        <li><a class="i" href="single.php"> </a></li>
+                        <li><a class="Compar" href="single.php"> </a></li>
+                        <li><a class="Wishlist" href="single.php"> </a></li>
                     </ul>
                 </div>
                 <div class="grid_1_of_4 images_1_of_4 products-info">
                     <img src="images/m1.jpg">
-                    <a href="product_detail.php">Duis aute irure dolor in reprehenderit sed do eiusmod tempor incididunt</a>
+                    <a href="single.php">Duis aute irure dolor in reprehenderit sed do eiusmod tempor incididunt</a>
                     <h3>$140</h3>
                     <ul>
-                        <li><a class="cart" href="product_detail.php"> </a></li>
-                        <li><a class="i" href="product_detail.php"> </a></li>
-                        <li><a class="Compar" href="product_detail.php"> </a></li>
-                        <li><a class="Wishlist" href="product_detail.php"> </a></li>
+                        <li><a class="cart" href="single.php"> </a></li>
+                        <li><a class="i" href="single.php"> </a></li>
+                        <li><a class="Compar" href="single.php"> </a></li>
+                        <li><a class="Wishlist" href="single.php"> </a></li>
+                    </ul>
+                </div>
+            </div>
+            <h4>Điện thoại Samsung</h4>
+            <div class="section group">
+                <div class="grid_1_of_4 images_1_of_4 products-info">
+                    <img src="images/m2.jpg">
+                    <a href="single.php">Duis aute irure dolor in reprehenderit sed do eiusmod tempor incididunt</a>
+                    <h3>$260</h3>
+                    <ul>
+                        <li><a class="cart" href="single.php"> </a></li>
+                        <li><a class="i" href="single.php"> </a></li>
+                        <li><a class="Compar" href="single.php"> </a></li>
+                        <li><a class="Wishlist" href="single.php"> </a></li>
+                    </ul>
+                </div>
+                <div class="grid_1_of_4 images_1_of_4 products-info">
+                    <img src="images/m6.jpg">
+                    <a href="single.php">Duis aute irure dolor in reprehenderit sed do eiusmod tempor incididunt</a>
+                    <h3>$100</h3>
+                    <ul>
+                        <li><a class="cart" href="single.php"> </a></li>
+                        <li><a class="i" href="single.php"> </a></li>
+                        <li><a class="Compar" href="single.php"> </a></li>
+                        <li><a class="Wishlist" href="single.php"> </a></li>
+                    </ul>
+                </div>
+                <div class="grid_1_of_4 images_1_of_4 products-info">
+                    <img src="images/m7.jpg">
+                    <a href="single.php">Duis aute irure dolor in reprehenderit sed do eiusmod tempor incididunt</a>
+                    <h3>$180</h3>
+                    <ul>
+                        <li><a class="cart" href="single.php"> </a></li>
+                        <li><a class="i" href="single.php"> </a></li>
+                        <li><a class="Compar" href="single.php"> </a></li>
+                        <li><a class="Wishlist" href="single.php"> </a></li>
+                    </ul>
+                </div>
+                <div class="grid_1_of_4 images_1_of_4 products-info">
+                    <img src="images/m1.jpg">
+                    <a href="single.php">Duis aute irure dolor in reprehenderit sed do eiusmod tempor incididunt</a>
+                    <h3>$140</h3>
+                    <ul>
+                        <li><a class="cart" href="single.php"> </a></li>
+                        <li><a class="i" href="single.php"> </a></li>
+                        <li><a class="Compar" href="single.php"> </a></li>
+                        <li><a class="Wishlist" href="single.php"> </a></li>
                     </ul>
                 </div>
             </div>
 
         </div>
-        <div class="content-sidebar">
-            <h4>Categories</h4>
-            <ul>
-                <li><a href="#">Accord Mobiles</a></li>
-                <li><a href="#">Ace Mobile</a></li>
-                <li><a href="#">Acer Mobile</a></li>
-                <li><a href="#">Airfone</a></li>
-                <li><a href="#">Apple</a></li>
-                <li><a href="#">Blackberry</a></li>
-                <li><a href="#">Byond Tech</a></li>
-                <li><a href="#">Celkon Mobiles</a></li>
-                <li><a href="#">Dell Mobile Phones </a></li>
-                <li><a href="#">Fly Mobile</a></li>
-                <li><a href="#">Fujezone Mobiles </a></li>
-                <li><a href="#">HTC</a></li>
-                <li><a href="#">LG Mobiles</a></li>
-                <li><a href="#">Longtel Mobile</a></li>
-                <li><a href="#">Maxx</a></li>
-                <li><a href="#">Micromax Mobiles </a></li>
-                <li><a href="#">Samsung Mobiles</a></li>
-                <li><a href="#">Sony Ericsson Mobiles</a></li>
-                <li><a href="#">Wynncom Mobiles</a></li>
-            </ul>
-        </div>
+        {{--<div class="content-sidebar">--}}
+        {{--<h4>Categories</h4>--}}
+        {{--<ul>--}}
+        {{--<li><a href="#">Accord Mobiles</a></li>--}}
+        {{--<li><a href="#">Ace Mobile</a></li>--}}
+        {{--<li><a href="#">Acer Mobile</a></li>--}}
+        {{--<li><a href="#">Airfone</a></li>--}}
+        {{--<li><a href="#">Apple</a></li>--}}
+        {{--<li><a href="#">Blackberry</a></li>--}}
+        {{--<li><a href="#">Byond Tech</a></li>--}}
+        {{--<li><a href="#">Celkon Mobiles</a></li>--}}
+        {{--<li><a href="#">Dell Mobile Phones </a></li>--}}
+        {{--<li><a href="#">Fly Mobile</a></li>--}}
+        {{--<li><a href="#">Fujezone Mobiles </a></li>--}}
+        {{--<li><a href="#">HTC</a></li>--}}
+        {{--<li><a href="#">LG Mobiles</a></li>--}}
+        {{--<li><a href="#">Longtel Mobile</a></li>--}}
+        {{--<li><a href="#">Maxx</a></li>--}}
+        {{--<li><a href="#">Micromax Mobiles </a></li>--}}
+        {{--<li><a href="#">Samsung Mobiles</a></li>--}}
+        {{--<li><a href="#">Sony Ericsson Mobiles</a></li>--}}
+        {{--<li><a href="#">Wynncom Mobiles</a></li>--}}
+        {{--</ul>--}}
+        {{--</div>--}}
     </div>
     <div class="clear"></div>
 </div>

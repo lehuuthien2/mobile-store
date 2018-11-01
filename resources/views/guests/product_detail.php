@@ -38,6 +38,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 var plusmin;
                 plusmin = $(this).children(".plusminus").text();
 
+                // $(this).children(".plusminus").text(plusmin == '+' ? '-' : '+');
+
+
                 if (plusmin == '+')
                     $(this).children(".plusminus").text('-');
                 else
@@ -222,7 +225,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     </div>
                 </div>
                 <div class="thongso-kt">
-                    <p class="menu_head" style="color: white; font-size: 130%;">Thông số kỹ thuật<span class="plusminus"></span></p>
+                    <p class="menu_head" style="color: white; font-size: 130%;">Thông số kỹ thuật<span class="plusminus">+</span></p>
                     <div class="menu_body" style="display: none;">
                         <p style="color: red; font-size: 120%;">Màn hình</p>
                         <p>Công nghệ màn hình :</p>

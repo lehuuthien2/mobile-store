@@ -13,7 +13,7 @@ class GuestController extends Controller
      */
     public function index()
     {
-        return view('guests.product_detail');
+        return view('guests.index');
     }
 
     /**
