@@ -74,10 +74,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					 <a href="#">Duis aute irure dolor in reprehenderit sed do eiusmod tempor incididunt</a>
 					 <h3>$260</h3>
 					 <ul>
-					 	<li><a  class="cart" href="single.php"> </a></li>
-					 	<li><a  class="i" href="single.php"> </a></li>
-					 	<li><a  class="Compar" href="single.php"> </a></li>
-					 	<li><a  class="Wishlist" href="single.php"> </a></li>
+					 	<li><a  class="cart" href="product_detail.php"> </a></li>
+					 	<li><a  class="i" href="product_detail.php"> </a></li>
+					 	<li><a  class="Compar" href="product_detail.php"> </a></li>
+					 	<li><a  class="Wishlist" href="product_detail.php"> </a></li>
 					 </ul>
 				</div>
 				<div class="grid_1_of_4 images_1_of_4 products-info">
@@ -85,10 +85,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					  <a href="#">Duis aute irure dolor in reprehenderit sed do eiusmod tempor incididunt</a>
 					 <h3>$150</h3>
 					 <ul>
-					 	<li><a  class="cart" href="single.php"> </a></li>
-					 	<li><a  class="i" href="single.php"> </a></li>
-					 	<li><a  class="Compar" href="single.php"> </a></li>
-					 	<li><a  class="Wishlist" href="single.php"> </a></li>
+					 	<li><a  class="cart" href="product_detail.php"> </a></li>
+					 	<li><a  class="i" href="product_detail.php"> </a></li>
+					 	<li><a  class="Compar" href="product_detail.php"> </a></li>
+					 	<li><a  class="Wishlist" href="product_detail.php"> </a></li>
 					 </ul>
 				</div>
 				<div class="grid_1_of_4 images_1_of_4 products-info">
@@ -96,10 +96,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					  <a href="#">Duis aute irure dolor in reprehenderit sed do eiusmod tempor incididunt</a>
 					 <h3>$130</h3>
 					 <ul>
-					 	<li><a  class="cart" href="single.php"> </a></li>
-					 	<li><a  class="i" href="single.php"> </a></li>
-					 	<li><a  class="Compar" href="single.php"> </a></li>
-					 	<li><a  class="Wishlist" href="single.php"> </a></li>
+					 	<li><a  class="cart" href="product_detail.php"> </a></li>
+					 	<li><a  class="i" href="product_detail.php"> </a></li>
+					 	<li><a  class="Compar" href="product_detail.php"> </a></li>
+					 	<li><a  class="Wishlist" href="product_detail.php"> </a></li>
 					 </ul>
 				</div>
 				<div class="grid_1_of_4 images_1_of_4 products-info">
@@ -107,10 +107,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					  <a href="#">Duis aute irure dolor in reprehenderit sed do eiusmod tempor incididunt</a>
 					 <h3>$460</h3>
 					 <ul>
-					 	<li><a  class="cart" href="single.php"> </a></li>
-					 	<li><a  class="i" href="single.php"> </a></li>
-					 	<li><a  class="Compar" href="single.php"> </a></li>
-					 	<li><a  class="Wishlist" href="single.php"> </a></li>
+					 	<li><a  class="cart" href="product_detail.php"> </a></li>
+					 	<li><a  class="i" href="product_detail.php"> </a></li>
+					 	<li><a  class="Compar" href="product_detail.php"> </a></li>
+					 	<li><a  class="Wishlist" href="product_detail.php"> </a></li>
 					 </ul>
 				</div>
 			</div>
