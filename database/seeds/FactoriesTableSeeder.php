@@ -13,21 +13,21 @@ class FactoriesTableSeeder extends Seeder
     {
         DB::table('factories')->insert([
             [
-              'name' => 'Apple',
-              'slug' => 'Apple'
+                'name' => 'Apple',
+                'slug' => 'apple'
             ],
             [
                 'name' => 'Samsung',
-                'slug' => 'Samsung'
+                'slug' => 'samsung'
             ],
             [
                 'name' => 'HTC',
-                'slug' => 'HTC'
+                'slug' => 'htc'
             ],
             [
                 'name' => 'Oppo',
-                'slug' => 'Oppo'
+                'slug' => 'oppo'
             ],
-    ]);
+        ]);
     }
 }

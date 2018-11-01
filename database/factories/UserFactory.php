@@ -39,8 +39,8 @@ $factory->define(mobileS\Product::class, function (Faker $faker) {
         'storage' => json_encode([array_rand(STORAGE), array_rand(STORAGE)]),
         'description' => $faker->text,
         'picture' => json_encode(
-            ['pic1' => 'dfdf4545s56ss11dkf.jpg',
-                'pic2' => '394534sdfsidfd454.jpg']),
+            ['dfdf4545s56ss11dkf.jpg',
+                '394534sdfsidfd454.jpg']),
         'in_stock' => $faker->randomNumber(2),
         'slug' => str_slug($faker->name),
         'created_at' => $faker->unixTime,
