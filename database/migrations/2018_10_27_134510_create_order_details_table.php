@@ -24,7 +24,7 @@ class CreateOrderDetailsTable extends Migration
             $table->string('product_name', 100);
             $table->string('product_color', 45);
             $table->tinyInteger('product_promotion')->nullable();
-            $table->string('product_storage', 60);
+            $table->string('product_storage', 255);
             $table->integer('amount');
             $table->timestamps();
         });
