@@ -2,6 +2,7 @@
 
 namespace mobileS\Http\Controllers\Auth;
 
+use Illuminate\Support\Facades\Auth;
 use mobileS\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -25,7 +26,16 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+//    protected $redirectTo = '/';
+
+//    Path Customization
+    protected function redirectTo()
+    {
+        if (Auth::user()->permission == 1) {
+            return $this->redirectTo = '/';
+        }
+        return $this->redirectTo = '/manage';
+    }
 
     /**
      * Create a new controller instance.
@@ -36,4 +46,11 @@ class LoginController extends Controller
     {
         $this->middleware('guests')->except('logout');
     }
+
+    public function username()
+    {
+        return 'username';
+    }
+
+
 }

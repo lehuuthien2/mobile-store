@@ -17,7 +17,7 @@ use Faker\Generator as Faker;
 $factory->define(mobileS\User::class, function (Faker $faker) {
     return [
         'username' => $faker->unique()->userName,
-        'password' => $faker->password,
+        'password' => bcrypt('123123'),
         'name' => $faker->name,
         'birthday' => $faker->date(),
         'gender' => $faker->numberBetween(1, 2),

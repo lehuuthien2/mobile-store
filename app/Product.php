@@ -4,7 +4,7 @@ namespace mobileS;
 
 use Illuminate\Database\Eloquent\Model;
 
-class News extends Model
+class Product extends Model
 {
-    protected $primaryKey = 'news_id';
+    protected $primaryKey = 'product_id';
 }

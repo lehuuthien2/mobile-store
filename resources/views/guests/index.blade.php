@@ -61,7 +61,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="top-nav">
 			<ul>
 				<li><a href="{{ route('guests.index') }}">Home</a></li>
-				<li><a href="about.php">About</a></li>
+				<li><a href="./about.php">About</a></li>
 				<li><a href="store.php">Store</a></li>
 				<li><a href="store.php">Featured</a></li>
 				<li><a href="blog.php">Blog</a></li>
