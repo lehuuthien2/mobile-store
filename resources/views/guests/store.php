@@ -209,7 +209,7 @@ function getpos(arr, obj) {
 				<li><a href="store.php">Store</a></li>
 				<li><a href="store.php">Featured</a></li>
 				<li><a href="blog.php">Blog</a></li>
-				<li><a href="contact.php">Contact</a></li>
+				<li><a href="contact.blade.php">Contact</a></li>
 			</ul>
 		</div>
 		<div class="clear"> </div>
