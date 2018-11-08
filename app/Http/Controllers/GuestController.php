@@ -81,4 +81,34 @@ class GuestController extends Controller
     {
         //
     }
+    public function news()
+    {
+        return view('guests.news');
+    }
+    public function product_detail()
+    {
+        return view('guests.product_detail');
+    }
+    public function contact()
+    {
+        return view('guests.contact');
+    }
+    public function factory()
+    {
+        return view('guests.factory');
+    }
+    public function cart()
+    {
+        return view('guests.cart');
+    }
+    public function search(Request $request)
+    {
+        $search = $request->get('search');
+        return view('guests.search_product', compact('search'));
+    }
+    public function news_detail()
+    {
+        return view('guests.news_detail');
+    }
+
 }
