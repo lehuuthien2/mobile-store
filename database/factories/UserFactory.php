@@ -25,6 +25,7 @@ $factory->define(mobileS\User::class, function (Faker $faker) {
         'tel' => '09052244' . $faker->numberBetween(10, 99),
         'email' => $faker->unique()->safeEmail,
         'remember_token' => str_random(10),
+        'permission' => $faker->numberBetween(1,3),
         'created_at' => $faker->unixTime,
         'updated_at' => $faker->unixTime,
     ];
@@ -54,6 +55,7 @@ $factory->define(mobileS\News::class, function (Faker $faker) {
         'summary' => $faker->text,
         'body' => $faker->text,
         'slug' => str_slug($faker->text(255)),
+        'thumbnail' => $faker->text(255),
         'created_at' => $faker->unixTime,
         'updated_at' => $faker->unixTime,
     ];

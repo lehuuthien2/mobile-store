@@ -34,7 +34,7 @@ class LoginController extends Controller
         if (Auth::user()->permission == 1) {
             return $this->redirectTo = '/';
         }
-        return $this->redirectTo = '/manage';
+        return $this->redirectTo = '/manages';
     }
 
     /**

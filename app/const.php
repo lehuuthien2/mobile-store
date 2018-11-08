@@ -15,3 +15,6 @@ define('STORAGE', [
     '6' => '512GB'
 ]);
 
+define('MALE', 1);
+define('FEMALE', 2);
+

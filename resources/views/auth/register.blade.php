@@ -84,11 +84,41 @@
                                 <div class="col-md-6">
                                     <input id="name" type="text"
                                            class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}"
-                                           name="name" value="{{ old('name') }}" required autofocus>
+                                           name="name" value="{{ old('name') }}" required>
 
                                     @if ($errors->has('name'))
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="birthday"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Ngày sinh') }} </label>
+
+                                <div class="col-md-6">
+                                    {!! Form::text('birthday', old('birthday', isset($user) ? $user->birthday : null), ['class' => 'form-control datepicker']) !!}
+                                    @if ($errors->has('birthday'))
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('birthday') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="gender"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Giới tính') }} </label>
+
+                                <div class="col-md-6">
+                                    <label><input type="radio" name="gender" value="{{MALE}}" checked> Nam</label>
+                                    <label><input type="radio" name="gender" value="{{FEMALE}}"> Nữ</label><br>
+
+                                    @if ($errors->has('gender'))
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('gender') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -131,20 +161,20 @@
                             </div>
 
                             {{--<div class="form-group row">--}}
-                                {{--<label for="avatar"--}}
-                                       {{--class="col-md-4 col-form-label text-md-right">{{ __('Ảnh đại diện') }}</label>--}}
+                            {{--<label for="avatar"--}}
+                            {{--class="col-md-4 col-form-label text-md-right">{{ __('Ảnh đại diện') }}</label>--}}
 
-                                {{--<div class="col-md-6">--}}
-                                    {{--<input id="avatar" type="text"--}}
-                                           {{--class="form-control{{ $errors->has('avatar') ? ' is-invalid' : '' }}"--}}
-                                           {{--name="avatar" value="{{ old('avatar') }}">--}}
+                            {{--<div class="col-md-6">--}}
+                            {{--<input id="avatar" type="text"--}}
+                            {{--class="form-control{{ $errors->has('avatar') ? ' is-invalid' : '' }}"--}}
+                            {{--name="avatar" value="{{ old('avatar') }}">--}}
 
-                                    {{--@if ($errors->has('avatar'))--}}
-                                        {{--<span class="invalid-feedback" role="alert">--}}
-                                        {{--<strong>{{ $errors->first('avatar') }}</strong>--}}
-                                    {{--</span>--}}
-                                    {{--@endif--}}
-                                {{--</div>--}}
+                            {{--@if ($errors->has('avatar'))--}}
+                            {{--<span class="invalid-feedback" role="alert">--}}
+                            {{--<strong>{{ $errors->first('avatar') }}</strong>--}}
+                            {{--</span>--}}
+                            {{--@endif--}}
+                            {{--</div>--}}
                             {{--</div>--}}
 
                             <div class="form-group row mb-0">

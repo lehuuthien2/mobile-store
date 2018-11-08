@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('address', 255);
             $table->rememberToken();
             $table->string('avatar',255)->nullable();
-            $table->integer('permission')->default(1);  //1.customer, 2.admin, 3.sale, 4.writer
+            $table->integer('permission')->default(1);  //1.customer, 2.sale, 3.writer, 4.admin
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();
         });
