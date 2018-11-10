@@ -1,0 +1,147 @@
+<?php
+
+namespace mobileS\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use mobileS\Http\Middleware\RedirectIfAuthentimanageed;
+use mobileS\Http\Requests\UserRequest;
+use mobileS\User;
+
+class UserController extends Controller
+{
+    public function __construct()
+    {
+        $this->middleware('admin')->only('destroy');
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        if(!Auth::check() || Auth::user()->permission != 4){
+            return redirect()
+                ->route('manages.index')
+                ->withError('Access denied');
+        }
+        $users = User::whereIn('permission', [2, 3])->paginate(30);
+        return view('manages/users.index', compact('users'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        if(!Auth::check() || Auth::user()->permission != 4){
+            return redirect()
+                ->route('manages.index')
+                ->withError('Access denied');
+        }
+        return view('manages/users.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  mobileS\Http\Requests\UserRequest $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(UserRequest $request)
+    {
+        $data = $request->all();
+        if ($request->hasFile('avatar')) {
+//            $pathName = $request->avatar->storeAs('avatars',$request->avatar->getClientOriginalName(),'public');
+            $pathName = $request->avatar->store('avatars', 'uploads');
+            $data['avatar'] = 'uploads/' . $pathName;
+        }
+        User::create($data);
+        return redirect(route('users.index'));
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int $user_id
+     * @return \Illuminate\Http\Response
+     */
+    public function show(User $user)
+    {
+//        $user = User::find('user_id', $user_id);
+        return view('manages/users.show', compact('user'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int $user_id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($user_id)
+    {
+        if(!Auth::check() || Auth::user()->permission != 4){
+            return redirect()
+                ->route('manages.index')
+                ->withError('Access denied');
+        }
+        $user = User::where('user_id', $user_id)->first();
+        return view('manages/users.edit', compact('user'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \mobileS\Http\Requests\UserRequest $request
+     * @param  int $user_id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(UserRequest $request, $user_id)
+    {
+        
+        $data = $request->all();
+        if ($request->hasFile('avatar')) {
+//            $pathName = $request->avatar->storeAs('avatars',$request->avatar->getClientOriginalName(),'public');
+            $pathName = $request->avatar->store('avatars', 'uploads');
+            $data['avatar'] = 'uploads/' . $pathName;
+        }
+        $data['password'] = bcrypt($data['password']);
+        $user = User::find($user_id);
+        $user->update($data);
+        return redirect(route('users.index'));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int $user_id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($user_id)
+    {
+        $user = User::find($user_id);
+        $user->delete();
+        if ($user->permission == 1) {
+            return redirect(route('users.customer'));
+        }
+        return redirect(route('users.index'));
+    }
+
+    public function manage_index()
+    {
+        if (!Auth::check() || Auth::user()->permission == 1) {
+            return redirect(route('guests.index'))->withErrors('Access Denied');
+        }
+        $c = 2;
+        return view('manages.index', compact('c'));
+    }
+
+    public function customer_index()
+    {
+        $users = User::where('permission', 1)->paginate(30);
+        return view('manages/users.customers', compact('users'));
+    }
+}
