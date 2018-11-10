@@ -3,16 +3,6 @@
 @section('content')
     <!--main content start-->
     <section class="wrapper">
-        <div class="row">
-            <div class="col-lg-12">
-                <h3 class="page-header"><i class="fa fa-table"></i> Table</h3>
-                <ol class="breadcrumb">
-                    <li><i class="fa fa-home"></i><a href="{{route('manages.index')}}">Home</a></li>
-                    <li><i class="fa fa-table"></i>Table</li>
-                    <li><i class="fa fa-th-list"></i><a href="{{route('users.index')}}">Users Table</a></li>
-                </ol>
-            </div>
-        </div>
         <!-- page start-->
         <div class="row">
             <div class="col-lg-12">
@@ -36,6 +26,7 @@
                             <th><i class="icon_cogs"></i> Action</th>
                         </tr>
                         @php $i = 1 @endphp
+
                         @foreach($users as $user)
                             <tr>
                                 <td>{{$i++}}</td>
@@ -44,7 +35,7 @@
                                 <td>{{ $user->tel}}</td>
                                 <td>{{ mb_substr($user->address, 0, 19) }}</td>
                                 <td>
-                                    @if($user->permission == 3)
+                                    @if($user->permission == 2)
                                         {{'Sale'}}
                                     @else {{'Writer'}}
                                     @endif
@@ -55,10 +46,12 @@
                                         <a class="btn btn-success" href="{{route('users.edit' , $user->user_id)}}"><i
                                                 class="icon_pencil-edit"></i></a>
                                         <form action="{{route('users.destroy', $user->user_id)}}"
-                                              method="POST" onsubmit="return confirm('Are you sure?');" style="display: inline-block;">
+                                              method="POST" onsubmit="return confirm('Are you sure?');"
+                                              style="display: inline-block;">
                                             <input type="hidden" name="_method" value="DELETE">
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                            <a class="btn btn-danger" href="javascript:void(0);" onclick="$(this).parent().submit();">
+                                            <a class="btn btn-danger" href="javascript:void(0);"
+                                               onclick="$(this).parent().submit();">
                                                 <i class="icon_close_alt"></i>
                                             </a>
                                         </form>
@@ -71,7 +64,9 @@
                 </section>
             </div>
         </div>
-
+        <div id="pagination" class="text-center">
+            {{$users->links()}}
+        </div>
         <!-- page end-->
     </section>
     <!--main content end-->

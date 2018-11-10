@@ -32,6 +32,7 @@ class UserRequest extends FormRequest
             'tel' => 'required|max:11',
             'email' => 'required|max:255|unique:users,email',
             'address' => 'required|max:255',
+            'avatar' => 'image|max:3072'
         ];
         if(request()->method() == 'PUT'){
             $rules['username'] = 'required|max:20|unique:users,username,' . request()->input('user_id') . ',user_id';

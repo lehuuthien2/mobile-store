@@ -2,9 +2,11 @@
 
 namespace mobileS;
 
+use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+
 
 class User extends Authenticatable
 {
@@ -60,10 +62,10 @@ class User extends Authenticatable
     }
 
     public function canEdit(News $news){
-        return $this->permission == 2 || $this->owns($news);
+        return $this->permission == 4 || $this->owns($news);
     }
 
     public function isAdministrator(){
-        return $this->permission == 2;
+        return $this->permission == 4;
     }
 }

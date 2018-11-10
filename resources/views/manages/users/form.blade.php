@@ -28,7 +28,7 @@
 <div class="form-group">
     {!! Form::label('birthday', 'Ngày sinh <span class="required">*</span>' ,['class' => 'control-label col-sm-2'], false) !!}
     <div class="col-sm-10">
-        {!! Form::text('birthday', old('birthday', isset($user) ? $user->birthday : null) , ['class' => 'form-control']) !!}
+        {!! Form::text('birthday', old('birthday', isset($user) ? $user->birthday : null) , ['class' => 'form-control datepicker']) !!}
     </div>
 </div>
 <div class="form-group">
@@ -59,7 +59,11 @@
 <div class="form-group">
     {!! Form::label('avatar', 'Ảnh đại diện',['class' => 'control-label col-sm-2']) !!}
     <div class="col-sm-10">
-        {!! Form::file('avatar', old('avatar', isset($user) ? $user->avatar : null), ['class' => 'form-control']) !!}
+        <input type="file" name="avatar" class="form-control"
+               value="{{old('avatar', isset($user) ? $user->avatar : null)}}">
+        @if(isset($user->avatar))
+            <img src="{{(asset($user->avatar))}}" alt="Ảnh đại diện" width="150px" height="150px">
+            @endif
     </div>
 </div>
 <div class="form-group">
@@ -74,5 +78,5 @@
 {{Form::hidden('user_id', isset($user) ? $user->user_id : null)}}
 <div class="col-lg-offset-2 col-lg-10">
     {!! Form::submit('Lưu', ['class' =>'btn btn-primary']) !!}
-    {!! Form::reset('Nhập lại', ['class' =>'btn btn-default']) !!}
+    <input type="button" name="clear" value="Nhập lại" onclick="clearForm(this.form);">
 </div>

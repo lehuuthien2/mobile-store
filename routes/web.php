@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return redirect('guests');
+    return redirect('/manages');
 });
 
 Route::resource('guests', 'GuestController');
@@ -31,7 +31,37 @@ Route::get('manages',[
 //]);
 Route::resource('manages/users','UserController');
 
+Route::resource('manages/products', 'ProductController');
 Route::get('manages/customers',[
    'uses' => 'UserController@customer_index',
    'as' => 'users.customer',
+]);
+
+Route::get('news', [
+    'uses' => 'GuestController@news',
+    'as' => 'guests.news'
+]);
+Route::get('cart', [
+    'uses' => 'GuestController@cart',
+    'as' => 'guests.cart'
+]);
+Route::get('factories', [
+    'uses' => 'GuestController@factory',
+    'as' => 'guests.factory'
+]);
+Route::get('detail', [
+    'uses' => 'GuestController@product_detail',
+    'as' => 'guests.product_detail'
+]);
+Route::get('search', [
+    'uses' => 'GuestController@search',
+    'as' => 'guests.search'
+]);
+Route::get('news_detail', [
+    'uses' => 'GuestController@news_detail',
+    'as' => 'guests.news_detail'
+]);
+Route::get('contact', [
+    'uses' => 'GuestController@contact',
+    'as' => 'guests.contact'
 ]);
