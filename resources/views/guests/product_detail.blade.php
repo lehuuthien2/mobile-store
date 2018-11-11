@@ -50,24 +50,36 @@
                     <div class="clear"></div>
                 </div>
                 <div class="brand-history">
-                    <h3>Chương trình khuyến mãi :</h3><br>
-                    <h2>Thế giới màn hình lớn chào đón bạn.</h2>
-                    <p>
-                        Xin giới thiệu chiếc iPhone màn hình lớn nhất từ trước đến nay khi bạn sẽ có
-                        hai lựa chọn kích thước màn hình khác nhau, cùng ở chuẩn độ phân giải
-                        Super Retina siêu sắc nét. Face ID cực nhanh, con chip mạnh mẽ và thông
-                        minh nhất thế giới smartphone, hệ thống camera kép đột phá, iPhone Xs tập
-                        hợp những điều bạn yêu thích nhất trên một chiếc iPhone.
+                    <h3 style="padding-bottom: 20px; color: red; font-weight: bold;">Chương trình khuyến mãi :</h3>
+                    <p>Bắt đầu từ 1/12/2018 Khi mua hàng tại hệ thống cửa hàng T&M Mobile.
+                         Quý khách sẽ được ( BẢO HÀNH Tại các hệ thống của T&M Mobile)
+                        NGUỒN và MÀN HÌNH 1 tháng PHẦN CỨNG 6 tháng, ĐỔI MỚI trong 30 ngày và được gói KHUYẾN MẠI cực khủng:
                     </p>
+                    <p>-Gói KM : Cáp + Sac chính hãng trị giá 250k, tai nghe S7 trị giá 150k, ốp lưng trị giá 100k,
+                        dán màn hình</p>
+                    <p>ƯU ĐÃI LỚN:</p>
+
+                    <p>   -DÙNG THỬ 10 NGÀY MIẾN PHÍ</p>
+
+                    <p>   -TRẢ GÓP LÃI XUẤT THẤP CMND+BLX</p>
+
+                    <p>  -TRẢ GÓP LÃI XUẤT 0% QUA THẺ TÍN DỤNG</p>
+
+                    <p>   -Trợ giá mua tai nghe AKG với giá chỉ 99.000đ</p>
+
+                    <p>   -Tặng ngay gậy selfie mini trị giá 150.000 VNĐ</p>
+
+                    <p>   -Tặng ngay Que chọc sim cao cấp trị giá :20.000đ</p>
+
+
+                    <p>   ♥ Freeship khi khách hàng đặt hàng ONLINE chuyển khoản 100% giá trị sản phẩm.</p>
+
+                    <p>   KHUYẾN MÃI HOT:</p>
+
+                    <p>   ♥ Mừng ngày nhà giáo Việt Nam 20/11 giảm 150.000đ tất cả khách hàng mới mua săm tại T&M Mobile.</p>
+                    <p>   ♥ Đặc biệt giáo viên và  học sinh sẽ giảm 200.0000đ trên toàn hệ thống T&M Mobile.</p>
                     <a href="{{route('guests.cart')}}">Add cart</a>
                 </div>
-                <!--		    		<div class="share">-->
-                <!--		    			<ul>-->
-                <!--		    				<li> <a href="#"><img src="images/facebook.png" title="facebook" /> Facebook</a></li>-->
-                <!--		    				<li> <a href="#"><img src="images/twitter.png" title="Twiiter" />Twiiter</a></li>-->
-                <!--		    				<li> <a href="#"><img src="images/rss.png" title="Rss" />Rss</a></li>-->
-                <!--		    			</ul>-->
-                <!--		    		</div>-->
                 <div class="clear"></div>
 
             </div>
@@ -95,11 +107,52 @@
                         <img  name="image3" src="images/XS/xs-5.png" alt="">
 
                     </div>
-                    <p class="menu_head" style="font-size: 130%;">Bình luận & Đánh giá<span class="plusminus">+</span></p>
+                    <p class="menu_head" style="font-size: 130%;">Bình luận<span class="plusminus">+</span></p>
                     <div class="menu_body" style="display: none;">
-                        <p>theonlytutorials.com is providing a great varitey of tutorials and scripts to use it immediate on
-                            any project!</p>
+                        <div class="add-comment" style="margin-bottom: 30px; padding-bottom: 30px; border-bottom: 1px solid #e5e5e5;">
+                            <p>BÌNH LUẬN VỀ SẢN PHẨM</p>
+                            <textarea name="comment-text" placeholder="Mời bạn nhập bình luận ..." style="width: 90%; height: 150px;"></textarea>
+                        </div>
+                        <div class="comment-reply">
+                            <p>Tên user</p>
+                            <p>Nội dung bình luận của user</p>
+                            <p>Trả lời : July 11, 2018</p>
+                            <p style="border: 1px dashed black;">Nội dung trả lời của addmin</p>
+                        </div>
+                        <div class="comment-reply">
+                            <p>Tên user</p>
+                            <p>Nội dung bình luận của user</p>
+                            <p>Trả lời : July 11, 2018</p>
+                            <p style="border: 1px dashed black;">Nội dung trả lời của addmin</p>
+                        </div>
+                        <div class="comment-reply">
+                            <p>Tên user</p>
+                            <p>Nội dung bình luận của user</p>
+                            <p>Trả lời : July 11, 2018</p>
+                            <p style="border: 1px dashed black;">Nội dung trả lời của addmin</p>
+                        </div>
+                        <div class="comment-reply">
+                            <p>Tên user</p>
+                            <p>Nội dung bình luận của user</p>
+                            <p>Trả lời : July 11, 2018</p>
+                            <p style="border: 1px dashed black;">Nội dung trả lời của addmin</p>
+                        </div>
+                        <div class="comment-reply">
+                            <p>Tên user</p>
+                            <p>Nội dung bình luận của user</p>
+                            <p>Trả lời : July 11, 2018</p>
+                            <p style="border: 1px dashed black;">Nội dung trả lời của addmin</p>
+                        </div>
+                        <div class="pagnation">
+                            <ul>
+                                <li><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a>....</li>
+                                <li><a href="#">Next</a></li>
+                            </ul>
+                        </div>
                     </div>
+                    <div class="clear"></div>
                 </div>
                 <div class="thongso-kt">
                     <p class="menu_head" style="color: white; font-size: 130%;">Thông số kỹ thuật<span class="plusminus">+</span></p>
@@ -133,30 +186,6 @@
         </div>
 
     </div>
-    <!--		    	<div class="content-sidebar">-->
-    <!--		    		<h4>Categories</h4>-->
-    <!--						<ul>-->
-    <!--							<li><a href="#">Accord Mobiles</a></li>-->
-    <!--							<li><a href="#">Ace Mobile</a></li>-->
-    <!--							<li><a href="#">Acer Mobile</a></li>-->
-    <!--							<li><a href="#">Airfone</a></li>-->
-    <!--							<li><a href="#">Apple</a></li>-->
-    <!--							<li><a href="#">Blackberry</a></li>-->
-    <!--							<li><a href="#">Byond Tech</a></li>-->
-    <!--							<li><a href="#">Celkon Mobiles</a></li>-->
-    <!--							<li><a href="#">Dell Mobile Phones </a></li>-->
-    <!--							<li><a href="#">Fly Mobile</a></li>-->
-    <!--							<li><a href="#">Fujezone Mobiles </a></li>-->
-    <!--							<li><a href="#">HTC</a></li>-->
-    <!--							<li><a href="#">LG Mobiles</a></li>-->
-    <!--							<li><a href="#">Longtel Mobile</a></li>-->
-    <!--							<li><a href="#">Maxx</a></li>-->
-    <!--							<li><a href="#">Micromax Mobiles </a></li>-->
-    <!--							<li><a href="#">Samsung Mobiles</a></li>-->
-    <!--							<li><a href="#">Sony Ericsson Mobiles</a></li>-->
-    <!--							<li><a href="#">Wynncom Mobiles</a></li>-->
-    <!--						</ul>-->
-    <!--		    	</div>-->
 </div>
 <div class="clear"></div>
 </div>
