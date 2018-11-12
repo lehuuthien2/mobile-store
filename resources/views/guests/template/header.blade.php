@@ -1,16 +1,19 @@
-<head>
+@php
+    $factories = \mobileS\Factory::all();
 
+@endphp
+<head>
     {{--<link href="{{asset('css/style.css')}}" rel="stylesheet" type="text/css" media="all"/>--}}
     <meta name="keywords"
           content="Mobilestore iphone web template, Android web template, Smartphone web template, free webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design"/>
     <link href='//fonts.googleapis.com/css?family=Londrina+Solid|Coda+Caption:800|Open+Sans' rel='stylesheet'
           type='text/css'>
-    <script src="js/jqzoom.pack.1.0.1.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen"/>
-    <script src="js/imagezoom.js"></script>
+    <script src="{{asset('js/jqzoom.pack.1.0.1.js')}}" type="text/javascript"></script>
+    <link rel="stylesheet" href="{{asset('css/flexslider.css')}}" type="text/css" media="screen"/>
+    <script src="{{asset('js/imagezoom.js')}}"></script>
     <!-- FlexSlider -->
 
-    <script defer src="js/jquery.flexslider.js"></script>
+    <script defer src="{{asset('js/jquery.flexslider.js')}}"></script>
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/responsiveslides.min.js') }}"></script>
     <script>
@@ -92,7 +95,7 @@
     <div class="wrap">
         <!----start-logo---->
         <div class="logo">
-            <a href="{{ route('guests.index') }}"><img src="images/logo.png" title="logo"/></a>
+            <a href="{{ route('guests.index') }}"><img src="{{asset('images/logo.png')}}" title="logo"/></a>
         </div>
         <!----end-logo---->
         <!----start-top-nav---->
@@ -101,12 +104,16 @@
                 <li><a href="{{ route('guests.index') }}">TRANG CHỦ</a></li>
                 <li><a>HÃNG SẢN XUẤT</a>
                     <ul>
-                        <li><a href="{{ route('guests.factory') }}">IPHONE</a></li>
-                        <li><a href="{{ route('guests.factory') }}">SAMSUNG</a></li>
-                        <li><a href="{{ route('guests.factory') }}">NOKIA</a></li>
-                        <li><a href="{{ route('guests.factory') }}">HUAWEI</a></li>
-                        <li><a href="{{ route('guests.factory') }}">XIAOMI</a></li>
-                        <li><a href="{{ route('guests.factory') }}">OPPO</a></li>
+
+                        @foreach($factories as $factory)
+                            <li><a href="{{route('guests.factory', $factory->slug)}}">{{$factory->name}}</a></li>
+                        @endforeach
+                        {{--<li><a href="{{ route('guests.factory') }}">IPHONE</a></li>--}}
+                        {{--<li><a href="{{ route('guests.factory') }}">SAMSUNG</a></li>--}}
+                        {{--<li><a href="{{ route('guests.factory') }}">NOKIA</a></li>--}}
+                        {{--<li><a href="{{ route('guests.factory') }}">HUAWEI</a></li>--}}
+                        {{--<li><a href="{{ route('guests.factory') }}">XIAOMI</a></li>--}}
+                        {{--<li><a href="{{ route('guests.factory') }}">OPPO</a></li>--}}
                     </ul>
                 </li>
                 {{--<li><a href="store.php">PHỤ KIỆN</a></li>--}}
@@ -115,8 +122,8 @@
                 <li><a href="{{route('guests.contact')}}">LIÊN HỆ</a></li>
                 <li>
                     <div class="search-bar" style="">
-                        {!! Form::open(['method' => 'Get', 'route' => ['guests.search', isset($search)]]) !!}
-                        {!! Form::text('search') !!}
+                        {!! Form::open(['method' => 'Get', 'route' => ['guests.search', isset($keyword)]]) !!}
+                        {!! Form::text('keyword') !!}
                         <button type="submit">Search</button>
                         {!! Form::close() !!}
                     </div>
