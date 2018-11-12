@@ -3,6 +3,8 @@
 namespace mobileS\Http\Controllers;
 
 use Illuminate\Http\Request;
+use mobileS\Factory;
+use mobileS\Product;
 
 class GuestController extends Controller
 {
@@ -13,7 +15,10 @@ class GuestController extends Controller
      */
     public function index()
     {
-        return view('guests.message');
+        $new_products = Product::orderBy('created_at', 'desc')->take(3)->get();
+        $iphones = Product::where('factory_id', 1)->orderBy('created_at', 'desc')->take(4)->get();
+        $samsungs = Product::where('factory_id', 2)->orderBy('created_at', 'desc')->take(4)->get();
+        return view('guests.index', compact('new_products', 'iphones', 'samsungs'));
     }
 
     /**
@@ -85,17 +90,20 @@ class GuestController extends Controller
     {
         return view('guests.news');
     }
-    public function product_detail()
+    public function product_detail($product_id)
     {
-        return view('guests.product_detail');
+        $product = Product::where('product_id', $product_id)->first();
+        return view('guests.product_detail', compact('product'));
     }
     public function contact()
     {
         return view('guests.contact');
     }
-    public function factory()
+    public function factory($slug)
     {
-        return view('guests.factory');
+        $factory = Factory::where('slug', $slug)->first();
+        $products = Product::where('factory_id', $factory->factory_id)->paginate(12);
+        return view('guests.factory',compact('products','factory'));
     }
     public function cart()
     {
@@ -109,6 +117,12 @@ class GuestController extends Controller
     public function news_detail()
     {
         return view('guests.news_detail');
+    }
+
+    public function message(Request $request)
+    {
+        $message = $request->get('message');
+        return view('guests.message', compact('message'));
     }
 
 }

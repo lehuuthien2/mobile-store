@@ -11,6 +11,11 @@
 |
 */
 
+
+//View::composer('layouts.guests', function ($view) {
+//    $view->factories = mobileS\Factory::pluck( 'name', 'factory_id');
+//});
+
 Route::get('/', function () {
     return redirect('/manages');
 });
@@ -22,8 +27,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('manages',[
-   'uses' => 'UserController@manage_index',
-   'as' => 'manages.index',
+    'uses' => 'UserController@manage_index',
+    'as' => 'manages.index',
 ]);
 //Route::get('manages/users',[
 //    'uses' => 'UserController@user_index',
@@ -33,8 +38,8 @@ Route::resource('manages/users','UserController');
 
 Route::resource('manages/products', 'ProductController');
 Route::get('manages/customers',[
-   'uses' => 'UserController@customer_index',
-   'as' => 'users.customer',
+    'uses' => 'UserController@customer_index',
+    'as' => 'users.customer',
 ]);
 
 Route::get('news', [
@@ -45,11 +50,11 @@ Route::get('cart', [
     'uses' => 'GuestController@cart',
     'as' => 'guests.cart'
 ]);
-Route::get('factories', [
+Route::get('factory/{slug}', [
     'uses' => 'GuestController@factory',
     'as' => 'guests.factory'
 ]);
-Route::get('detail', [
+Route::get('detail/{product_id}', [
     'uses' => 'GuestController@product_detail',
     'as' => 'guests.product_detail'
 ]);
@@ -64,4 +69,8 @@ Route::get('news_detail', [
 Route::get('contact', [
     'uses' => 'GuestController@contact',
     'as' => 'guests.contact'
+]);
+Route::get('message', [
+    'uses' => 'GuestController@message',
+    'as' => 'guests.message'
 ]);

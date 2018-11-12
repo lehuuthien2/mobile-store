@@ -1,7 +1,7 @@
 <div class="footer">
     <div class="wrap">
         <section class="group">
-        <div class=" col_1_of_4 span_1_of_4">
+            <div class=" col_1_of_4 span_1_of_4">
                 <h3>LIÊN HỆ VỚI CHÚNG TÔI</h3>
                 <p>Chuyên mua bán điện thoại thông minh</p>
                 <p  style="padding-bottom: 10px;">
@@ -15,8 +15,8 @@
                 </p>
             </div>
             <div class="col_1_of_4 span_1_of_4" style="margin-top: 30px;">
-                <img src="images/footer/store-1.jpg" width="200px" height="100px">
-                <img src="images/footer/store-2.jpg" width="200px" height="100px">
+                <img src="{{asset('images/footer/store-1.jpg')}}" width="200px" height="100px">
+                <img src="{{asset('images/footer/store-2.jpg')}}" width="200px" height="100px">
             </div>
             <div class="col_1_of_4 span_1_of_4">
                 <h3>TƯ VẤN MIỄN PHÍ </h3>

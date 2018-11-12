@@ -14,7 +14,7 @@
                             <h3 style="font-size: 200%;">Iphone XS Max 256GB</h3>
                             <br><label>Chọn màu :</label>
                             <input name="product-color" type="radio" value="color-1" checked alt="/"><span
-                                        style="color: #d7ebf6">Trắng</span>
+                                    style="color: #d7ebf6">Trắng</span>
                             <input name="product-color" type="radio" value="color-2" alt="/">Đen
                             <input name="product-color" type="radio" value="color-3" alt="/"><span style="color: red;">Đỏ</span>
 
@@ -116,6 +116,7 @@
             </div>
             <div class="clear"></div>
             <button type="button" class="btn btn-primary" name="message"><strong>ĐẶT HÀNG</strong></button>
+
             <div class="clear"></div>
         </div>
         <!--    <button type="button" class="button" name="order">ĐẶT HÀNG</button>-->
