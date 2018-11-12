@@ -13,7 +13,7 @@ class GuestController extends Controller
      */
     public function index()
     {
-        return view('guests.index');
+        return view('guests.message');
     }
 
     /**

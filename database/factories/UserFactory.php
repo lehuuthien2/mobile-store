@@ -8,7 +8,7 @@ use Faker\Generator as Faker;
 |--------------------------------------------------------------------------
 |
 | This directory should contain each of the model factory definitions for
-| your application. Factory provide a convenient way to generate new
+| your application. Factory provide a conve nient way to generate new
 | model instances for testing / seeding your application's database.
 |
 */
