@@ -26,14 +26,14 @@ body{
 	background:#F9F9F9;
 }
 .wrap{
-	width:80%;
+	width:800%;
 	margin:0 auto;
 }
 .search-bar,.header-top-nav{
 	float:right;
 }
 .search-bar input[type="text"]{
-	width: 182px;
+	width: 190px;
 	height: 20px;
 	margin-right: 0;
 	color: #666565;
@@ -75,7 +75,7 @@ body{
 	color:#fff;
 }
 .search-bar{
-	background:#fff;
+	/*background:#fff;*/
 	margin: 20px 0px 12.5px 20px;
 	border-radius:0.3em;
     float: none;
@@ -459,7 +459,7 @@ body{
 .col_1_of_4{
 	display: block;
 	float:left;
-	margin: 10px 0 0 30px;
+	margin: 10px 0 0 20px;
 }
 .col_1_of_4:first-child { margin-left: 0; } /* all browsers except IE6 and lower */
 	
@@ -886,7 +886,7 @@ body{
 	border: 1px solid #E8E7DC;
 	cursor: pointer;
 	display: inline-block;
-	font: 9px/21px;
+	/*font: 9px/21px;*/
 	letter-spacing: 2px;
 	padding: 10px;
 	color: #525049;
@@ -934,9 +934,12 @@ body{
 .   menu_container {
  	margin-top: 5%;
 }
-.info-detail {
+.info-detail, .comments {
     width: 58%;
     float: left;
+}
+.comments{
+    margin-top: 5%;
 }
 .thongso-kt {
     width: 40%;
@@ -947,7 +950,7 @@ body{
     border-bottom: solid 1px lightgray;
     color: rgb(100, 100, 100);
 }
-.menu_head {
+.menu_head, .comment_head{
 	background: #94CB32;
     color: white;
     cursor: pointer;
@@ -957,10 +960,10 @@ body{
     padding: 7px 11px;
 	font-weight: bold;
 }
-.menu_body {
+.menu_body, .comment_body {
 	background: #fff;
 }
-.menu_body p{
+.menu_body p, .comment_body p{
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 0.8em;
 	color: rgb(155, 155, 155);
@@ -968,6 +971,7 @@ body{
 	margin-bottom: 5px;
 	padding:5px;
 }
+
 .comment-reply {
 	padding: 10px 0;
 	border-bottom: 1px solid #e5e5e5;
@@ -1656,7 +1660,7 @@ a#show_cart {
     /*height: 700px;*/
 }
 .guest-cart {
-    width: 60%;
+    width: 90%;
     margin: 0 auto;
     /*margin-top: 10px;*/
     background-color: white;
@@ -1713,7 +1717,7 @@ a#show_cart {
     width: 50px;
 }
 .guest-info {
-    width: 60%;
+    width: 90%;
     margin: 0 auto;
     /*margin-top: 10px;*/
     background-color: white;
@@ -1798,10 +1802,10 @@ a#show_cart {
     margin-top: 20px;
 }
 .search-content img {
-    height: 240px;
+    height: 200px;
     width: 200px;
     float: left;
-    width: 30%;
+    /*width: 30%;*/
     padding: 20px 0;
     border-bottom: 1px solid black;
 }

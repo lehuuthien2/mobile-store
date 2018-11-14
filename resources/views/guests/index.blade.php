@@ -86,6 +86,8 @@
                         </ul>
                     </div>
                 </div>
+            </div>
+            <div class="content-grids">
                 <h4>Điện thoại Iphone</h4>
                 <div class="section group">
                     @foreach($iphones as $product)
@@ -137,6 +139,8 @@
                     {{--</ul>--}}
                     {{--</div>--}}
                     {{--</div>--}}
+                </div>
+                <div class="content-grids">
                     <h4>Điện thoại Samsung</h4>
                     <div class="section group">
                         @foreach($samsungs as $product)

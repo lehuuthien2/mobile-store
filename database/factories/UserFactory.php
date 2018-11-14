@@ -37,7 +37,7 @@ $factory->define(mobileS\Product::class, function (Faker $faker) {
         'body' => $faker->text,
         'color' => json_encode([COLOR[array_rand(COLOR)], COLOR[array_rand(COLOR)]]),
         'price' => $faker->randomNumber(8),
-        'storage' => json_encode([array_rand(STORAGE), array_rand(STORAGE)]),
+        'storage' => $faker->numberBetween(32,128),
         'description' => $faker->text,
         'picture' => json_encode(
             ['dfdf4545s56ss11dkf.jpg',

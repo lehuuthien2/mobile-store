@@ -70,7 +70,24 @@ Route::get('contact', [
     'uses' => 'GuestController@contact',
     'as' => 'guests.contact'
 ]);
-Route::get('message', [
-    'uses' => 'GuestController@message',
-    'as' => 'guests.message'
+Route::post('success', [
+    'uses' => 'GuestController@success',
+    'as' => 'guests.success'
 ]);
+Route::post('addCart/{product}',[
+   'uses' => 'GuestController@addCart',
+   'as' => 'addCart' ,
+]);
+Route::post('Cart/{rowId}',[
+    'uses' => 'GuestController@updateCart',
+    'as' => 'updateCart'
+]);
+Route::delete('Cart/{rowId}',[
+    'uses' => 'GuestController@remove',
+    'as' => 'updateCart'
+]);
+Route::post('/comment', [
+   'uses' => 'GuestController@comment',
+   'as' => 'comment'
+]);
+

@@ -13,3 +13,7 @@ yarn-error.log
 .env
 .phpunit.result.cache
 /nbproject/private/
+/public/uploads/
+public/assets/jquery-file-upload/server/php/files/thumbnail/
+public/avatars
+public/uploads/

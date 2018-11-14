@@ -78,5 +78,5 @@
 {{Form::hidden('user_id', isset($user) ? $user->user_id : null)}}
 <div class="col-lg-offset-2 col-lg-10">
     {!! Form::submit('Lưu', ['class' =>'btn btn-primary']) !!}
-    <input type="button" name="clear" value="Nhập lại" onclick="clearForm(this.form);">
+    <input type="button" name="clear" value="Nhập lại" onclick="clearForm(this.form);" class="btn btn-default">
 </div>
