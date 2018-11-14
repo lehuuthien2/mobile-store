@@ -14,6 +14,7 @@ class UserController extends Controller
     {
         $this->middleware('admin')->only('destroy');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -21,12 +22,12 @@ class UserController extends Controller
      */
     public function index()
     {
-        if(!Auth::check() || Auth::user()->permission != 4){
+        if (!Auth::check() || Auth::user()->permission != 4) {
             return redirect()
                 ->route('manages.index')
                 ->withError('Access denied');
         }
-        $users = User::whereIn('permission', [2, 3])->paginate(30);
+        $users = User::whereIn('permission', [2, 3])->orderBy('created_at', 'desc')->paginate(30);
         return view('manages/users.index', compact('users'));
     }
 
@@ -37,7 +38,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        if(!Auth::check() || Auth::user()->permission != 4){
+        if (!Auth::check() || Auth::user()->permission != 4) {
             return redirect()
                 ->route('manages.index')
                 ->withError('Access denied');
@@ -83,7 +84,7 @@ class UserController extends Controller
      */
     public function edit($user_id)
     {
-        if(!Auth::check() || Auth::user()->permission != 4){
+        if (!Auth::check() || Auth::user()->permission != 4) {
             return redirect()
                 ->route('manages.index')
                 ->withError('Access denied');
@@ -101,15 +102,21 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, $user_id)
     {
-        
+
         $data = $request->all();
+        $user = User::find($user_id);
         if ($request->hasFile('avatar')) {
+            // Kiểm tra user đã có avatar chưa
+            if (!empty($user->avatar)) {
+                //xoá avatar cũ
+                unlink($user->avatar);
+            }
+
 //            $pathName = $request->avatar->storeAs('avatars',$request->avatar->getClientOriginalName(),'public');
             $pathName = $request->avatar->store('avatars', 'uploads');
             $data['avatar'] = 'uploads/' . $pathName;
         }
         $data['password'] = bcrypt($data['password']);
-        $user = User::find($user_id);
         $user->update($data);
         return redirect(route('users.index'));
     }
@@ -123,6 +130,10 @@ class UserController extends Controller
     public function destroy($user_id)
     {
         $user = User::find($user_id);
+        if (!empty($user->avatar)) {
+            //xoá avatar cũ
+            unlink($user->avatar);
+        }
         $user->delete();
         if ($user->permission == 1) {
             return redirect(route('users.customer'));
@@ -141,7 +152,12 @@ class UserController extends Controller
 
     public function customer_index()
     {
-        $users = User::where('permission', 1)->paginate(30);
+        if (!Auth::check() || Auth::user()->permission != 4) {
+            return redirect()
+                ->route('manages.index')
+                ->withError('Access denied');
+        }
+        $users = User::where('permission', 1)->orderBy('created_at', 'desc')->paginate(30);
         return view('manages/users.customers', compact('users'));
     }
 }

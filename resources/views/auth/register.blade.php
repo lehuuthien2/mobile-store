@@ -19,7 +19,7 @@
                                 <div class="col-md-6">
                                     <input id="username" type="text"
                                            class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}"
-                                           name="username" value="{{ old('username') }}" required autofocus>
+                                           name="username" value="{{ old('username') }}" autofocus>
 
                                     @if ($errors->has('username'))
                                         <span class="invalid-feedback" role="alert">
@@ -37,7 +37,7 @@
                                 <div class="col-md-6">
                                     <input id="password" type="password"
                                            class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
-                                           name="password" required>
+                                           name="password">
 
                                     @if ($errors->has('password'))
                                         <span class="invalid-feedback" role="alert">
@@ -54,7 +54,7 @@
 
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control"
-                                           name="password_confirmation" required>
+                                           name="password_confirmation">
                                 </div>
                             </div>
 
@@ -66,7 +66,7 @@
                                 <div class="col-md-6">
                                     <input id="email" type="email"
                                            class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
-                                           name="email" value="{{ old('email') }}" required>
+                                           name="email" value="{{ old('email') }}">
 
                                     @if ($errors->has('email'))
                                         <span class="invalid-feedback" role="alert">
@@ -84,7 +84,7 @@
                                 <div class="col-md-6">
                                     <input id="name" type="text"
                                            class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}"
-                                           name="name" value="{{ old('name') }}" required>
+                                           name="name" value="{{ old('name') }}">
 
                                     @if ($errors->has('name'))
                                         <span class="invalid-feedback" role="alert">
@@ -113,16 +113,17 @@
                                        class="col-md-4 col-form-label text-md-right">{{ __('Giới tính') }} </label>
 
                                 <div class="col-md-6">
-                                    <label><input type="radio" name="gender" value="{{MALE}}" checked> Nam</label>
-                                    <label><input type="radio" name="gender" value="{{FEMALE}}"> Nữ</label><br>
+                                    <label>{!! Form::radio('gender', MALE,true ) !!}Nam</label>
+                                    <label>{!! Form::radio('gender', FEMALE) !!}Nữ</label>
+                                </div>
 
-                                    @if ($errors->has('gender'))
-                                        <span class="invalid-feedback" role="alert">
+                                @if ($errors->has('gender'))
+                                    <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('gender') }}</strong>
                                     </span>
-                                    @endif
-                                </div>
+                                @endif
                             </div>
+
 
                             <div class="form-group row">
                                 <label for="tel"
@@ -130,9 +131,9 @@
                                     <span style="color: red;">*</span></label>
 
                                 <div class="col-md-6">
-                                    <input id="tel" type="text"
+                                    <input id="tel" type="number"
                                            class="form-control{{ $errors->has('tel') ? ' is-invalid' : '' }}"
-                                           name="tel" value="{{ old('tel') }}" required>
+                                           name="tel" value="{{ old('tel') }}">
 
                                     @if ($errors->has('tel'))
                                         <span class="invalid-feedback" role="alert">
@@ -150,7 +151,7 @@
                                 <div class="col-md-6">
                                     <input id="address" type="text"
                                            class="form-control{{ $errors->has('address') ? ' is-invalid' : '' }}"
-                                           name="address" value="{{ old('address') }}" required>
+                                           name="address" value="{{ old('address') }}">
 
                                     @if ($errors->has('address'))
                                         <span class="invalid-feedback" role="alert">

@@ -42,6 +42,8 @@ function clearForm(oForm) {
             case "select-multi":
                 elements[i].selectedIndex = -1;
                 break;
+            case 'file':
+                elements[i].value = "";
 
             default:
                 break;

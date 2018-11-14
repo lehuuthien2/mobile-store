@@ -82,9 +82,30 @@
         <div class="clear"></div>
         <div class="header-top-nav">
             <ul>
-                <li><a href="#">Register</a></li>
-                <li><a href="#">Login</a></li>
-                <li><a href="{{route('guests.cart')}}"><span>shopping cart&nbsp;&nbsp;: </span></a><label> &nbsp;noitems</label></li>
+                @if(!Auth::check())
+                <li><a href="{{route('login')}}">Đăng nhập</a></li>
+                <li><a href="{{route('register')}}">Đăng ký</a></li>
+                @else
+                    <li>
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            {{ Auth::user()->name }} <span class="caret"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                              style="display: none;">
+                            @csrf
+                        </form>
+                    </li>
+                @endif
+                <li><a href="{{route('guests.cart')}}"><span>Giỏ hàng</span></a></li>
             </ul>
         </div>
         <div class="clear"></div>
@@ -122,9 +143,9 @@
                 <li><a href="{{route('guests.contact')}}">LIÊN HỆ</a></li>
                 <li>
                     <div class="search-bar" style="">
-                        {!! Form::open(['method' => 'Get', 'route' => ['guests.search', isset($keyword)]]) !!}
-                        {!! Form::text('keyword') !!}
-                        <button type="submit">Search</button>
+                        {!! Form::open(['method' => 'GET', 'route' => ['guests.search', isset($keyword)]]) !!}
+                        {!! Form::text('keyword', null, ['placeholder' => 'nhập tên sản phẩm muốn tìm']) !!}
+                        <button type="submit">Tìm kiếm</button>
                         {!! Form::close() !!}
                     </div>
                 </li>
