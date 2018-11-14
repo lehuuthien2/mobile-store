@@ -16,6 +16,8 @@
     <!-- bootstrap theme -->
     <link href="{{asset('css/bootstrap-theme.css')}}" rel="stylesheet">
     <!--external css-->
+    <link rel="stylesheet" href="{{asset('css/select2.min.css')}}">
+
     <!-- font icon -->
     <link href="{{asset('css/elegant-icons-style.css')}}" rel="stylesheet"/>
     <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet"/>
@@ -31,6 +33,8 @@
     <!-- Custom styles -->
     <link rel="stylesheet" href="{{asset('css/fullcalendar.css')}}">
     <link href="{{asset('css/widgets.css')}}" rel="stylesheet">
+
+
     <link href="{{asset('css/admin_style.css')}}" rel="stylesheet">
     <link href="{{asset('css/style-responsive.css')}}" rel="stylesheet"/>
     {{--<link href="css/xcharts.min.css" rel=" stylesheet">--}}
@@ -41,8 +45,6 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-
-    <script src="{{ asset('js/common.js') }}"></script>
 
 
     <!-- =======================================================
@@ -241,7 +243,7 @@
 
 <!-- javascripts -->
 <script src="{{asset('js/jquery.js')}}"></script>
-
+<script src="{{ asset('js/common.js') }}"></script>
 <script src="{{asset('js/jquery-1.8.3.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/jquery-ui-1.9.2.custom.min.js')}}"></script>
 <!-- bootstrap -->

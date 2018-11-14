@@ -14,7 +14,7 @@
     </style>
     <section class="wrapper">
         <a href="{{route('products.index')}}" class="btn btn-success">Quay lại</a>
-        <h2>Tên sản phẩm</h2>
+        <h2>{{$product->name}}</h2>
         <a class="btn btn-success" href="#">
             <span class="icon_pencil-edit"></span>
             Edit
@@ -30,19 +30,34 @@
         </form>
         <br>
         <label>Nhà sản xuất</label>
-        <p>Trống</p>
+        <p>{{$product->factory->name}}</p>
         <label>Giá tiền</label>
-        <p>Trống</p>
+        <p>{{$product->price}}</p>
         <label>Màu sắc</label>
-        <p>Trống</p>
-        <label>Bộ nhớ</label>
-        <p>Trống</p>
+        <p>{{$product->color}}</p>
         <label>Hình ảnh</label>
-        <p>Trống</p>
+        <p>{{$product->picture}}</p>
         <label>Cấu hình</label>
-        <p>Trống</p>
+        <br>
+        <br>
+        <label>Màn hình</label>
+        <p>{{$product->description->screen}}</p>
+        <label>Hệ điều hành</label>
+        <p>{{$product->description->OS}}</p>
+        <label>Camera</label>
+        <p>{{$product->description->camera}}</p>
+        <label>CPU</label>
+        <p>{{$product->description->cpu}}</p>
+        <label>Ram</label>
+        <p>{{$product->description->ram}}</p>
+        <label>Sim</label>
+        <p>{{$product->description->sim}}</p>
+        <label>Pin</label>
+        <p>{{$product->description->pin}}</p>
+        <label>Vân tay</label>
+        <p>{{$product->description->fingerprint}}</p>
         <p>Bài viết</p>
-        <p>Trống</p>
+        <p>{{$product->body}}</p>
         {{--<p>Last edited: {{$user->updated_at->diffForHumans()}}</p>--}}
     </section>
 @endsection

@@ -24,17 +24,18 @@
                             {{--<th>Password</th>--}}
                             <th><i class="icon_cogs"></i> Action</th>
                         </tr>
-
+                        @php $i = 0 @endphp
+                        @foreach($products as $product)
+                            @php $i++ @endphp
                         <tr>
-                            <td></td>
-                            <td><a href="{{route('products.show', 1)}}">Lorem Ipsum is simply dummy text</a></td>
-                            <td>Lorem Ipsum is simply dummy text</td>
-                            <td>Lorem Ipsum is simply dummy text</td>
-                            <td>Lorem Ipsum is simply dummy text</td>
-                            {{--<td></td>--}}
+                            <td>{{$i}}</td>
+                            <td><a href="{{route('products.show', $product->product_id)}}">{{$product->name}}</a></td>
+                            <td>{{$product->factory->name}}</td>
+                            <td>{{$product->storage}}</td>
+                            <td>{{$product->price}}</td>
                             <td>
                                 <div class="btn-group">
-                                    <a class="btn btn-success" href="#"><i
+                                    <a class="btn btn-success" href="{{route('products.edit', $product->product_id)}}"><i
                                             class="icon_pencil-edit"></i></a>
                                     <form action="#"
                                           method="POST" onsubmit="return confirm('Are you sure?');"
@@ -49,30 +50,7 @@
                                 </div>
                             </td>
                         </tr>
-                        <tr>
-                            <td></td>
-                            <td><a href="{{route('products.show', 1)}}">Lorem Ipsum is simply dummy text</a></td>
-                            <td>Lorem Ipsum is simply dummy text</td>
-                            <td>Lorem Ipsum is simply dummy text</td>
-                            <td>Lorem Ipsum is simply dummy text</td>
-                            {{--<td></td>--}}
-                            <td>
-                                <div class="btn-group">
-                                    <a class="btn btn-success" href="#"><i
-                                            class="icon_pencil-edit"></i></a>
-                                    <form action="#"
-                                          method="POST" onsubmit="return confirm('Are you sure?');"
-                                          style="display: inline-block;">
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <a class="btn btn-danger" href="javascript:void(0);"
-                                           onclick="$(this).parent().submit();">
-                                            <i class="icon_close_alt"></i>
-                                        </a>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </section>
