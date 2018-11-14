@@ -3,6 +3,7 @@
 namespace mobileS\Http\Controllers;
 
 use Illuminate\Http\Request;
+use mobileS\Product;
 
 class ProductController extends Controller
 {
@@ -13,7 +14,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('manages/products.index');
+        $products = Product::orderBy('created_at','desc')->get();
+        return view('manages/products.index',compact('products'));
     }
 
     /**
@@ -34,18 +36,42 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = [];
+        $data['name'] = $request->name;
+        $data['factory_id'] = $request->factory_id;
+        $data['price'] = $request->price;
+        $data['storage'] = $request->storage;
+        $data['promotion'] = $request->promotion;
+        $data['color'] = 'den';
+        $data['picture'] = 'dasdasdasd';
+        $description = [
+            'screen' => $request->screen,
+            'OS' => $request->OS,
+            'camera' => $request->camera,
+            'cpu' => $request->cpu,
+            'ram' => $request->ram,
+            'sim' => $request->sim,
+            'pin' => $request->pin,
+            'fingerprint' => $request->fingerprint
+        ];
+        $data['description'] = json_encode($description);
+        $data['body'] = $request->body;
+        $data['in_stock'] = $request->in_stock;
+        $data['slug'] = str_slug($data['name']);
+        Product::create($data);
+        return redirect(route('products.index'));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $product_id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Product $product)
     {
-        return view('manages/products.show');
+        $product->description = json_decode($product->description);
+        return view('manages/products.show', compact('product'));
     }
 
     /**
@@ -54,9 +80,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-        return view('manages/products.edit');
+        return view('manages/products.edit', compact('product'));
     }
 
     /**
