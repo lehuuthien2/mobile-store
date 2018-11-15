@@ -21,12 +21,20 @@ class FactoriesTableSeeder extends Seeder
                 'slug' => 'samsung'
             ],
             [
-                'name' => 'HTC',
-                'slug' => 'htc'
+                'name' => 'Nokia',
+                'slug' => 'nokia'
             ],
             [
                 'name' => 'Oppo',
                 'slug' => 'oppo'
+            ],
+            [
+                'name' => 'Huawei',
+                'slug' => 'huawei'
+            ],
+            [
+                'name' => 'Xiaomi',
+                'slug' => 'xiaomi'
             ],
         ]);
     }

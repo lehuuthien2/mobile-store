@@ -10,7 +10,7 @@
                     <a href="{{route('guests.product_detail', $product->product_id)}}">
                         <div class="search-content">
                             <div class="search-image">
-                                <img src="{{asset($product->picture)}}" width="150px" height="150px">
+                                <img src="{{asset($product->picture['0'])}}" width="150px" height="150px">
                             </div>
                             <div class="search-info">
                                 <div class="brand-value">

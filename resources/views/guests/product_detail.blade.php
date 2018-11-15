@@ -21,18 +21,12 @@
                 <div class="detalis-image">
                     <div class="flexslider">
                         <ul class="slides">
-                            <li data-thumb="{{asset('images/xsMax.png')}}">
-                                <div class="thumb-image"><img src="{{asset('images/xsMax.png')}}" data-imagezoom="true"
-                                                              class="img-responsive" alt=""/></div>
-                            </li>
-                            <li data-thumb="{{asset('images/xsMax.png')}}">
-                                <div class="thumb-image"><img src="{{asset('images/xsMax.png')}}" data-imagezoom="true"
-                                                              class="img-responsive" alt=""/></div>
-                            </li>
-                            <li data-thumb="{{asset('images/xsMax.png')}}">
-                                <div class="thumb-image"><img src="{{asset('images/xsMax.png')}}" data-imagezoom="true"
-                                                              class="img-responsive" alt=""/></div>
-                            </li>
+                            @foreach($product->picture as $item)
+                                <li data-thumb="{{asset($item)}}">
+                                    <div class="thumb-image"><img src="{{asset($item)}}" data-imagezoom="true"
+                                                                  class="img-responsive" alt=""/></div>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -53,10 +47,9 @@
                         </ul>
                         <br>
                         <label>Chọn màu :</label>
-                        {!! Form::radio('color', 'Đen', true) !!}Đen
-                        {!! Form::radio('color', 'Trắng') !!}<span
-                            style="color: #d7ebf6">Trắng</span>
-                        {!! Form::radio('color', 'Đỏ') !!}<span style="color: red;">Đỏ</span>
+                        @foreach($product->color as $color)
+                            {!! Form::radio('color', $color, true) !!} {{$color}}
+                        @endforeach
                     </div>
                     <div class="left-value-details">
                         <!--                    <div class="right-value-details">-->
@@ -96,9 +89,8 @@
                         <p> ♥ Mừng ngày nhà giáo Việt Nam 20/11 giảm 150.000đ tất cả khách hàng mới mua săm tại T&M
                             Mobile.</p>
                         <p> ♥ Đặc biệt giáo viên và học sinh sẽ giảm 200.0000đ trên toàn hệ thống T&M Mobile.</p>
-                        {{--<a href="{{route('addCart', $product->product_id)}}" class="btn btn-warning"><span--}}
-                        {{--class="glyphicon glyphicon-shopping-cart">Thêm vào giỏ hàng</span></a>--}}
-                        <a href="#">{!! Form::submit('Thêm vào giỏ hàng',['style' => 'background: white; border: none; font-size: 1.5em']) !!}</a>
+
+                        {!! Form::submit('Thêm vào giỏ hàng',['class' => 'btn btn-danger']) !!}
                         {!! Form::close() !!}
                     </div>
                     <div class="clear"></div>
@@ -110,7 +102,7 @@
                         <p class="menu_head" style="font-size: 130%;">Thông tin chi tiết<span class="plusminus">+</span>
                         </p>
                         <div class="menu_body" style="display: none;">
-                            {{$product->body}}
+                            {!! $product->body !!}
                         </div>
                         <div class="clear"></div>
                     </div>
@@ -118,30 +110,23 @@
                         <p class="menu_head" style="color: white; font-size: 130%;">Thông số kỹ thuật<span
                                 class="plusminus">+</span></p>
                         <div class="menu_body" style="display: none;">
-                            {{$product->description}}
-                            {{--<p style="color: red; font-size: 120%;">Màn hình</p>--}}
-                            {{--<p>Công nghệ màn hình :</p>--}}
-                            {{--<p>Màu màn hình :</p>--}}
-                            {{--<p>Chuẩn màn hình :</p>--}}
-                            {{--<p>Độ phân giải màn hình :</p>--}}
-                            {{--<p>Công nghệ cảm ứng :</p>--}}
-                            {{--<p>Mặt kính màn hình :</p>--}}
-                            {{--<p style="color: red; font-size: 120%;">Camera trước</p>--}}
-                            {{--<p>Video Call :</p>--}}
-                            {{--<p>Độ phân giải :</p>--}}
-                            {{--<p>Thông tin khác :</p>--}}
-                            {{--<p style="color: red; font-size: 120%;">Camera sau</p>--}}
-                            {{--<p>Độ phân giải :</p>--}}
-                            {{--<p>Quay phim :</p>--}}
-                            {{--<p>Đèn Flash :</p>--}}
-                            {{--<p>Chụp ảnh nâng cao :</p>--}}
-                            {{--<p style="color: red; font-size: 120%;">Cấu hình phần cứng</p>--}}
-                            {{--<p>Tốc độ CPU :</p>--}}
-                            {{--<p>Số nhân :</p>--}}
-                            {{--<p>Chipset :</p>--}}
-                            {{--<p>RAM :</p>--}}
-                            {{--<p>Chip đồ họa (GPU) :</p>--}}
-                            {{--<p style="color: red; font-size: 120%;">Bộ nhớ & Lưu trữ</p>--}}
+                            <label>Màn hình</label>
+                            <p><b>{{$product->description->screen}}</b></p>
+                            <label>Hệ điều hành</label>
+                            <p>{{$product->description->OS}}</p>
+                            <label>Camera</label>
+                            <p>{{$product->description->camera}}</p>
+                            <label>CPU</label>
+                            <p>{{$product->description->cpu}}</p>
+                            <label>Ram</label>
+                            <p>{{$product->description->ram}}</p>
+                            <label>Sim</label>
+                            <p>{{$product->description->sim}}</p>
+                            <label>Pin</label>
+                            <p>{{$product->description->pin}}</p>
+                            <label>Cảm biến vân tay</label>
+                            <p>{{$product->description->fingerprint}}</p>
+                            <p>Bài viết</p>
                         </div>
                     </div>
                     <div class="comments">
@@ -174,17 +159,20 @@
                                             <h3 style="font-size: 150%;">{!! $comment['content'] !!}</h3>
                                             <p>{{$comment['created_at']}}</p>
                                             @if(Auth::check())
-                                                <button onclick="$('#reply{{$i}}').toggle()" class="btn btn-info">Trả lời
+                                                <button onclick="$('#reply{{$i}}').toggle()" class="btn btn-info">Trả
+                                                    lời
                                                 </button>
                                                 <div class="add-comment"
-                                                     style="margin-bottom: 30px; margin-top:10px; padding-bottom: 20px; display:none" id="reply{{$i}}">
+                                                     style="margin-bottom: 30px; margin-top:10px; padding-bottom: 20px; display:none"
+                                                     id="reply{{$i}}">
                                                     {!! Form::open(['url' => 'comment', 'id' => "reply$i"]) !!}
 
                                                     {!! Form::hidden('product_id', $product->product_id) !!}
                                                     {!! Form::hidden('user_id', Auth::user()->user_id) !!}
                                                     {!! Form::hidden('parent_id', $comment['comment_id']) !!}
                                                     <div>
-                                                        <textarea name="content" placeholder="Mời bạn nhập bình luận ..."
+                                                        <textarea name="content"
+                                                                  placeholder="Mời bạn nhập bình luận ..."
                                                                   class="form-control"
                                                                   style="width: 99%; height: 150px; margin: 0 auto"></textarea>
                                                         {!! Form::submit('Đăng',['class' => 'btn btn-warning', 'style' => ' margin-top: 5px; float:right;']) !!}
