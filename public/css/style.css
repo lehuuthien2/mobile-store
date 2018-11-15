@@ -189,7 +189,7 @@ body{
 .images_1_of_3 {
 	width: 33%;
 	padding: 0px 0 1.1% 0;
-	background:#92AC05;
+	/*background:#92AC05;*/
 	text-align:center;
 	box-shadow: 0px 3px 10px rgb(233, 233, 233);
 }
@@ -206,9 +206,10 @@ body{
 .images_1_of_3  img {
 	max-width:100%;
 	display:block;
+    height: 400px;
 }
 .images_1_of_3  h3{
-	color:#fff;
+	color: #9f041b;
 	margin-top:0.4em;
 	font-size:1.2em;
 	font-family: 'Open Sans', sans-serif;
@@ -328,6 +329,7 @@ body{
 }
 .images_1_of_4  img{
 	max-width:100%;
+    height: 339px;
 	display:block;
 	padding-bottom: 8px;
 	margin: 0 auto;
@@ -965,13 +967,17 @@ body{
 }
 .menu_body p, .comment_body p{
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 0.8em;
-	color: rgb(155, 155, 155);
+	/*font-size: 0.8em;*/
+    color: #000000bf;
 	line-height: 1.8em;
 	margin-bottom: 5px;
 	padding:5px;
 }
-
+.menu_body label{
+    float:left;
+    width: 7em;
+    padding-top: 7px;
+}
 .comment-reply {
 	padding: 10px 0;
 	border-bottom: 1px solid #e5e5e5;

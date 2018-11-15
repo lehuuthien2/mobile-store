@@ -21,14 +21,12 @@
                 <h4 style="font-size: 2em; color: #575757; margin-top: 20px;">Sản phẩm mới</h4>
                 <div class="section group">
                     @foreach($new_products as $product)
-                        <a href="{{ route('guests.product_detail', $product->product_id) }}">
-                            <div class="grid_1_of_3 images_1_of_3">
-                                <img src="{{asset($product->picture)}}">
+                        <div class="grid_1_of_3 images_1_of_3">
+                            <a href="{{ route('guests.product_detail', $product->product_id) }}">
+                                <img src="{{asset($product->picture['0'])}}">
                                 <h3> {{$product->name}} </h3>
-                                {{--                            @php  dd($product) @endphp--}}
-                                {{--                            <p>{{$product->price}}</p>--}}
-                            </div>
-                        </a>
+                            </a>
+                        </div>
                     @endforeach
                 </div>
             </div>
@@ -91,119 +89,32 @@
                 <h4>Điện thoại Iphone</h4>
                 <div class="section group">
                     @foreach($iphones as $product)
-                        <a href="{{ route('guests.product_detail', $product->product_id) }}">
-                            <div class="grid_1_of_4 images_1_of_4 products-info">
-                                <img src="{{asset($product->picture)}}">
+
+                        <div class="grid_1_of_4 images_1_of_4 products-info">
+                            <a href="{{ route('guests.product_detail', $product->product_id) }}">
+                                <img src="{{asset($product->picture['0'])}}">
                                 {{$product->name}}
                                 <h3>{{$product->price}}</h3>
-                            </div>
-                        </a>
+                            </a>
+                        </div>
+
+
                     @endforeach
-                    {{--<div class="grid_1_of_4 images_1_of_4 products-info">--}}
-                    {{--<img src="images/m6.jpg">--}}
-                    {{--<a href="{{ route('guests.product_detail') }}">Duis aute irure dolor in reprehenderit sed do--}}
-                    {{--eiusmod--}}
-                    {{--tempor incididunt</a>--}}
-                    {{--<h3>$100</h3>--}}
-                    {{--<ul>--}}
-                    {{--<li><a class="cart" href="{{ route('guests.product_detail') }}"> </a></li>--}}
-                    {{--<li><a class="i" href="{{ route('guests.product_detail') }}"> </a></li>--}}
-                    {{--<li><a class="Compar" href="{{ route('guests.product_detail') }}"> </a></li>--}}
-                    {{--<li><a class="Wishlist" href="{{ route('guests.product_detail') }}"> </a></li>--}}
-                    {{--</ul>--}}
-                    {{--</div>--}}
-                    {{--<div class="grid_1_of_4 images_1_of_4 products-info">--}}
-                    {{--<img src="images/m7.jpg">--}}
-                    {{--<a href="{{ route('guests.product_detail') }}">Duis aute irure dolor in reprehenderit sed do--}}
-                    {{--eiusmod--}}
-                    {{--tempor incididunt</a>--}}
-                    {{--<h3>$180</h3>--}}
-                    {{--<ul>--}}
-                    {{--<li><a class="cart" href="{{ route('guests.product_detail') }}"> </a></li>--}}
-                    {{--<li><a class="i" href="{{ route('guests.product_detail') }}"> </a></li>--}}
-                    {{--<li><a class="Compar" href="{{ route('guests.product_detail') }}"> </a></li>--}}
-                    {{--<li><a class="Wishlist" href="{{ route('guests.product_detail') }}"> </a></li>--}}
-                    {{--</ul>--}}
-                    {{--</div>--}}
-                    {{--<div class="grid_1_of_4 images_1_of_4 products-info">--}}
-                    {{--<img src="images/m1.jpg">--}}
-                    {{--<a href="{{ route('guests.product_detail') }}">Duis aute irure dolor in reprehenderit sed do--}}
-                    {{--eiusmod--}}
-                    {{--tempor incididunt</a>--}}
-                    {{--<h3>$140</h3>--}}
-                    {{--<ul>--}}
-                    {{--<li><a class="cart" href="{{ route('guests.product_detail') }}"> </a></li>--}}
-                    {{--<li><a class="i" href="{{ route('guests.product_detail') }}"> </a></li>--}}
-                    {{--<li><a class="Compar" href="{{ route('guests.product_detail') }}"> </a></li>--}}
-                    {{--<li><a class="Wishlist" href="{{ route('guests.product_detail') }}"> </a></li>--}}
-                    {{--</ul>--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
                 </div>
                 <div class="content-grids">
                     <h4>Điện thoại Samsung</h4>
                     <div class="section group">
                         @foreach($samsungs as $product)
-                            <a href="{{ route('guests.product_detail', $product->product_id) }}">
-                                <div class="grid_1_of_4 images_1_of_4 products-info">
-                                    <img src="{{asset($product->picture)}}">
+
+                            <div class="grid_1_of_4 images_1_of_4 products-info">
+                                <a href="{{ route('guests.product_detail', $product->product_id) }}">
+                                    <img src="{{asset($product->picture['0'])}}">
                                     {{$product->name}}
                                     <h3>{{$product->price}}</h3>
-                                </div>
-                            </a>
+                                </a>
+                            </div>
+
                         @endforeach
-                        {{--<div class="grid_1_of_4 images_1_of_4 products-info">--}}
-                        {{--<img src="images/m2.jpg">--}}
-                        {{--<a href="{{ route('guests.product_detail') }}">Duis aute irure dolor in reprehenderit sed do--}}
-                        {{--eiusmod--}}
-                        {{--tempor incididunt</a>--}}
-                        {{--<h3>$260</h3>--}}
-                        {{--<ul>--}}
-                        {{--<li><a class="cart" href="{{ route('guests.product_detail') }}"> </a></li>--}}
-                        {{--<li><a class="i" href="{{ route('guests.product_detail') }}"> </a></li>--}}
-                        {{--<li><a class="Compar" href="{{ route('guests.product_detail') }}"> </a></li>--}}
-                        {{--<li><a class="Wishlist" href="{{ route('guests.product_detail') }}"> </a></li>--}}
-                        {{--</ul>--}}
-                        {{--</div>--}}
-                        {{--<div class="grid_1_of_4 images_1_of_4 products-info">--}}
-                        {{--<img src="images/m6.jpg">--}}
-                        {{--<a href="{{ route('guests.product_detail') }}">Duis aute irure dolor in reprehenderit sed do--}}
-                        {{--eiusmod--}}
-                        {{--tempor incididunt</a>--}}
-                        {{--<h3>$100</h3>--}}
-                        {{--<ul>--}}
-                        {{--<li><a class="cart" href="{{ route('guests.product_detail') }}"> </a></li>--}}
-                        {{--<li><a class="i" href="{{ route('guests.product_detail') }}"> </a></li>--}}
-                        {{--<li><a class="Compar" href="{{ route('guests.product_detail') }}"> </a></li>--}}
-                        {{--<li><a class="Wishlist" href="{{ route('guests.product_detail') }}"> </a></li>--}}
-                        {{--</ul>--}}
-                        {{--</div>--}}
-                        {{--<div class="grid_1_of_4 images_1_of_4 products-info">--}}
-                        {{--<img src="images/m7.jpg">--}}
-                        {{--<a href="{{ route('guests.product_detail') }}">Duis aute irure dolor in reprehenderit sed do--}}
-                        {{--eiusmod--}}
-                        {{--tempor incididunt</a>--}}
-                        {{--<h3>$180</h3>--}}
-                        {{--<ul>--}}
-                        {{--<li><a class="cart" href="{{ route('guests.product_detail') }}"> </a></li>--}}
-                        {{--<li><a class="i" href="{{ route('guests.product_detail') }}"> </a></li>--}}
-                        {{--<li><a class="Compar" href="{{ route('guests.product_detail') }}"> </a></li>--}}
-                        {{--<li><a class="Wishlist" href="{{ route('guests.product_detail') }}"> </a></li>--}}
-                        {{--</ul>--}}
-                        {{--</div>--}}
-                        {{--<div class="grid_1_of_4 images_1_of_4 products-info">--}}
-                        {{--<img src="images/m1.jpg">--}}
-                        {{--<a href="{{ route('guests.product_detail') }}">Duis aute irure dolor in reprehenderit sed do--}}
-                        {{--eiusmod--}}
-                        {{--tempor incididunt</a>--}}
-                        {{--<h3>$140</h3>--}}
-                        {{--<ul>--}}
-                        {{--<li><a class="cart" href="{{ route('guests.product_detail') }}"> </a></li>--}}
-                        {{--<li><a class="i" href="{{ route('guests.product_detail') }}"> </a></li>--}}
-                        {{--<li><a class="Compar" href="{{ route('guests.product_detail') }}"> </a></li>--}}
-                        {{--<li><a class="Wishlist" href="{{ route('guests.product_detail') }}"> </a></li>--}}
-                        {{--</ul>--}}
-                        {{--</div>--}}
                     </div>
 
                 </div>

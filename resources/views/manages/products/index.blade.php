@@ -37,7 +37,7 @@
                                 <div class="btn-group">
                                     <a class="btn btn-success" href="{{route('products.edit', $product->product_id)}}"><i
                                             class="icon_pencil-edit"></i></a>
-                                    <form action="#"
+                                    <form action="{{route('products.destroy', $product->product_id)}}"
                                           method="POST" onsubmit="return confirm('Are you sure?');"
                                           style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">

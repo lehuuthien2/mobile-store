@@ -37,6 +37,7 @@ Route::get('manages',[
 Route::resource('manages/users','UserController');
 
 Route::resource('manages/products', 'ProductController');
+Route::resource('manages/news', 'NewsController');
 Route::get('manages/customers',[
     'uses' => 'UserController@customer_index',
     'as' => 'users.customer',

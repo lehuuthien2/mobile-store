@@ -8,6 +8,7 @@
                 <section class="panel">
                     <header class="panel-heading">
                         Chỉnh sửa thông tin sản phẩm
+                        <a href="{{route('products.index')}}" class="btn btn-success" style="float:right;">Bảng sản phẩm</a>
                     </header>
                     <div class="panel-body">
                         <div class="form">

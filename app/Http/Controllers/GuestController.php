@@ -24,6 +24,18 @@ class GuestController extends Controller
         $new_products = Product::orderBy('created_at', 'desc')->take(3)->get();
         $iphones = Product::where('factory_id', 1)->orderBy('created_at', 'desc')->take(4)->get();
         $samsungs = Product::where('factory_id', 2)->orderBy('created_at', 'desc')->take(4)->get();
+
+        foreach ($new_products as $product){
+            $product->picture = json_decode($product->picture, true);
+        }
+        foreach ($iphones as $product){
+            $product->picture = json_decode($product->picture, true);
+        }
+        foreach ($samsungs as $product){
+            $product->picture = json_decode($product->picture,true);
+        }
+//        dd($new_products);
+
         return view('guests.index', compact('new_products', 'iphones', 'samsungs'));
     }
 
@@ -129,7 +141,11 @@ class GuestController extends Controller
             ['parent_id', null]
         ])->orderBy('created_at', 'desc')
             ->paginate(15);
-        $product = Product::where('product_id', $product_id)->first();
+        $product = Product::find($product_id);
+        $product->picture = json_decode($product->picture);
+        $product->description = json_decode($product->description);
+//        dd($product);
+        $product->color = json_decode($product->color);
         return view('guests.product_detail', compact('product','comments','pagins'));
     }
 
@@ -142,6 +158,9 @@ class GuestController extends Controller
     {
         $factory = Factory::where('slug', $slug)->first();
         $products = Product::where('factory_id', $factory->factory_id)->paginate(12);
+        foreach ($products as $product){
+            $product->picture = json_decode($product->picture, true);
+        }
         return view('guests.factory', compact('products', 'factory'));
     }
 
@@ -149,6 +168,9 @@ class GuestController extends Controller
     {
         $keyword = $request->keyword;
         $products = Product::where('name', 'like', '%'. $keyword . '%')->take(4)->get();
+        foreach ($products as $product){
+            $product->picture = json_decode($product->picture, true);
+        }
         return view('guests.search_product', compact('products'));
     }
 

@@ -1,11 +1,19 @@
 <?php
 
 define('COLOR', [
-    '1' => 'Đen',
-    '2' => 'Trắng',
-    '3' => 'Đỏ'
+    'Đen' => 'Đen',
+    'Trắng' => 'Trắng',
+    'Đỏ' => 'Đỏ',
+    'Vàng' => 'Vàng',
+    'Xanh' => 'Xanh'
 ]);
 
+define('STATUS', [
+   '0' => 'Huỷ đơn hàng',
+    '1' => 'Đang đặt hàng',
+    '2' => 'Đang xử lý',
+    '3' => 'Đã giao hàng'
+]);
 //define('STORAGE', [
 //    '1' => '16GB',
 //    '2' => '32GB',

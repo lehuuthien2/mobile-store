@@ -7,13 +7,13 @@
                 <h4>Điện thoại {{$factory->name}}</h4>
                 <div class="section group">
                     @foreach($products as $product)
-                        <a href="{{route('guests.product_detail', $product->product_id)}}">
-                            <div class="grid_1_of_4 images_1_of_4 products-info">
-                                <img src="{{asset($product->picture)}}">
+                        <div class="grid_1_of_4 images_1_of_4 products-info">
+                            <a href="{{route('guests.product_detail', $product->product_id)}}">
+                                <img src="{{asset($product->picture['0'])}}">
                                 {{$product->name}}
                                 <h3>{{$product->price}}</h3>
-                            </div>
-                        </a>
+                            </a>
+                        </div>
                     @endforeach
                 </div>
                 <div class="pagnation">

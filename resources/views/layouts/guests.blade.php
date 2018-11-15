@@ -29,7 +29,8 @@
     </div>
 </div>
 <!-- Scripts -->
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+{{--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>--}}
+<script src="{{asset('js\jquery-ui.min.js')}}"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 <script>
     $(function () {
