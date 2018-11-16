@@ -15,6 +15,7 @@ function clearForm(oForm) {
     var elements = oForm.elements;
 
     oForm.reset();
+    $('.img-thumbnail').remove();
 
     for(i=0; i<elements.length; i++) {
 

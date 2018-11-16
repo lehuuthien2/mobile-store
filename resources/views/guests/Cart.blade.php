@@ -1,13 +1,31 @@
 @extends('layouts.guests')
 @section('content')
-
+<style>
+    span{
+        color:red;
+    }
+</style>
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{!! $error !!}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     <div class="clear"></div>
     <div class="cart-body">
         <div class="guest-cart">
             <h4 style="font-size: 1.5em; color: #575757;">GIỎ HÀNG CỦA BẠN :</h4>
             <div class="cart">
-                @if(isset($cart))
-                    <table class="table table-striped table-bordered">
+
+                <table class="table table-striped table-bordered">
+                    @if($cart->count() == 0)
+                        <tr>
+                            <th style="text-align: center;font-size: 1.5em;">Không có sản phẩm nào trong giỏ hàng</th>
+                        </tr>
+                    @else
                         <tr>
                             <th class="name">Tên sản phẩm</th>
                             <th>Màu sắc</th>
@@ -21,12 +39,12 @@
                             {!! Form::open(['url' => '/Cart/' . $item->rowId  , 'method' => 'POST']) !!}
                             <tr>
                                 <td class="name"><a
-                                        href="{{route('guests.product_detail', $item->id)}}">{{ $item->name }}</a>
+                                        href="{{route('guests.product_detail', $item->options['slug'])}}">{{ $item->name }}</a>
                                 </td>
                                 <td>{{$item->options['color']}}</td>
                                 <td class="name">{!! Form::selectRange('qty', 1, 20, old('qty', $item->qty )) !!}</td>
-                                <td class="price">{{ number_format($item->price,0 ,'.', ',') }} VND</td>
-                                <td class="total">{{ number_format($item->subtotal,0 ,'.', ',') }} VND</td>
+                                <td class="price">{{ number_format($item->price,0 ,',', '.') }} VND</td>
+                                <td class="total">{{ number_format($item->subtotal,0 ,',', '.') }} VND</td>
                                 {{--{!! Form::hidden('rowId', $item->rowId) !!}--}}
                                 <td>{!!  Form::submit('Cập nhật', ['class' => 'btn btn-success'])!!}
                                 </td>
@@ -39,8 +57,10 @@
                                 </td>
                             </tr>
                         @endforeach
-                    </table>
-                @endif
+
+                    @endif
+                </table>
+
             </div>
             <div class="clear"></div>
         </div>
@@ -50,31 +70,31 @@
             <br>
             <div class="info">
                 @if(Auth::check())
-                    <label>Họ và tên:<sup>*</sup></label>
+                    <label>Họ và tên:<span>*</span></label>
                     <input type="text" name="user_name" placeholder="Nhập họ và tên"
                            value="{{old('user_name', Auth::user()->name)}}">
-                    <label>Số điện thoại:<sup>*</sup></label>
+                    <label>Số điện thoại:<span>*</span></label>
                     <input type="text" name="tel" placeholder="Nhập số điện thoại"
                            value="{{old('tel',Auth::user()->tel)}}">
-                    <label>Địa chỉ:<sup>*</sup></label>
+                    <label>Địa chỉ:<span>*</span></label>
                     <input type="text" name="address" placeholder="Nhập địa chỉ"
                            value="{{old('address', Auth::user()->address)}}">
                     <label>Ghi chú :</label><textarea name="note-text" placeholder="Ghi chú ..."
                                                       style="width: 75%; height: 100px; float: right;">{{old('note')}}</textarea>
                     <input type="hidden" name="user_id" value="{{Auth::user()->user_id}}">
                 @else
-                    <label>Họ và tên:<sup>*</sup></label>
+                    <label>Họ và tên:<span>*</span></label>
                     <input type="text" name="user_name" placeholder="Nhập họ và tên" value="{{old('user_name')}}">
-                    <label>Số điện thoại:<sup>*</sup></label>
+                    <label>Số điện thoại:<span>*</span></label>
                     <input type="text" name="tel" placeholder="Nhập số điện thoại" value="{{old('tel')}}">
-                    <label>Địa chỉ:<sup>*</sup></label>
+                    <label>Địa chỉ:<span>*</span></label>
                     <input type="text" name="address" placeholder="Nhập địa chỉ" value="{{old('address')}}">
                     <label>Ghi chú :</label><textarea name="note-text" placeholder="Ghi chú ..."
                                                       style="width: 75%; height: 100px; float: right;">{{old('note')}}</textarea>
                 @endif
             </div>
             <div class="clear"></div>
-            {!! Form::submit('Đặt hàng', ['class' => 'btn btn-success']) !!}
+            {!! Form::submit('Đặt hàng', ['class' => 'btn btn-success', 'style' => 'margin-left:40%; margin-top: 2%;']) !!}
 
             {!! Form::close() !!}
             <div class="clear"></div>

@@ -7,10 +7,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use mobileS\Comment;
 use mobileS\Factory;
+use mobileS\Http\Requests\OrderRequest;
+use mobileS\Http\Requests\UserRequest;
+use mobileS\News;
 use mobileS\Order;
 use mobileS\Order_detail;
 use mobileS\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use mobileS\User;
 
 class GuestController extends Controller
 {
@@ -25,18 +29,43 @@ class GuestController extends Controller
         $iphones = Product::where('factory_id', 1)->orderBy('created_at', 'desc')->take(4)->get();
         $samsungs = Product::where('factory_id', 2)->orderBy('created_at', 'desc')->take(4)->get();
 
-        foreach ($new_products as $product){
-            $product->picture = json_decode($product->picture, true);
+        $sales = DB::table("order_details")
+			->select(DB::raw("*, SUM(product_quantity) as qty"))
+            ->join('orders', 'orders.order_id', '=', 'order_details.order_id')
+            ->where('status', 3)
+			->groupBy('product_id')
+            ->orderBy("qty", 'desc')
+            ->take(4)
+            ->get();
+//			dd($sales);
+
+        //cách 2
+//        $sales = DB::select(DB::raw("SELECT *, SUM(product_quantity) as qty FROM `order_details` JOIN orders
+//                        On orders.order_id = order_details.order_id
+//                        where STATUS = 3
+//                        GROUP BY product_id
+//                        order BY qty DESC
+//                        Limit 4"));
+        $best_products = [];
+        foreach ($sales as $product)
+        {
+            $item = Product::find($product->product_id);
+            $item->picture = json_decode($item->picture);
+            $best_products[] = $item;
         }
-        foreach ($iphones as $product){
-            $product->picture = json_decode($product->picture, true);
+
+        foreach ($new_products as $product) {
+            $product->picture = json_decode($product->picture);
         }
-        foreach ($samsungs as $product){
-            $product->picture = json_decode($product->picture,true);
+        foreach ($iphones as $product) {
+            $product->picture = json_decode($product->picture);
+        }
+        foreach ($samsungs as $product) {
+            $product->picture = json_decode($product->picture);
         }
 //        dd($new_products);
 
-        return view('guests.index', compact('new_products', 'iphones', 'samsungs'));
+        return view('guests.index', compact('new_products', 'iphones', 'samsungs', 'best_products'));
     }
 
     /**
@@ -107,12 +136,18 @@ class GuestController extends Controller
 
     public function news()
     {
-        return view('guests.news');
+        $news = News::orderBy('created_at', 'desc')->paginate(10);
+        return view('guests.news', compact('news'));
     }
 
-    public function product_detail($product_id)
+    public function product_detail($slug)
     {
-        $data = Comment::where('product_id', $product_id)
+        $product = Product::where('slug', $slug)->first();
+        $product->picture = json_decode($product->picture);
+        $product->description = json_decode($product->description);
+//        dd($product);
+        $product->color = json_decode($product->color);
+        $data = Comment::where('product_id', $product->product_id)
             ->orderBy('parent_id', 'asc')
             ->orderBy('created_at', 'desc')
             ->get();
@@ -137,16 +172,12 @@ class GuestController extends Controller
 //        dd($comments);
 
         $pagins = DB::table('comments')->where([
-            ['product_id', $product_id],
+            ['product_id', $product->product_id],
             ['parent_id', null]
         ])->orderBy('created_at', 'desc')
             ->paginate(15);
-        $product = Product::find($product_id);
-        $product->picture = json_decode($product->picture);
-        $product->description = json_decode($product->description);
-//        dd($product);
-        $product->color = json_decode($product->color);
-        return view('guests.product_detail', compact('product','comments','pagins'));
+
+        return view('guests.product_detail', compact('product', 'comments', 'pagins'));
     }
 
     public function contact()
@@ -158,8 +189,8 @@ class GuestController extends Controller
     {
         $factory = Factory::where('slug', $slug)->first();
         $products = Product::where('factory_id', $factory->factory_id)->paginate(12);
-        foreach ($products as $product){
-            $product->picture = json_decode($product->picture, true);
+        foreach ($products as $product) {
+            $product->picture = json_decode($product->picture);
         }
         return view('guests.factory', compact('products', 'factory'));
     }
@@ -167,114 +198,64 @@ class GuestController extends Controller
     public function search(Request $request)
     {
         $keyword = $request->keyword;
-        $products = Product::where('name', 'like', '%'. $keyword . '%')->take(4)->get();
-        foreach ($products as $product){
+        $products = Product::where('name', 'like', '%' . $keyword . '%')->paginate(10);
+        foreach ($products as $product) {
             $product->picture = json_decode($product->picture, true);
         }
         return view('guests.search_product', compact('products'));
     }
 
-    public function news_detail()
+    public function news_detail($slug)
     {
-        return view('guests.news_detail');
+        $news = News::where('slug', $slug)->first();
+        return view('guests.news_detail', compact('news'));
     }
 
-    public function success(Request $request)
+
+    public function user_info($user_id)
     {
-        //lấy dữ liệu để tạo order
-        date_default_timezone_set("Asia/Ho_Chi_Minh");
-        $price = 0;
-        $data = [];
-        $cart = Cart::content();
-        foreach ($cart as $item) {
-            $price += $item->subtotal;
-        }
-        $data['total'] = $price;
-        $data['user_name'] = $request->user_name;
-        $data['address'] = $request->address;
-        $data['tel'] = $request->tel;
-        if ($request->user_id != '') {
-            $data['user_id'] = $request->user_id;
-        }
-        if ($request->note != '') {
-            $data['note'] = $request->note;
-        }
-        Order::create($data);
-
-        //lấy dữ liệu để tạo order_detail
-        $order_id = Order::orderBy('order_id', 'desc')->first()->order_id;
-
-        $detail = [];
-        foreach ($cart as $item) {
-            $detail['order_id'] = $order_id;
-            $detail['product_id'] = $item->id;
-            $detail['amount'] = $item->price * $item->qty;
-
-            //lấy lại giá gốc
-            if ($item->promotion != null) {
-                $item->price = $item->price * 100 / (100 - $item->promotion);
-            }
-
-            $detail['product_price'] = $item->price;
-            $detail['product_quantity'] = $item->qty;
-            $detail['product_name'] = $item->name;
-            $detail['product_color'] = $item->options['color'];
-            $detail['product_promotion'] = $item->options['promotion'];
-            $detail['product_storage'] = $item->options['storage'];
-
-            Order_detail::create($detail);
-            $detail = [];
-        }
-        Cart::destroy();
-        return view('guests.success');
+        $user = User::find($user_id);
+        return view('guests.user_info', compact('user'));
     }
 
-    public function cart()
+    public function updateUser(UserRequest $request, $user_id)
     {
-        $cart = Cart::content();
-        $subtotal = Cart::subtotal();
-        return view('guests.cart', compact('cart', 'subtotal'));
-    }
-
-    public function addCart(Product $product, Request $request)
-    {
-        if (isset($product->promotion))
-            Cart::add([
-                'id' => $product->product_id,
-                'name' => $product->name,
-                'qty' => 1,
-                'price' => $product->price - ($product->price * $product->promotion / 100),
-                'options' => ['promotion' => $product->promotion, 'storage' => $product->storage, 'color' => $request->color]
-            ]);
-        else
-            Cart::add([
-                'id' => $product->product_id,
-                'name' => $product->name,
-                'qty' => 1,
-                'price' => $product->price,
-                'options' => ['promotion' => null, 'storage' => $product->storage, 'color' => $request->color ]
-            ]);
-        return back();
-    }
-
-    public function updateCart(Request $request)
-    {
-        Cart::update($request['rowId'], $request['qty']);
-        return back();
-    }
-
-    public function remove(Request $request)
-    {
-        Cart::remove($request['rowId']);
-        return back();
-    }
-
-    public function comment(Request $request)
-    {
-        date_default_timezone_set("Asia/Ho_Chi_Minh");
+        $user = User::find($user_id);
         $data = $request->all();
-        $data['content'] = nl2br($request->content, false);
-        Comment::create($data);
+        if (empty($request->password)) {
+            $data['password'] = bcrypt($user->password);
+        }
+        if ($request->hasFile('avatar')) {
+            // Kiểm tra user đã có avatar chưa
+            if (!empty($user->avatar)) {
+                //xoá avatar cũ
+                unlink($user->avatar);
+            }
+            $pathName = $request->avatar->store('customers', 'uploads');
+            $data['avatar'] = 'uploads/' . $pathName;
+//            dd($data);
+        }
+        $user->update($data);
+        return redirect(route('guests.index'));
+    }
+
+    public function orders($user_id)
+    {
+        $orders = Order::where('user_id', $user_id)->orderBy('created_at', 'desc')->paginate(10);
+        return view('guests.orders', compact('orders'));
+    }
+
+    public function order_detail($order_id)
+    {
+        $order = Order::find($order_id);
+        return view('guests.order_detail', compact('order'));
+    }
+
+    public function cancelOrder($order_id)
+    {
+        $order = Order::find($order_id);
+        $order->status = 0;
+        $order->update();
         return back();
     }
 }

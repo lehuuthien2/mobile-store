@@ -17,7 +17,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::orderBy('created_at', 'desc')->get();
+        $products = Product::orderBy('created_at', 'desc')->paginate(20);
         return view('manages/products.index', compact('products'));
     }
 
@@ -34,7 +34,7 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  Illuminate\Http\Request $request
+     * @param  mobileS\Http\Requests\ProductRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(ProductRequest $request)
@@ -87,7 +87,7 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $product_id
+     * @param  object $product
      * @return \Illuminate\Http\Response
      */
     public function show(Product $product)
@@ -101,7 +101,7 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param  object $product
      * @return \Illuminate\Http\Response
      */
     public function edit(Product $product)
@@ -115,11 +115,11 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  Illuminate\Http\Request $request
+     * @param  mobileS\Http\Requests\ProductRequest $request
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ProductRequest $request, $id)
+    public function update(Request $request, $id)
     {
         $product = Product::find($id);
         $product->picture = json_decode($product->picture);
@@ -131,37 +131,19 @@ class ProductController extends Controller
         $data['promotion'] = $request->promotion;
         $data['color'] = json_encode($request->color);
         $pictures = [];
-//        dd($request->all());
-        if ($request->hasFile('pic1')) {
-            if ($request->pic1 == $product->picture['0']) {
-                $pictures[] = $request->pic1;
-            } else {
-                unlink($product->picture['0']);
-                $pathName = $request->pic1->store('products', 'uploads');
+
+        if ($request->hasFile('pic')) {
+            foreach ($request->file('pic') as $pic){
+                $pathName = $pic->store('products', 'uploads');
                 $picture = 'uploads/' . $pathName;
                 $pictures[] = $picture;
             }
+            $product->picture = array_merge($product->picture, $pictures);
+//            foreach ($product->picture as $picture){
+//                unlink($picture);
+//            }
         }
-        if ($request->hasFile('pic2')) {
-            if ($request->pic1 == $product->picture['0']) {
-                $pictures[] = $request->pic2;
-            } else {
-                unlink($product->picture['1']);
-                $pathName = $request->pic2->store('products', 'uploads');
-                $picture = 'uploads/' . $pathName;
-                $pictures[] = $picture;
-            }
-        }
-        if ($request->hasFile('pic3')) {
-            if ($request->pic3 == $product->picture['0']) {
-                $pictures[] = $request->pic3;
-            } else {
-                unlink($product->picture['2']);
-                $pathName = $request->pic3->store('products', 'uploads');
-                $picture = 'uploads/' . $pathName;
-                $pictures[] = $picture;
-            }
-        }
+
         $data['picture'] = json_encode($pictures);
 
         $description = [
@@ -200,5 +182,11 @@ class ProductController extends Controller
         return redirect(route('products.index'));
     }
 
+    public function search(Request $request){
+        $c = 1;
+        $keyword = $request->keyword;
+        $products = Product::where('name', 'like' ,'%'. $keyword .'%')->paginate(20);
+        return view('manages/products.index', compact('products','c'));
+    }
 
 }

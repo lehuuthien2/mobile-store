@@ -8,10 +8,10 @@
                 <div class="section group">
                     @foreach($products as $product)
                         <div class="grid_1_of_4 images_1_of_4 products-info">
-                            <a href="{{route('guests.product_detail', $product->product_id)}}">
+                            <a href="{{route('guests.product_detail', $product->slug)}}">
                                 <img src="{{asset($product->picture['0'])}}">
                                 {{$product->name}}
-                                <h3>{{$product->price}}</h3>
+                                <h3>{{number_format($product->price,0 ,',','.')}}</h3>
                             </a>
                         </div>
                     @endforeach

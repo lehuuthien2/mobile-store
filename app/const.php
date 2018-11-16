@@ -9,7 +9,7 @@ define('COLOR', [
 ]);
 
 define('STATUS', [
-   '0' => 'Huỷ đơn hàng',
+   '0' => 'Đã huỷ',
     '1' => 'Đang đặt hàng',
     '2' => 'Đang xử lý',
     '3' => 'Đã giao hàng'

@@ -29,10 +29,9 @@ function initializeJS() {
         }
         var o = (jQuery(this).offset());
         diff = 200 - o.top;
-        if(diff>0)
-            jQuery("#sidebar").scrollTo("-="+Math.abs(diff),500);
-        else
-            jQuery("#sidebar").scrollTo("+="+Math.abs(diff),500);
+        $('#sidebar').animate({
+            scrollTop: (diff>0 ? "-" : "+") + "=" + Math.abs(diff)
+        }, 2000);
     });
 
     // sidebar menu toggle

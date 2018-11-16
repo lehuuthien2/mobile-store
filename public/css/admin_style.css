@@ -1000,6 +1000,10 @@ a.logo span {
     float: left;
 
 }
+.search-input{
+    border-radius: 5px;
+    height: 31px;
+}
 
 .search-row {
 
