@@ -1,6 +1,12 @@
 @extends('layouts.guests')
 
 @section('content')
+    <style>
+        .required{
+            color:red;
+            font-size: 1.5em;
+        }
+    </style>
     <div class="clear"></div>
     <div class="wrap">
         <div class="content">
@@ -13,7 +19,6 @@
                             </li>
                             <li><a href="#">{{$product->factory->name}}</a><img src="{{asset('images/arrow.png')}}"
                                                                                 alt=""></li>
-                            {{--                        @php dd($product) @endphp--}}
                             <li><a>{{$product->name}}</a></li>
                         </ul>
                     </div>
@@ -38,17 +43,18 @@
                         <ul>
                             <li>Giá:</li>
                             @if(isset($product->promotion))
-                                <li><span>{{number_format($product->price)}} VND</span></li>
+                                <li><span style="text-decoration: line-through">{{number_format($product->price, 0, ',' ,'.')}}
+                                        VND</span></li>
                                 <li>
-                                    <h5>{{number_format($product->price - ($product->price * $product->promtion / 100))}}
+                                    <h5 style="font-size: 1.25em;">{{number_format($product->price - ($product->price * $product->promotion / 100) , 0 ,',','.')}}
                                         VND</h5></li>
-                            @else <h5>{{number_format($product->price)}} VND</h5>
+                            @else <h5>{{number_format($product->price, 0 ,',','.')}} VND</h5>
                             @endif
                         </ul>
                         <br>
                         <label>Chọn màu :</label>
                         @foreach($product->color as $color)
-                            {!! Form::radio('color', $color, true) !!} {{$color}}
+                            <label>{!! Form::radio('color', $color, true) !!} {{$color}}</label>
                         @endforeach
                     </div>
                     <div class="left-value-details">
@@ -71,16 +77,11 @@
 
                         <p> -DÙNG THỬ 10 NGÀY MIẾN PHÍ</p>
 
-                        <p> -TRẢ GÓP LÃI XUẤT THẤP CMND+BLX</p>
-
-                        <p> -TRẢ GÓP LÃI XUẤT 0% QUA THẺ TÍN DỤNG</p>
-
                         <p> -Trợ giá mua tai nghe AKG với giá chỉ 99.000đ</p>
 
                         <p> -Tặng ngay gậy selfie mini trị giá 150.000 VNĐ</p>
 
                         <p> -Tặng ngay Que chọc sim cao cấp trị giá :20.000đ</p>
-
 
                         <p> ♥ Freeship khi khách hàng đặt hàng ONLINE chuyển khoản 100% giá trị sản phẩm.</p>
 
@@ -126,79 +127,94 @@
                             <p>{{$product->description->pin}}</p>
                             <label>Cảm biến vân tay</label>
                             <p>{{$product->description->fingerprint}}</p>
-                            <p>Bài viết</p>
                         </div>
                     </div>
-                    <div class="comments">
-                        <p class="comment_head" style="font-size: 130%;">Bình luận</p>
-                        <div class="comment_body" style="">
-                            @if(Auth::check())
-                                <div class="add-comment"
-                                     style="margin-bottom: 30px; padding-bottom: 40px; border-bottom: 1px solid #e5e5e5;">
-                                    <p>BÌNH LUẬN VỀ SẢN PHẨM</p>
-                                    {!! Form::open(['url' => '/comment']) !!}
-                                    {!! Form::hidden('user_id', Auth::user()->user_id) !!}
-                                    {!! Form::hidden('product_id', $product->product_id) !!}
-                                    <div>
+                    @if(!empty($comments) or Auth::check())
+                        <div class="comments">
+                            <p class="comment_head" style="font-size: 130%;">Bình luận</p>
+                            <div class="comment_body" style="">
+                                @if(Auth::check())
+                                    <div class="add-comment"
+                                         style="margin-bottom: 30px; padding-bottom: 40px; border-bottom: 1px solid #e5e5e5;">
+                                        <p>BÌNH LUẬN VỀ SẢN PHẨM</p>
+                                        {!! Form::open(['url' => '/comment']) !!}
+                                        {!! Form::hidden('user_id', Auth::user()->user_id) !!}
+                                        {!! Form::hidden('product_id', $product->product_id) !!}
+                                        <div>
 
                                     <textarea name="content" placeholder="Mời bạn nhập bình luận ..."
                                               class="form-control"
                                               style="width: 99%; height: 150px; margin: 0 auto"></textarea>
-                                        {!! Form::submit('Đăng',['class' => 'btn btn-warning', 'style' => 'float:right; margin-top: 5px;']) !!}
+                                            @if ($errors->has('content'))
+                                                <span class="invalid-feedback required" role="alert">
+                                        <strong>{{ $errors->first('content') }}</strong>
+                                    </span>
+                                            @endif
+                                            {!! Form::submit('Đăng',['class' => 'btn btn-warning', 'style' => 'float:right; margin-top: 5px;']) !!}
+                                        </div>
                                     </div>
-                                </div>
-                            @endif
-                            {!! Form::close() !!}
-                            @php $i = 0; @endphp
-                            @foreach($pagins as $item)
-                                @foreach($comments as $comment)
-                                    @if($comment['comment_id'] == $item->comment_id)
-                                        @php $i++; @endphp
-                                        <div class="comment-reply">
-                                            <h3>{{$comment['name']}}</h3>
-                                            <h3 style="font-size: 150%;">{!! $comment['content'] !!}</h3>
-                                            <p>{{$comment['created_at']}}</p>
-                                            @if(Auth::check())
-                                                <button onclick="$('#reply{{$i}}').toggle()" class="btn btn-info">Trả
-                                                    lời
-                                                </button>
-                                                <div class="add-comment"
-                                                     style="margin-bottom: 30px; margin-top:10px; padding-bottom: 20px; display:none"
-                                                     id="reply{{$i}}">
-                                                    {!! Form::open(['url' => 'comment', 'id' => "reply$i"]) !!}
+                                @endif
+                                {!! Form::close() !!}
+                                @php $i = 0; @endphp
+                                @foreach($pagins as $item)
+                                    @foreach($comments as $comment)
+                                        @if($comment['comment_id'] == $item->comment_id)
+                                            @php $i++; @endphp
+                                            <div class="comment-reply">
+                                                <h3 style="font-size: 150%; ">{{$comment['name']}}</h3>
+                                                <h3 style="color: #808080e3;">{!! $comment['content'] !!}</h3>
+                                                <p>{{$comment['created_at']->diffForHumans()}}
+                                                    , {{date_format($comment['created_at'], 'd-m-y h:i:s')}}</p>
+                                                @if(Auth::check())
+                                                    <button onclick="$('#reply{{$i}}').toggle()" class="btn btn-info">
+                                                        Trả
+                                                        lời
+                                                    </button>
+                                                    <div class="add-comment"
+                                                         style="margin-bottom: 30px; margin-top:10px; padding-bottom: 20px; display:none"
+                                                         id="reply{{$i}}">
+                                                        {!! Form::open(['url' => 'comment', 'id' => "reply$i"]) !!}
 
-                                                    {!! Form::hidden('product_id', $product->product_id) !!}
-                                                    {!! Form::hidden('user_id', Auth::user()->user_id) !!}
-                                                    {!! Form::hidden('parent_id', $comment['comment_id']) !!}
-                                                    <div>
+                                                        {!! Form::hidden('product_id', $product->product_id) !!}
+                                                        {!! Form::hidden('user_id', Auth::user()->user_id) !!}
+                                                        {!! Form::hidden('parent_id', $comment['comment_id']) !!}
+                                                        <div>
                                                         <textarea name="content"
                                                                   placeholder="Mời bạn nhập bình luận ..."
                                                                   class="form-control"
-                                                                  style="width: 99%; height: 150px; margin: 0 auto"></textarea>
-                                                        {!! Form::submit('Đăng',['class' => 'btn btn-warning', 'style' => ' margin-top: 5px; float:right;']) !!}
+                                                                  style="width: 99%; height: 150px; margin: 0 auto"
+                                                        ></textarea>
+                                                            @if ($errors->has('content'))
+                                                                <span class="invalid-feedback required" role="alert">
+                                        <strong>{{ $errors->first('content') }}</strong>
+                                    </span>
+                                                            @endif
+                                                            {!! Form::submit('Đăng',['class' => 'btn btn-warning', 'style' => ' margin-top: 5px; float:right;']) !!}
+                                                        </div>
+                                                        {!! Form::close() !!}
                                                     </div>
-                                                    {!! Form::close() !!}
-                                                </div>
-                                            @endif
-                                            @if(!empty($comment['reply']))
-                                                @foreach($comment['reply'] as $reply)
-                                                    <div class="comment-reply" style="margin-left:50px">
-                                                        <h3>{{$reply['name']}}</h3>
-                                                        <h3 style="font-size: 150%;">{!! $reply['content'] !!}</h3>
-                                                        <p>{{$reply['created_at']}}</p>
-                                                    </div>
-                                                @endforeach
-                                            @endif
-                                        </div>
-                                    @endif
+                                                @endif
+                                                @if(!empty($comment['reply']))
+                                                    @foreach($comment['reply'] as $reply)
+                                                        <div class="comment-reply" style="margin-left:50px">
+                                                            <h3 style="font-size: 150%; ">{{$reply['name']}}</h3>
+                                                            <h3 style="color: #808080e3;">{!! $reply['content'] !!}</h3>
+                                                            <p>{{$reply['created_at']->diffForHumans()}}
+                                                                , {{date_format($reply['created_at'], 'd-m-y h:i:s')}}</p>
+                                                        </div>
+                                                    @endforeach
+                                                @endif
+                                            </div>
+                                        @endif
+                                    @endforeach
                                 @endforeach
-                            @endforeach
-                            <div class="pagnation">
-                                {{$pagins->links()}}
-                            </div>
+                                <div class="pagnation">
+                                    {{$pagins->links()}}
+                                </div>
 
+                            </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
             </div>
 
@@ -207,11 +223,6 @@
     <div class="clear"></div>
     </div>
     <script>
-        // Get the button, and when the user clicks on it, execute myFunction
-        document.getElementById("myBtn").onclick = function () {
-            myFunction()
-        };
-
         /* myFunction toggles between adding and removing the show class, which is used to hide and show the dropdown content */
         function myFunction() {
             document.getElementById("myDropdown").classList.toggle("show");

@@ -43,25 +43,38 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'username' => 'required|string|max:20|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-            'email' => 'required|string|email|max:255|unique:users',
-            'name' => 'required|string|max:255',
-            'tel' => 'required|numeric|max:11|min:10',
-            'address' => 'required|string|max:255',
-        ]);
+            'username' => 'required|max:20|unique:users',
+            'password' => 'required|min:6|confirmed',
+            'email' => 'required|email|max:255|unique:users',
+            'name' => 'required|max:255',
+            'tel' => 'required|digits_between:10,11',
+            'address' => 'required|max:255',
+        ],
+            [
+                'required' => 'Trường :attribute là bắt buộc',
+                'max' => 'Trường :attribute có tối đa :max ký tự',
+                'min' => 'Trường :attribute phải có tối thiểu :min ký tự',
+                'unique' => 'Trường :attribute đã bị trùng',
+                'email' => 'Trường :attribute phải là kiểu email',
+                'digits_between' => 'Trường :attribute phải có số ký tự là 10 hoặc 11'
+            ],
+            [
+                'name' => 'họ và tên',
+                'tel' => 'số điện thoại',
+                'address' => 'địa chỉ'
+            ]);
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \mobileS\User
      */
     protected function create(array $data)

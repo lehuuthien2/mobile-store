@@ -146,7 +146,7 @@ class UserController extends Controller
         if (!Auth::check() || Auth::user()->permission == 1) {
             return redirect(route('guests.index'))->withErrors('Access Denied');
         }
-        $c = 2;
+        $h = 2;
         return view('manages.index', compact('c'));
     }
 
@@ -159,5 +159,19 @@ class UserController extends Controller
         }
         $users = User::where('permission', 1)->orderBy('created_at', 'desc')->paginate(30);
         return view('manages/users.customers', compact('users'));
+    }
+
+    public function search(Request $request){
+        $c = 1;
+        $keyword = $request->keyword;
+        $users = User::where('name', 'like' ,'%'. $keyword .'%')->paginate(20);
+        return view('manages/users.index', compact('users','c'));
+    }
+
+    public function searchCustomers(Request $request){
+        $c = 1;
+        $keyword = $request->keyword;
+        $users = User::where('name', 'like' ,'%'. $keyword .'%')->where('permission', 1)->paginate(20);
+        return view('manages/users.customers', compact('users','c'));
     }
 }

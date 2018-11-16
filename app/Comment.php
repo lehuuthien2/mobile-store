@@ -15,4 +15,7 @@ class Comment extends Model
     public function user(){
         return $this->belongsTo('mobileS\User','user_id', 'user_id');
     }
+    public function product(){
+        return $this->belongsTo('mobileS\Product','product_id','product_id');
+    }
 }

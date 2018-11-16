@@ -8,14 +8,14 @@
           content="Mobilestore iphone web template, Android web template, Smartphone web template, free webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design"/>
     <link href='//fonts.googleapis.com/css?family=Londrina+Solid|Coda+Caption:800|Open+Sans' rel='stylesheet'
           type='text/css'>
-    <script src="{{asset('js/jqzoom.pack.1.0.1.js')}}" type="text/javascript"></script>
     <link rel="stylesheet" href="{{asset('css/flexslider.css')}}" type="text/css" media="screen"/>
-    <script src="{{asset('js/imagezoom.js')}}"></script>
+
     <!-- FlexSlider -->
 
     <script defer src="{{asset('js/jquery.flexslider.js')}}"></script>
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/responsiveslides.min.js') }}"></script>
+    <script src="{{asset('js/imagezoom.js')}}"></script>
     <script>
         // You can also use "$(window).load(function() {"
         $(function () {
@@ -56,21 +56,21 @@
         });
     </script>
     <script type="text/javascript">
-        window.onload = function(){
-            setTimeout("switch_Image()", 3000);
-        }
-        var current = 1;
-        var num_image = 9;
-        function switch_Image(){
-            current++;
-            document.images['image'].src ='images/XS/xs-' + current + '.png';
-            if(current < num_image){
-                setTimeout("switch_Image()", 3000);
-            }else if(current == num_image){
-                current = 0;
-                setTimeout("switch_Image()", 3000);
-            }
-        }
+        // window.onload = function(){
+        //     setTimeout("switch_Image()", 3000);
+        // }
+        // var current = 1;
+        // var num_image = 9;
+        // function switch_Image(){
+        //     current++;
+        //     document.images['image'].src ='images/XS/xs-' + current + '.png';
+        //     if(current < num_image){
+        //         setTimeout("switch_Image()", 3000);
+        //     }else if(current == num_image){
+        //         current = 0;
+        //         setTimeout("switch_Image()", 3000);
+        //     }
+        // }
     </script>
     <script>
 
@@ -83,13 +83,15 @@
         <div class="header-top-nav">
             <ul>
                 @if(!Auth::check())
-                <li><a href="{{route('login')}}">Đăng nhập</a></li>
-                <li><a href="{{route('register')}}">Đăng ký</a></li>
+                    <li><a href="{{route('login')}}">Đăng nhập</a></li>
+                    <li><a href="{{route('register')}}">Đăng ký</a></li>
                 @else
                     <li>
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->name }} <span class="caret"></span>
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle"
+                           href="{{route('user', Auth::user()->user_id)}}" role="button"
+                           aria-haspopup="true" aria-expanded="false" v-pre>
+                            {{ Auth::user()->name }}
+                            {{--<span class="caret"></span>--}}
                         </a>
                     </li>
                     <li>
@@ -104,8 +106,13 @@
                             @csrf
                         </form>
                     </li>
+                    <li>
+                        <a href="{{route('guests.orders', Auth::user()->user_id)}}">
+                            Lịch sử đặt hàng
+                        </a>
+                    </li>
                 @endif
-                <li><a href="{{route('guests.cart')}}"><span>Giỏ hàng</span></a></li>
+                <li><a href="{{route('guests.cart')}}"><span>Giỏ hàng:</span> Có {{Cart::content()->count()}} sản phẩm</a></li>
             </ul>
         </div>
         <div class="clear"></div>
@@ -129,17 +136,9 @@
                         @foreach($factories as $factory)
                             <li><a href="{{route('guests.factory', $factory->slug)}}">{{$factory->name}}</a></li>
                         @endforeach
-                        {{--<li><a href="{{ route('guests.factory') }}">IPHONE</a></li>--}}
-                        {{--<li><a href="{{ route('guests.factory') }}">SAMSUNG</a></li>--}}
-                        {{--<li><a href="{{ route('guests.factory') }}">NOKIA</a></li>--}}
-                        {{--<li><a href="{{ route('guests.factory') }}">HUAWEI</a></li>--}}
-                        {{--<li><a href="{{ route('guests.factory') }}">XIAOMI</a></li>--}}
-                        {{--<li><a href="{{ route('guests.factory') }}">OPPO</a></li>--}}
                     </ul>
                 </li>
-                {{--<li><a href="store.php">PHỤ KIỆN</a></li>--}}
                 <li><a href="{{route('guests.news')}}">TIN TỨC</a></li>
-                {{--<li><a href="#">KHUYẾN MÃI</a></li>--}}
                 <li><a href="{{route('guests.contact')}}">LIÊN HỆ</a></li>
                 <li>
                     <div class="search-bar" style="">

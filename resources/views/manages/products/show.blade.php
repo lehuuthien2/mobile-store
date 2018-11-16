@@ -19,7 +19,7 @@
         <span class="icon_pencil-edit"></span>
         Edit
     </a>
-    <form action="#"
+    <form action="{{route('products.destroy', $product->product_id)}}"
           method="POST" onsubmit="return confirm('Are you sure?');" style="display: inline-block;">
         <input type="hidden" name="_method" value="DELETE">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">

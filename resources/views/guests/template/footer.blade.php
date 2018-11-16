@@ -24,7 +24,7 @@
                 <h3>GÓP Ý, PHẢN ÁNH</h3>
                 <p style="font-size: 150%; color: red;">18006616</p>
                 <h3>CHỨNG NHẬN </h3>
-                <img src="images/footer/dathongbao.png" width="50%";>
+                {{--<img src="images/footer/dathongbao.png" width="50%";>--}}
             </div>
             <div class="col_1_of_4 span_1_of_4">
                 <h3>TÀI KHOẢN NGÂN HÀNG</h3>

@@ -11,9 +11,6 @@
 			{{--<ul>--}}
 				{{--<li><a href="index.blade.php">Home</a></li>--}}
 				{{--<li><a href="about.blade.php">About</a></li>--}}
-				{{--<li><a href="store.php">Store</a></li>--}}
-				{{--<li><a href="store.php">Featured</a></li>--}}
-				{{--<li><a href="blog.php">Blog</a></li>--}}
 				{{--<li><a href="contact.blade.php">Contact</a></li>--}}
 			{{--</ul>--}}
 		{{--</div>--}}

@@ -22,7 +22,7 @@
                 <div class="section group">
                     @foreach($new_products as $product)
                         <div class="grid_1_of_3 images_1_of_3">
-                            <a href="{{ route('guests.product_detail', $product->product_id) }}">
+                            <a href="{{ route('guests.product_detail', $product->slug) }}">
                                 <img src="{{asset($product->picture['0'])}}">
                                 <h3> {{$product->name}} </h3>
                             </a>
@@ -34,55 +34,18 @@
             <div class="content-grids">
                 <h4>Sản phẩm bán chạy</h4>
                 <div class="section group">
-                    <div class="grid_1_of_4 images_1_of_4 products-info">
-                        <img src="images/m1.jpg">
-                        <a href="#">Duis aute irure dolor in reprehenderit sed do
-                            eiusmod
-                            tempor incididunt</a>
-                        <h3>$260</h3>
-                        {{--<li><a class="i" href="{{ route('guests.product_detail') }}"> </a></li>--}}
-                        {{--<li><a class="Compar" href="{{ route('guests.product_detail') }}"> </a></li>--}}
-                        {{--<li><a class="Wishlist" href="{{ route('guests.product_detail') }}"> </a></li>--}}
-                    </div>
-                    <div class="grid_1_of_4 images_1_of_4 products-info">
-                        <img src="images/m2.jpg">
-                        <a href="#">Duis aute irure dolor in reprehenderit sed do
-                            eiusmod
-                            tempor incididunt</a>
-                        <h3>$150</h3>
-                        <ul>
-                            {{--<li><a class="cart" href="{{ route('guests.product_detail') }}"> </a></li>--}}
-                            {{--<li><a class="i" href="{{ route('guests.product_detail') }}"> </a></li>--}}
-                            {{--<li><a class="Compar" href="{{ route('guests.product_detail') }}"> </a></li>--}}
-                            {{--<li><a class="Wishlist" href="{{ route('guests.product_detail') }}"> </a></li>--}}
-                        </ul>
-                    </div>
-                    <div class="grid_1_of_4 images_1_of_4 products-info">
-                        <img src="images/m7.jpg">
-                        <a href="#">Duis aute irure dolor in reprehenderit sed do
-                            eiusmod
-                            tempor incididunt</a>
-                        <h3>$130</h3>
-                        <ul>
-                            {{--<li><a class="cart" href="{{ route('guests.product_detail') }}"> </a></li>--}}
-                            {{--<li><a class="i" href="{{ route('guests.product_detail') }}"> </a></li>--}}
-                            {{--<li><a class="Compar" href="{{ route('guests.product_detail') }}"> </a></li>--}}
-                            {{--<li><a class="Wishlist" href="{{ route('guests.product_detail') }}"> </a></li>--}}
-                        </ul>
-                    </div>
-                    <div class="grid_1_of_4 images_1_of_4 products-info">
-                        <img src="images/m4.jpg">
-                        <a href="#">Duis aute irure dolor in reprehenderit sed do
-                            eiusmod
-                            tempor incididunt</a>
-                        <h3>$460</h3>
-                        <ul>
-                            <li><a class="cart" href="#"> </a></li>
-                            <li><a class="i" href="#"> </a></li>
-                            <li><a class="Compar" href="#"> </a></li>
-                            <li><a class="Wishlist" href="#"> </a></li>
-                        </ul>
-                    </div>
+                    @foreach($best_products as $product)
+
+                        <div class="grid_1_of_4 images_1_of_4 products-info">
+                            <a href="{{ route('guests.product_detail', $product->slug) }}">
+                                <img src="{{asset($product->picture['0'])}}">
+                                {{$product->name}}
+                                <h3>{{number_format($product->price, 0, ',','.')}}</h3>
+                            </a>
+                        </div>
+
+
+                    @endforeach
                 </div>
             </div>
             <div class="content-grids">
@@ -91,10 +54,10 @@
                     @foreach($iphones as $product)
 
                         <div class="grid_1_of_4 images_1_of_4 products-info">
-                            <a href="{{ route('guests.product_detail', $product->product_id) }}">
+                            <a href="{{ route('guests.product_detail', $product->slug) }}">
                                 <img src="{{asset($product->picture['0'])}}">
                                 {{$product->name}}
-                                <h3>{{$product->price}}</h3>
+                                <h3>{{number_format($product->price, 0, ',','.')}}</h3>
                             </a>
                         </div>
 
@@ -107,10 +70,10 @@
                         @foreach($samsungs as $product)
 
                             <div class="grid_1_of_4 images_1_of_4 products-info">
-                                <a href="{{ route('guests.product_detail', $product->product_id) }}">
+                                <a href="{{ route('guests.product_detail', $product->slug) }}">
                                     <img src="{{asset($product->picture['0'])}}">
                                     {{$product->name}}
-                                    <h3>{{$product->price}}</h3>
+                                    <h3>{{number_format($product->price, 0, ',','.')}}</h3>
                                 </a>
                             </div>
 

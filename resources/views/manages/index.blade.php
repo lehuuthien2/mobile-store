@@ -8,6 +8,7 @@
     <meta name="author" content="GeeksLabs">
     <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
     <link rel="shortcut icon" href="img/favicon.png">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Creative - Bootstrap Admin Template</title>
 
@@ -21,19 +22,6 @@
     <!-- font icon -->
     <link href="{{asset('css/elegant-icons-style.css')}}" rel="stylesheet"/>
     <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet"/>
-{{--<!-- full calendar css-->--}}
-{{--<link href="assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet"/>--}}
-{{--<link href="assets/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet"/>--}}
-{{--<!-- easy pie chart-->--}}
-{{--<link href="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css"--}}
-{{--media="screen"/>--}}
-<!-- owl carousel -->
-    {{--<link rel="stylesheet" href="{{asset('css/owl.carousel.css')}}" type="text/css">--}}
-    {{--<link href="{{asset('css/jquery-jvectormap-1.2.2.css')}}" rel="stylesheet">--}}
-    <!-- Custom styles -->
-    {{--<link rel="stylesheet" href="{{asset('css/fullcalendar.css')}}">--}}
-    {{--<link href="{{asset('css/widgets.css')}}" rel="stylesheet">--}}
-
 
     <link href="{{asset('css/admin_style.css')}}" rel="stylesheet">
     <link href="{{asset('css/style-responsive.css')}}" rel="stylesheet"/>
@@ -94,7 +82,6 @@
                 <li class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="profile-ava">
-                                <img alt="" src="img/avatar1_small.jpg">
                             </span>
                         <span class="username">{{Auth::user()->name}}</span>
                         <b class="caret"></b>
@@ -146,6 +133,7 @@
                     <ul class="sub">
                         <li><a class="" href="{{route('users.create')}}">Create staff</a></li>
                         <li><a class="" href="{{route('products.create')}}">Create product</a></li>
+                        <li><a class="" href="{{route('news.create')}}">Create news</a></li>
                     </ul>
                 </li>
 
@@ -159,6 +147,9 @@
                         <li><a class="" href="{{route('users.index')}}">Staffs Table</a></li>
                         <li><a class="" href="{{route('users.customer')}}">Customers Table</a></li>
                         <li><a class="" href="{{route('products.index')}}">Products Table</a></li>
+                        <li><a class="" href="{{route('news.index')}}">News Table</a></li>
+                        <li><a class="" href="{{route('orders.index')}}">Orders Table</a></li>
+                        <li><a class="" href="{{route('comments.index')}}">Comments Table</a></li>
                     </ul>
                 </li>
 
@@ -184,7 +175,7 @@
             <br>
             @yield('content')
 
-            @if(isset($c))
+            @if(isset($h))
                 <h2>Chào {{Auth::user()->name}}. Ngày mới tốt lành!</h2>
             @endif
         </section>
@@ -217,24 +208,12 @@
     $(document).ready(function() {
         $('.js-example-basic-multiple').select2();
     });
-</script>
-<script>
+
     $(function () {
         $('select.styled').customSelect();
     });
-</script>
-<script>
-    CKEDITOR.replace( 'editor1', {
-        filebrowserBrowseUrl: '{{ asset('ckfinder/ckfinder.html') }}',
-        filebrowserImageBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Images') }}',
-        filebrowserFlashBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Flash') }}',
-        filebrowserUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files') }}',
-        filebrowserImageUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images') }}',
-        filebrowserFlashUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash') }}'
-    } );
-    CKEDITOR.config.height = '500px';
-    CKEDITOR.config.extraPlugins = 'justify';
 
+    CKEDITOR.config.extraPlugins = 'justify';
 </script>
 
 

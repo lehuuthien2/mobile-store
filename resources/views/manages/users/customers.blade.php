@@ -7,9 +7,21 @@
         <!-- page start-->
         <div class="row">
             <div class="col-lg-12">
+                <div class="form-group" style="text-align: right;margin-bottom: 30px;">
+                    {!! Form::open(['method' => 'GET', 'route' => ['searchCustomer', isset($keyword)]]) !!}
+                    <div class="col-sm-12">
+                        {!! Form::text('keyword', null, ['placeholder' => 'nhập tên người bạn muốn tìm','class' => 'search-input']) !!}
+                        <button type="submit" class="btn btn-send ">Tìm kiếm</button>
+                    </div>
+                    {!! Form::close() !!}
+                </div>
                 <section class="panel">
                     <header class="panel-heading">
+                        @if(empty($c))
                         Bảng khách hàng
+                        @else <a href="{{route('users.customer')}}" class="btn btn-success" style="float:right">Quay
+                            lại</a>
+                        @endif
                     </header>
                     <table class="table">
                         <thead>
@@ -33,7 +45,7 @@
                                 <td><a href="{{route('users.show', $user->user_id)}}">{{ $user->name }}</a></td>
                                 <td>{{ $user->email}}</td>
                                 <td>{{ $user->tel}}</td>
-                                <td>{{ mb_substr($user->address, 0, 19) }}</td>
+                                <td>{{ str_limit($user->address, 20) }}</td>
                                 <td>
                                     <div class="btn-group">
                                         <form action="{{route('users.destroy', $user->user_id)}}"
