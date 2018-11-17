@@ -9,6 +9,7 @@ use Validator;
 
 class CommentController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -16,6 +17,11 @@ class CommentController extends Controller
      */
     public function index()
     {
+        if (Auth::user()->permission != 4 & Auth::user()->permission != 3) {
+            return redirect()
+                ->route('manages.index')
+                ->withError('Access denied');
+        }
         $comments = Comment::orderBy('created_at', 'desc')->paginate(50);
         return view('manages/comments.index', compact('comments'));
     }
@@ -67,6 +73,11 @@ class CommentController extends Controller
      */
     public function show($comment_id)
     {
+        if (Auth::user()->permission != 4 & Auth::user()->permission != 3) {
+            return redirect()
+                ->route('manages.index')
+                ->withError('Access denied');
+        }
         $comment = Comment::find($comment_id);
         return view('manages/comments.show', compact('comment'));
     }

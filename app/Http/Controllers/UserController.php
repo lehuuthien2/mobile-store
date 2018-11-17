@@ -10,6 +10,7 @@ use mobileS\User;
 
 class UserController extends Controller
 {
+
     public function __construct()
     {
         $this->middleware('admin')->only('destroy');
@@ -144,10 +145,11 @@ class UserController extends Controller
     public function manage_index()
     {
         if (!Auth::check() || Auth::user()->permission == 1) {
-            return redirect(route('guests.index'))->withErrors('Access Denied');
+            return redirect(route('guests.index'));
         }
+//        dd(Auth::user()->permission);
         $h = 2;
-        return view('manages.index', compact('c'));
+        return view('manages.index', compact('h'));
     }
 
     public function customer_index()

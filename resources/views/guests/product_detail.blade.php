@@ -17,9 +17,9 @@
                             <li><a href="{{ route('guests.index') }}">Trang chủ</a><img
                                     src="{{asset('images/arrow.png')}}" alt="">
                             </li>
-                            <li><a href="#">{{$product->factory->name}}</a><img src="{{asset('images/arrow.png')}}"
+                            <li><a href="{{route('guests.factory', $product->factory->slug)}}">{{$product->factory->name}}</a><img src="{{asset('images/arrow.png')}}"
                                                                                 alt=""></li>
-                            <li><a>{{$product->name}}</a></li>
+                            <li><a href="{{route('guests.product_detail', $product->slug)}}">{{$product->name}}</a></li>
                         </ul>
                     </div>
                 </div>

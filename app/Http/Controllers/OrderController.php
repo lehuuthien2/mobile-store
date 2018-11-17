@@ -3,6 +3,7 @@
 namespace mobileS\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use mobileS\Http\Requests\OrderRequest;
 use mobileS\Order;
 use mobileS\Order_detail;
@@ -13,6 +14,11 @@ use Cart;
 
 class OrderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -20,6 +26,11 @@ class OrderController extends Controller
      */
     public function index()
     {
+        if (Auth::user()->permission != 4 & Auth::user()->permission != 2) {
+            return redirect()
+                ->route('manages.index')
+                ->withError('Access denied');
+        }
         $orders = Order::orderBy('created_at', 'desc')->paginate(30);
         return view('manages/orders.index', compact('orders'));
     }
@@ -102,6 +113,11 @@ class OrderController extends Controller
      */
     public function show($order_id)
     {
+        if (Auth::user()->permission != 4 & Auth::user()->permission != 2) {
+            return redirect()
+                ->route('manages.index')
+                ->withError('Access denied');
+        }
         $order = Order::find($order_id);
         return view('manages/orders.show', compact('order'));
     }
@@ -114,6 +130,11 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
+        if (Auth::user()->permission != 4 & Auth::user()->permission != 2) {
+            return redirect()
+                ->route('manages.index')
+                ->withError('Access denied');
+        }
         return view('manages/orders.edit', compact('order'));
     }
 

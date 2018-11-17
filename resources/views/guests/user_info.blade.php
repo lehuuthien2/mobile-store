@@ -21,7 +21,7 @@
         </div>
     </div>
     <div class="form-group">
-        {!! Form::label('password-confirm ', 'Password ' ,['class' => 'control-label col-sm-2'],
+        {!! Form::label('password-confirm ', 'Password confirm' ,['class' => 'control-label col-sm-2'],
         false) !!}
         <div class="col-sm-9">
             {!! Form::password('password_confirmation', ['class' => 'form-control'], old('password', isset($user) ? $user->password :
@@ -113,7 +113,7 @@
     {!! Form::hidden('permission', 1) !!}
     {!! Form::hidden('username', $user->username) !!}
     {{Form::hidden('user_id', isset($user) ? $user->user_id : null)}}
-    <div class="col-lg-offset-2 col-lg-10">
+    <div class="col-lg-offset-5 col-lg-7">
         {!! Form::submit('Lưu', ['class' =>'btn btn-primary']) !!}
         <input type="button" name="clear" value="Nhập lại" onclick="clearForm(this.form);" class="btn btn-default">
     </div>

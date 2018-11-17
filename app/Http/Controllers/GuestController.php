@@ -218,13 +218,14 @@ class GuestController extends Controller
         return view('guests.user_info', compact('user'));
     }
 
-    public function updateUser(UserRequest $request, $user_id)
+    public function updateCustomer(UserRequest $request, $user_id)
     {
         $user = User::find($user_id);
         $data = $request->all();
         if (empty($request->password)) {
             $data['password'] = bcrypt($user->password);
         }
+        else $data['password'] = bcrypt($data['password']);
         if ($request->hasFile('avatar')) {
             // Kiểm tra user đã có avatar chưa
             if (!empty($user->avatar)) {

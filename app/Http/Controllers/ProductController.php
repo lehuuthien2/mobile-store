@@ -7,9 +7,16 @@ use mobileS\Http\Requests\ProductRequest;
 use mobileS\Product;
 use mobileS\Comment;
 use Illuminate\Support\Facades\DB;
+use Auth;
 
 class ProductController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('admin')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,6 +24,11 @@ class ProductController extends Controller
      */
     public function index()
     {
+        if (Auth::user()->permission != 4 & Auth::user()->permission != 2) {
+            return redirect()
+                ->route('manages.index')
+                ->withError('Access denied');
+        }
         $products = Product::orderBy('created_at', 'desc')->paginate(20);
         return view('manages/products.index', compact('products'));
     }
@@ -28,6 +40,11 @@ class ProductController extends Controller
      */
     public function create()
     {
+        if (Auth::user()->permission != 4 & Auth::user()->permission != 2) {
+            return redirect()
+                ->route('manages.index')
+                ->withError('Access denied');
+        }
         return view('manages/products.create');
     }
 
@@ -48,22 +65,14 @@ class ProductController extends Controller
         $data['color'] = json_encode($request->color);
         $pictures = [];
 //        dd($request->pic1);
-        if ($request->hasFile('pic1')) {
-            $pathName = $request->pic1->store('products', 'uploads');
-            $picture = 'uploads/' . $pathName;
-            $pictures[] = $picture;
+        if ($request->hasFile('pic')) {
+            foreach ($request->file('pic') as $pic) {
+                $pathName = $pic->store('products', 'uploads');
+                $picture = 'uploads/' . $pathName;
+                $pictures[] = $picture;
+            }
         }
 
-        if ($request->hasFile('pic2')) {
-            $pathName = $request->pic2->store('products', 'uploads');
-            $picture = 'uploads/' . $pathName;
-            $pictures[] = $picture;
-        }
-        if ($request->hasFile('pic3')) {
-            $pathName = $request->pic3->store('products', 'uploads');
-            $picture = 'uploads/' . $pathName;
-            $pictures[] = $picture;
-        }
 //        dd($pictures);
         $data['picture'] = json_encode($pictures);
         $description = [
@@ -92,6 +101,11 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
+        if (Auth::user()->permission != 4 & Auth::user()->permission != 2) {
+            return redirect()
+                ->route('manages.index')
+                ->withError('Access denied');
+        }
         $product->picture = json_decode($product->picture);
         $product->color = json_decode($product->color);
         $product->description = json_decode($product->description);
@@ -106,6 +120,11 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
+        if (Auth::user()->permission != 4 & Auth::user()->permission != 2) {
+            return redirect()
+                ->route('manages.index')
+                ->withError('Access denied');
+        }
         $product->picture = json_decode($product->picture);
         $product->color = json_decode($product->color);
         $product->description = json_decode($product->description);
@@ -119,10 +138,13 @@ class ProductController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public
+    function update(Request $request, $id)
     {
         $product = Product::find($id);
         $product->picture = json_decode($product->picture);
+        $product->picture = array_filter($product->picture);
+//        dd($product->picture);
         $data = [];
         $data['name'] = $request->name;
         $data['factory_id'] = $request->factory_id;
@@ -130,10 +152,10 @@ class ProductController extends Controller
         $data['storage'] = $request->storage;
         $data['promotion'] = $request->promotion;
         $data['color'] = json_encode($request->color);
-        $pictures = [];
 
+        $pictures = [];
         if ($request->hasFile('pic')) {
-            foreach ($request->file('pic') as $pic){
+            foreach ($request->file('pic') as $pic) {
                 $pathName = $pic->store('products', 'uploads');
                 $picture = 'uploads/' . $pathName;
                 $pictures[] = $picture;
@@ -144,7 +166,7 @@ class ProductController extends Controller
 //            }
         }
 
-        $data['picture'] = json_encode($pictures);
+        $data['picture'] = json_encode($product->picture);
 
         $description = [
             'screen' => $request->screen,
@@ -171,7 +193,8 @@ class ProductController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public
+    function destroy($id)
     {
         $product = Product::find($id);
         $product->picture = json_decode($product->picture);
@@ -182,11 +205,41 @@ class ProductController extends Controller
         return redirect(route('products.index'));
     }
 
-    public function search(Request $request){
+    public
+    function search(Request $request)
+    {
         $c = 1;
         $keyword = $request->keyword;
-        $products = Product::where('name', 'like' ,'%'. $keyword .'%')->paginate(20);
-        return view('manages/products.index', compact('products','c'));
+        $products = Product::where('name', 'like', '%' . $keyword . '%')->paginate(20);
+        return view('manages/products.index', compact('products', 'c'));
     }
 
+    public
+    function removeImage(Request $request)
+    {
+        $product = Product::find($request->product_id);
+        $product->picture = json_decode($product->picture);
+        $picture = [];
+        foreach ($product->picture as $pic) {
+            if ($pic == $request->image) {
+                unlink($pic);
+            } else $picture[] = $pic;
+        }
+        $product->picture = json_encode($picture);
+        $product->update();
+        return back();
+    }
+
+    public
+    function addImage($product_id)
+    {
+        $product = Product::find($product_id);
+        $product->picture = json_decode($product->picture, true);
+//        dd($product->picture);
+        $picture = [''];
+        $product->picture = array_merge($product->picture, $picture);
+        $product->picture = json_encode($product->picture);
+        $product->update();
+        return back();
+    }
 }
