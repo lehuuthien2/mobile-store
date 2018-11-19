@@ -72,6 +72,13 @@ class ProductController extends Controller
                 $pictures[] = $picture;
             }
         }
+        if ($request->hasFile('plus')) {
+            foreach ($request->file('plus') as $plus) {
+                $pathName = $plus->store('products', 'uploads');
+                $picture = 'uploads/' . $pathName;
+                $pictures[] = $picture;
+            }
+        }
 
 //        dd($pictures);
         $data['picture'] = json_encode($pictures);
@@ -138,8 +145,7 @@ class ProductController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public
-    function update(Request $request, $id)
+    public function update(ProductRequest $request, $id)
     {
         $product = Product::find($id);
         $product->picture = json_decode($product->picture);
@@ -161,9 +167,6 @@ class ProductController extends Controller
                 $pictures[] = $picture;
             }
             $product->picture = array_merge($product->picture, $pictures);
-//            foreach ($product->picture as $picture){
-//                unlink($picture);
-//            }
         }
 
         $data['picture'] = json_encode($product->picture);

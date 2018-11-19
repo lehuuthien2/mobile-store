@@ -81,7 +81,6 @@
         @php
             $count = count($product->picture);
         @endphp
-
         <a href="{{route('addImage', $product->product_id)}} "
            class="btn btn-success addImage col-sm-offset-5" style="">
             <span>Thêm hình</span>
@@ -99,7 +98,24 @@
                                         <strong>{{ $errors->first('pic') }}</strong>
                                     </span>
                 @endif
-                <div style="width:150px; height: 160px;"></div>
+                @if ($errors->has('pic.*'))
+                    <span class="invalid-feedback required" role="alert">
+                                        <strong>{{ $errors->first('pic.*') }}</strong>
+                                    </span>
+                @endif
+                <div style="width:150px; height: 80px;"></div>
+            </div>
+        @endfor
+        @for($k = 4; $k <= 6; $k++)
+            {!! Form::label("pic$k", "Hình $k &nbsp" ,['class' => 'control-label col-sm-2'], false) !!}
+            <div class="col-sm-2">
+                <input type="file" name="plus[]" class="form-control">
+                @if ($errors->has('plus.*'))
+                    <span class="invalid-feedback required" role="alert">
+                                        <strong>{{ $errors->first('plus.*') }}</strong>
+                                    </span>
+                @endif
+                <div style="width:150px; height: 80px;"></div>
             </div>
         @endfor
     @else
@@ -112,6 +128,11 @@
                 @if ($errors->has('pic'))
                     <span class="invalid-feedback required" role="alert">
                                         <strong>{{ $errors->first('pic') }}</strong>
+                                    </span>
+                @endif
+                @if ($errors->has('pic.*'))
+                    <span class="invalid-feedback required" role="alert">
+                                        <strong>{{ $errors->first('pic.*') }}</strong>
                                     </span>
                 @endif
                 @if(($product->picture[$k]) != '')

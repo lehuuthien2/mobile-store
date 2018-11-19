@@ -3,6 +3,7 @@
 namespace mobileS\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use mobileS\Comment;
 use mobileS\User;
 use Validator;
@@ -44,7 +45,7 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        date_default_timezone_set("Asia/Ho_Chi_Minh");
+//        date_default_timezone_set("Asia/Ho_Chi_Minh");
         $validator = Validator::make($request->all(), [
             'content' => 'required|max:255',
         ],[

@@ -3,78 +3,7 @@
 
 @endphp
 <head>
-    {{--<link href="{{asset('css/style.css')}}" rel="stylesheet" type="text/css" media="all"/>--}}
-    <meta name="keywords"
-          content="Mobilestore iphone web template, Android web template, Smartphone web template, free webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design"/>
-    <link href='//fonts.googleapis.com/css?family=Londrina+Solid|Coda+Caption:800|Open+Sans' rel='stylesheet'
-          type='text/css'>
-    <link rel="stylesheet" href="{{asset('css/flexslider.css')}}" type="text/css" media="screen"/>
 
-    <!-- FlexSlider -->
-
-    <script defer src="{{asset('js/jquery.flexslider.js')}}"></script>
-    <script src="{{ asset('js/jquery.min.js') }}"></script>
-    <script src="{{ asset('js/responsiveslides.min.js') }}"></script>
-    <script src="{{asset('js/imagezoom.js')}}"></script>
-    <script>
-        // You can also use "$(window).load(function() {"
-        $(function () {
-            // Slideshow 1
-            $("#slider1").responsiveSlides({
-                maxwidth: 1600,
-                speed: 600
-            });
-        });
-    </script>
-    <script>
-        // Can also be used with $(document).ready()
-        $(window).load(function () {
-            $('.flexslider').flexslider({
-                animation: "slide",
-                controlNav: "thumbnails"
-            });
-        });
-    </script>
-    <!----->
-    <script>
-        $(document).ready(function () {
-            $(".menu_body").hide();
-            //toggle the componenet with class menu_body
-            $(".menu_head").click(function () {
-                $(this).next(".menu_body").slideToggle(600);
-                var plusmin;
-                plusmin = $(this).children(".plusminus").text();
-
-                // $(this).children(".plusminus").text(plusmin == '+' ? '-' : '+');
-
-
-                if (plusmin == '+')
-                    $(this).children(".plusminus").text('-');
-                else
-                    $(this).children(".plusminus").text('+');
-            });
-        });
-    </script>
-    <script type="text/javascript">
-        // window.onload = function(){
-        //     setTimeout("switch_Image()", 3000);
-        // }
-        // var current = 1;
-        // var num_image = 9;
-        // function switch_Image(){
-        //     current++;
-        //     document.images['image'].src ='images/XS/xs-' + current + '.png';
-        //     if(current < num_image){
-        //         setTimeout("switch_Image()", 3000);
-        //     }else if(current == num_image){
-        //         current = 0;
-        //         setTimeout("switch_Image()", 3000);
-        //     }
-        // }
-    </script>
-    <script>
-
-    </script>
 </head>
 <div class="wrap">
     <!----start-Header---->
