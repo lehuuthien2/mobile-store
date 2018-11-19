@@ -3,6 +3,7 @@
 namespace mobileS\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use mobileS\Http\Requests\NewsRequest;
 use mobileS\News;
 
@@ -15,6 +16,11 @@ class NewsController extends Controller
      */
     public function index()
     {
+        if (Auth::user()->permission != 4 & Auth::user()->permission != 3) {
+            return redirect()
+                ->route('manages.index')
+                ->withError('Access denied');
+        }
         $news = News::orderBy('created_at', 'desc')->paginate(10);
         return view('manages/news.index', compact('news'));
     }
@@ -26,6 +32,11 @@ class NewsController extends Controller
      */
     public function create()
     {
+        if (Auth::user()->permission != 4 & Auth::user()->permission != 3) {
+            return redirect()
+                ->route('manages.index')
+                ->withError('Access denied');
+        }
         return view('manages/news.create');
     }
 
@@ -56,6 +67,11 @@ class NewsController extends Controller
      */
     public function show($news_id)
     {
+        if (Auth::user()->permission != 4 & Auth::user()->permission != 3) {
+            return redirect()
+                ->route('manages.index')
+                ->withError('Access denied');
+        }
         $news = News::find($news_id);
         return view('manages/news.show',compact('news'));
     }
@@ -68,6 +84,11 @@ class NewsController extends Controller
      */
     public function edit(News $news)
     {
+        if (Auth::user()->permission != 4 & Auth::user()->permission != 3) {
+            return redirect()
+                ->route('manages.index')
+                ->withError('Access denied');
+        }
         return view('manages/news.edit', compact('news'));
     }
 

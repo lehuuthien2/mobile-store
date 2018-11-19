@@ -3,6 +3,7 @@
 namespace mobileS\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use mobileS\Product;
 
 class ProductRequest extends FormRequest
 {
@@ -23,13 +24,23 @@ class ProductRequest extends FormRequest
      */
     public function rules()
     {
+        //Kiểm tra số phần tử của mảng picture
+        if (!empty($this->request->get('product_id'))) {
+            $product_id = $this->request->get('product_id');
+            $product = Product::find($product_id);
+            $product->picture = json_decode($product->picture);
+            $count = count(array_filter($product->picture));
+        }
+
         $rules = [
             'name' => 'required|max:100|unique:products,name',
             'price' => 'required|numeric',
             'factory_id' => 'required',
             'body' => 'required',
             'color' => 'required',
-            'pic' => 'required|image',
+            'pic' => 'required',
+            'pic.*' => 'mimes:jpg,jpeg,png,bmp',
+            'plus.*' => 'mimes:jpg,jpeg,png,bmp',
             'in_stock' => 'required|numeric',
             'storage' => 'required|max:255',
             'screen' => 'required',
@@ -41,8 +52,11 @@ class ProductRequest extends FormRequest
             'pin' => 'required',
             'fingerprint' => 'required',
         ];
-        if(request()->method() == 'PUT'){
+        if (request()->method() == 'PUT') {
             $rules['name'] = 'required|max:100|unique:products,name,' . request()->input('product_id') . ',product_id';
+            if ($count >= 3) {
+                $rules['pic'] = '';
+            }
         }
 
         return $rules;
@@ -57,9 +71,10 @@ class ProductRequest extends FormRequest
             'regex' => 'Trường :attribute định dạng không đúng.',
             'currency_size' => 'Trường :attribute độ dài phải lớn hơn :min và nhỏ hơn :max.',
             'image' => 'Trường :attribute phải là kiểu ảnh',
-
+            'mimes' => 'Trường :attribute có đuôi mở rộng thuộc :jpg,jpeg,png,bmp'
         ];
     }
+
     public function attributes()
     {
         return [
@@ -72,7 +87,10 @@ class ProductRequest extends FormRequest
             'screen' => 'màn hình',
             'OS' => 'hệ điêu hành',
             'fingerprint' => 'vân tay',
-            'factory_id' => 'nhà sản xuất'
+            'factory_id' => 'nhà sản xuất',
+            'pic' => 'hình ảnh',
+            'plus' => 'hình ảnh',
+            'pic.*' => 'hình ảnh'
         ];
     }
 }

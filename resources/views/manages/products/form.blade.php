@@ -16,7 +16,7 @@
 <div class="form-group">
     {!! Form::label('factory', 'Nhà sản xuất <span class="required">*</span>' ,['class' => 'control-label col-sm-2'], false) !!}
     <div class="col-sm-10">
-        {!! Form::select('factory_id', $factories, old('factory_id', isset($factories) ? $factories : null), ['class' => 'form-control']) !!}
+        {!! Form::select('factory_id', $factories, old('factory_id', isset($product) ? $product->factory_id : null), ['class' => 'form-control']) !!}
         @if ($errors->has('factory_id'))
             <span class="invalid-feedback required" role="alert">
                                         <strong>{{ $errors->first('factory_id') }}</strong>
@@ -58,48 +58,7 @@
         @endif
     </div>
 </div>
-<div class="form-group">
-    {!! Form::label('pic1', 'Hình 1 <span class="required">*</span>' ,['class' => 'control-label col-sm-2'], false) !!}
-    <div class="col-sm-2">
-        <input type="file" name="pic[]" class="form-control">
-        {{--               value="{!! isset($product) ? $product->picture['0'] : null !!}">--}}
-        @if(!empty($product->picture))
-            <img src="{{(asset($product->picture['0']))}}" alt="Ảnh 1" width="150px" height="150px">
-        @endif
-        @if ($errors->has('pic'))
-            <span class="invalid-feedback required" role="alert">
-                                        <strong>{{ $errors->first('pic') }}</strong>
-                                    </span>
-        @endif
-    </div>
 
-    {!! Form::label('pic2', 'Hình 2 <span class="required">*</span>' ,['class' => 'control-label col-sm-2'], false) !!}
-    <div class="col-sm-2">
-        <input type="file" name="pic[]" class="form-control">
-        {{--               value="{!!  isset($product) ? $product->picture['1'] : null !!}">--}}
-        @if(!empty($product->picture))
-            <img src="{{(asset($product->picture['1']))}}" alt="Ảnh 2" width="150px" height="150px">
-        @endif
-        @if ($errors->has('pic'))
-            <span class="invalid-feedback required" role="alert">
-                                        <strong>{{ $errors->first('pic') }}</strong>
-                                    </span>
-        @endif
-    </div>
-    {!! Form::label('pic3', 'Hình 3 <span class="required">*</span>' ,['class' => 'control-label col-sm-2'], false) !!}
-    <div class="col-sm-2">
-        <input type="file" name="pic[]" class="form-control">
-        {{--               value="{!!  isset($product) ? $product->picture['2'] : null !!}">--}}
-        @if(!empty($product->picture))
-            <img src="{{(asset($product->picture['2']))}}" alt="Ảnh 3" width="150px" height="150px">
-        @endif
-        @if ($errors->has('pic'))
-            <span class="invalid-feedback required" role="alert">
-                                        <strong>{{ $errors->first('pic') }}</strong>
-                                    </span>
-        @endif
-    </div>
-</div>
 <div class="form-group">
     {!! Form::label('promotion', 'Khuyến mãi',['class' => 'control-label col-sm-2']) !!}
     <div class="col-sm-10">
@@ -117,9 +76,84 @@
         @endif
     </div>
 </div>
+@if(isset($product))
+    <div class="form-group">
+        @php
+            $count = count($product->picture);
+        @endphp
+        <a href="{{route('addImage', $product->product_id)}} "
+           class="btn btn-success addImage col-sm-offset-5" style="">
+            <span>Thêm hình</span>
+        </a>
+    </div>
+@endif
 <div class="form-group">
-    {!! Form::label('description', 'Cấu hình',['class' => 'control-label col-sm-6', 'style'=> 'font-size: 2em;']) !!}
+    @if(empty($product->picture))
+        @for($k = 1; $k <= 3; $k++)
+            {!! Form::label("pic$k", "Hình $k<span class='required'>*</span> " ,['class' => 'control-label col-sm-2'], false) !!}
+            <div class="col-sm-2">
+                <input type="file" name="pic[]" class="form-control">
+                @if ($errors->has('pic'))
+                    <span class="invalid-feedback required" role="alert">
+                                        <strong>{{ $errors->first('pic') }}</strong>
+                                    </span>
+                @endif
+                @if ($errors->has('pic.*'))
+                    <span class="invalid-feedback required" role="alert">
+                                        <strong>{{ $errors->first('pic.*') }}</strong>
+                                    </span>
+                @endif
+                <div style="width:150px; height: 80px;"></div>
+            </div>
+        @endfor
+        @for($k = 4; $k <= 6; $k++)
+            {!! Form::label("pic$k", "Hình $k &nbsp" ,['class' => 'control-label col-sm-2'], false) !!}
+            <div class="col-sm-2">
+                <input type="file" name="plus[]" class="form-control">
+                @if ($errors->has('plus.*'))
+                    <span class="invalid-feedback required" role="alert">
+                                        <strong>{{ $errors->first('plus.*') }}</strong>
+                                    </span>
+                @endif
+                <div style="width:150px; height: 80px;"></div>
+            </div>
+        @endfor
+    @else
+        @php $i = 0 @endphp
+        @for($k = 0; $k < $count; $k++)
+            @php $i++ @endphp
+            {!! Form::label("pic$i", "Hình $i<span class='required'>*</span> " ,['class' => 'control-label col-sm-2'], false) !!}
+            <div class="col-sm-2" style="">
+                <input type="file" name="pic[]" class="form-control">
+                @if ($errors->has('pic'))
+                    <span class="invalid-feedback required" role="alert">
+                                        <strong>{{ $errors->first('pic') }}</strong>
+                                    </span>
+                @endif
+                @if ($errors->has('pic.*'))
+                    <span class="invalid-feedback required" role="alert">
+                                        <strong>{{ $errors->first('pic.*') }}</strong>
+                                    </span>
+                @endif
+                @if(($product->picture[$k]) != '')
+                    <img src="{{asset($product->picture[$k])}}" alt="Ảnh {{$i}}" width="150px" height="150px">
+                    <a href="{{route('removeImage', ['product_id' => $product->product_id, 'image' => $product->picture[$k]])}} "
+                       onclick="return confirm('Bạn muốn xoá hình này?')"
+                       class="btn btn-danger removeImage" style="margin-left:50px; margin-bottom: 10px;">
+                        <span>X</span>
+                    </a>
+                @else
+                    <div style="width:150px; height: 160px;"></div>
+                @endif
+            </div>
+        @endfor
+    @endif
 </div>
+
+<div class="form-group">
+    {!! Form::label('description', 'Cấu hình',['class' => 'control-label col-sm-offset-5', 'style'=> 'font-size: 2em;']) !!}
+</div>
+
 <div class="form-group">
     {!! Form::label('screen', 'Màn hình <span class="required">*</span>' ,['class' => 'control-label col-sm-2'], false) !!}
     <div class="col-sm-10">
@@ -210,7 +244,7 @@
 </div>
 
 <div class="form-group">
-    {!! Form::label('body', 'Bài viết <span class="required">*</span>',['class' => 'control-label col-sm-6', 'style'=> 'font-size: 2em;'], false) !!}
+    {!! Form::label('body', 'Bài viết <span class="required">*</span>',['class' => 'control-label col-sm-offset-5', 'style'=> 'font-size: 2em;'], false) !!}
     <div class="col-sm-12">
         {!! Form::textarea('body', old('body',isset($product) ? $product->body : null),
          ['class' => 'form-control ckeditor'] ) !!}
@@ -222,7 +256,49 @@
     </div>
 </div>
 {{Form::hidden('product_id', isset($product) ? $product->product_id : null)}}
-<div class="col-lg-offset-2 col-lg-10">
+<div class="col-lg-offset-5 col-lg-7">
     {!! Form::submit('Lưu', ['class' =>'btn btn-primary']) !!}
     <input type="button" name="clear" value="Nhập lại" onclick="clearForm(this.form);" class="btn btn-default">
 </div>
+
+<script type="application/javascript">
+
+    $(document).ready(function () {
+        $('a.removeImage').click(function (event) {
+            event.preventDefault();
+
+            var url = $(this).attr('href');
+
+            $.ajax({
+                method: 'GET',
+                url: url,
+                success: function (response) {
+                    $('#container').replaceWith(response);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+            // return false;
+        });
+    });
+    $(document).ready(function () {
+        $('a.addImage').click(function (event) {
+            event.preventDefault();
+
+            var url = $(this).attr('href');
+
+            $.ajax({
+                method: 'GET',
+                url: url,
+                success: function (response) {
+                    $('#container').replaceWith(response);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+            // return false;
+        });
+    });
+</script>

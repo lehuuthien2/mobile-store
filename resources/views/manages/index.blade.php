@@ -7,9 +7,8 @@
     <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
     <meta name="author" content="GeeksLabs">
     <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
-    <link rel="shortcut icon" href="img/favicon.png">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    <link rel="shortcut icon" href="{{asset('images/icons/Aha-Soft-Free-Large-Boss-Admin.ico')}}">
     <title>Creative - Bootstrap Admin Template</title>
 
     <!-- Bootstrap CSS -->
@@ -29,7 +28,7 @@
     <link href="{{asset('css/jquery-ui-1.10.4.min.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="{{asset('js/jquery-1.12.4.js')}}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
 
@@ -126,33 +125,58 @@
                 </li>
                 <li class="sub-menu">
                     <a href="javascript:;" class="">
-                        <i class="icon_document_alt"></i>
-                        <span>Forms</span>
-                        <span class="menu-arrow arrow_carrot-right"></span>
-                    </a>
-                    <ul class="sub">
-                        <li><a class="" href="{{route('users.create')}}">Create staff</a></li>
-                        <li><a class="" href="{{route('products.create')}}">Create product</a></li>
-                        <li><a class="" href="{{route('news.create')}}">Create news</a></li>
-                    </ul>
-                </li>
-
-                <li class="sub-menu">
-                    <a href="javascript:;" class="">
-                        <i class="icon_table"></i>
-                        <span>Tables</span>
+                        <i class="icon_profile"></i>
+                        <span>Users</span>
                         <span class="menu-arrow arrow_carrot-right"></span>
                     </a>
                     <ul class="sub">
                         <li><a class="" href="{{route('users.index')}}">Staffs Table</a></li>
                         <li><a class="" href="{{route('users.customer')}}">Customers Table</a></li>
+                        <li><a class="" href="{{route('users.create')}}">Create staff</a></li>
+                    </ul>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:;" class="">
+                        <i class="icon_archive_alt"></i>
+                        <span>Products</span>
+                        <span class="menu-arrow arrow_carrot-right"></span>
+                    </a>
+                    <ul class="sub">
                         <li><a class="" href="{{route('products.index')}}">Products Table</a></li>
-                        <li><a class="" href="{{route('news.index')}}">News Table</a></li>
+                        <li><a class="" href="{{route('products.create')}}">Create product</a></li>
+                    </ul>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:;" class="">
+                        <i class="icon_document_alt"></i>
+                        <span>Orders</span>
+                        <span class="menu-arrow arrow_carrot-right"></span>
+                    </a>
+                    <ul class="sub">
                         <li><a class="" href="{{route('orders.index')}}">Orders Table</a></li>
+                    </ul>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:;" class="">
+                        <i class="icon_pencil"></i>
+                        <span>News</span>
+                        <span class="menu-arrow arrow_carrot-right"></span>
+                    </a>
+                    <ul class="sub">
+                        <li><a class="" href="{{route('news.index')}}">News Table</a></li>
+                        <li><a class="" href="{{route('news.create')}}">Create news</a></li>
+                    </ul>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:;" class="">
+                        <i class="icon_comment"></i>
+                        <span>Comments</span>
+                        <span class="menu-arrow arrow_carrot-right"></span>
+                    </a>
+                    <ul class="sub">
                         <li><a class="" href="{{route('comments.index')}}">Comments Table</a></li>
                     </ul>
                 </li>
-
             </ul>
             <!-- sidebar menu end-->
         </div>
@@ -163,12 +187,12 @@
     <section id="main-content">
         <section class="wrapper">
             @if(Session::has('success'))
-                <div class="alert alert-success">
+                <div class="alert alert-success" style="margin-top:50px">
                     {{ Session::get('success') }}
                 </div>
             @endif
             @if(Session::has('error'))
-                <div class="alert alert-danger">
+                <div class="alert alert-danger" style="margin-top:50px">
                     {{ Session::get('error') }}
                 </div>
             @endif

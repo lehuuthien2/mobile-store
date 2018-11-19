@@ -3,12 +3,14 @@
 namespace mobileS\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use mobileS\Comment;
 use mobileS\User;
 use Validator;
 
 class CommentController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -16,6 +18,11 @@ class CommentController extends Controller
      */
     public function index()
     {
+        if (Auth::user()->permission != 4 & Auth::user()->permission != 3) {
+            return redirect()
+                ->route('manages.index')
+                ->withError('Access denied');
+        }
         $comments = Comment::orderBy('created_at', 'desc')->paginate(50);
         return view('manages/comments.index', compact('comments'));
     }
@@ -38,7 +45,7 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        date_default_timezone_set("Asia/Ho_Chi_Minh");
+//        date_default_timezone_set("Asia/Ho_Chi_Minh");
         $validator = Validator::make($request->all(), [
             'content' => 'required|max:255',
         ],[
@@ -67,6 +74,11 @@ class CommentController extends Controller
      */
     public function show($comment_id)
     {
+        if (Auth::user()->permission != 4 & Auth::user()->permission != 3) {
+            return redirect()
+                ->route('manages.index')
+                ->withError('Access denied');
+        }
         $comment = Comment::find($comment_id);
         return view('manages/comments.show', compact('comment'));
     }

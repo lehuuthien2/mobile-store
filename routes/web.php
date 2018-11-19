@@ -30,6 +30,14 @@ Route::get('manages',[
     'uses' => 'UserController@manage_index',
     'as' => 'manages.index',
 ]);
+Route::get('manages/products/removeImage/',[
+    'uses' => 'ProductController@removeImage',
+    'as' => 'removeImage'
+]);
+Route::get('manages/products/addImage/{id}',[
+   'uses' => 'ProductController@addImage',
+   'as' => 'addImage'
+]);
 //Route::get('manages/users',[
 //    'uses' => 'UserController@user_index',
 //    'as' => 'users.index',
@@ -99,8 +107,8 @@ Route::get('user/{id}', [
    'as' => 'user'
 ]);
 Route::put('user/{id}', [
-    'uses' => 'GuestController@updateUser',
-    'as' => 'updateUser'
+    'uses' => 'GuestController@updateCustomer',
+    'as' => 'updateCustomer'
 ]);
 Route::get('user/{id}/orders', [
    'uses' => 'GuestController@orders',
@@ -139,4 +147,5 @@ Route::get('search/customers', [
     'uses' => 'UserController@searchCustomers',
     'as' => 'searchCustomer'
 ]);
+
 
