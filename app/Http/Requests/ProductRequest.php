@@ -25,12 +25,12 @@ class ProductRequest extends FormRequest
     public function rules()
     {
         //Kiểm tra số phần tử của mảng picture
-        if (!empty($this->request->get('product_id'))) {
-            $product_id = $this->request->get('product_id');
+        if (!empty(request()->input('product_id'))) {
+            $product_id = request()->input(('product_id'));
             $product = Product::find($product_id);
             $product->picture = json_decode($product->picture);
-            $count = count(array_filter($product->picture));
-        }
+            $count =  count(array_filter($product->picture));
+//        }
 
         $rules = [
             'name' => 'required|max:100|unique:products,name',
@@ -54,9 +54,10 @@ class ProductRequest extends FormRequest
         ];
         if (request()->method() == 'PUT') {
             $rules['name'] = 'required|max:100|unique:products,name,' . request()->input('product_id') . ',product_id';
-            if ($count >= 3) {
+            if($count >= 3){
                 $rules['pic'] = '';
             }
+        }
         }
 
         return $rules;

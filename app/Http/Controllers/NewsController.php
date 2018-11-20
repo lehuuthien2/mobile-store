@@ -135,6 +135,11 @@ class NewsController extends Controller
         return redirect(route('news.index'));
     }
 
+    /**
+     * Display a listing of news for result of search (keyword is title of news)
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function search(Request $request){
         $c = 1;
         $keyword = $request->keyword;

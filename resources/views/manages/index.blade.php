@@ -24,9 +24,9 @@
 
     <link href="{{asset('css/admin_style.css')}}" rel="stylesheet">
     <link href="{{asset('css/style-responsive.css')}}" rel="stylesheet"/>
-    {{--<link href="css/xcharts.min.css" rel=" stylesheet">--}}
-    <link href="{{asset('css/jquery-ui-1.10.4.min.css')}}" rel="stylesheet">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+{{--    <link href="{{asset('css/jquery-ui-1.10.4.min.css')}}" rel="stylesheet">--}}
+    <link rel="stylesheet" href="{{asset('css/jquery-ui.css')}}">
 
     <script src="{{asset('js/jquery-1.12.4.js')}}"></script>
     <script src="{{ asset('js/app.js') }}"></script>

@@ -11,6 +11,9 @@ use mobileS\User;
 class UserController extends Controller
 {
 
+    /**
+     * UserController constructor.
+     */
     public function __construct()
     {
         $this->middleware('admin')->only('destroy');
@@ -68,11 +71,16 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $user_id
+     * @param  User $user_id
      * @return \Illuminate\Http\Response
      */
     public function show(User $user)
     {
+        if (!Auth::check() || Auth::user()->permission != 4) {
+            return redirect()
+                ->route('manages.index')
+                ->withError('Access denied');
+        }
 //        $user = User::find('user_id', $user_id);
         return view('manages/users.show', compact('user'));
     }
@@ -142,6 +150,10 @@ class UserController extends Controller
         return redirect(route('users.index'));
     }
 
+    /**
+     * Display home of managers
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     */
     public function manage_index()
     {
         if (!Auth::check() || Auth::user()->permission == 1) {
@@ -152,6 +164,10 @@ class UserController extends Controller
         return view('manages.index', compact('h'));
     }
 
+    /**
+     * Display a listing of customer (only admin can access)
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function customer_index()
     {
         if (!Auth::check() || Auth::user()->permission != 4) {
@@ -163,6 +179,11 @@ class UserController extends Controller
         return view('manages/users.customers', compact('users'));
     }
 
+    /**
+     * Display a listing of staffs for result of search (keyword is name of staff)
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function search(Request $request){
         $c = 1;
         $keyword = $request->keyword;
@@ -170,6 +191,11 @@ class UserController extends Controller
         return view('manages/users.index', compact('users','c'));
     }
 
+    /**
+     * Display a listing of customers for result of search (keyword is name of customer)
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function searchCustomers(Request $request){
         $c = 1;
         $keyword = $request->keyword;

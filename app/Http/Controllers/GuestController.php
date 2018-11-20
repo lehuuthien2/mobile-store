@@ -4,6 +4,7 @@ namespace mobileS\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use mobileS\Comment;
 use mobileS\Factory;
@@ -134,12 +135,20 @@ class GuestController extends Controller
         //
     }
 
+    /** Display a listing of News
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function news()
     {
         $news = News::orderBy('created_at', 'desc')->paginate(10);
         return view('guests.news', compact('news'));
     }
 
+    /**
+     * Display detail of a specified product
+     * @param string $slug
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function product_detail($slug)
     {
         $product = Product::where('slug', $slug)->first();
@@ -180,11 +189,20 @@ class GuestController extends Controller
         return view('guests.product_detail', compact('product', 'comments', 'pagins'));
     }
 
+    /**
+     * Display page for customers to contact with managers
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function contact()
     {
         return view('guests.contact');
     }
 
+    /**
+     * Display a listing of products by factory
+     * @param string $slug
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function factory($slug)
     {
         $factory = Factory::where('slug', $slug)->first();
@@ -195,6 +213,12 @@ class GuestController extends Controller
         return view('guests.factory', compact('products', 'factory'));
     }
 
+    /**
+     * Display a listing of products for result of search (keyword is name of product)
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function search(Request $request)
     {
         $keyword = $request->keyword;
@@ -205,6 +229,11 @@ class GuestController extends Controller
         return view('guests.search_product', compact('products'));
     }
 
+    /**
+     * Display detail of a news
+     * @param string $slug
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function news_detail($slug)
     {
         $news = News::where('slug', $slug)->first();
@@ -212,12 +241,26 @@ class GuestController extends Controller
     }
 
 
+    /**
+     * Display info of a customer
+     * @param int $user_id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function user_info($user_id)
     {
+        if(Auth::user()->permission != 1){
+            return redirect(route('manages.index'));
+        }
         $user = User::find($user_id);
         return view('guests.user_info', compact('user'));
     }
 
+    /**
+     * Update info of customer
+     * @param UserRequest $request
+     * @param int $user_id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function updateCustomer(UserRequest $request, $user_id)
     {
         $user = User::find($user_id);
@@ -240,18 +283,33 @@ class GuestController extends Controller
         return redirect(route('guests.index'));
     }
 
+    /**
+     * Display a listing of orders of customer
+     * @param int $user_id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function orders($user_id)
     {
         $orders = Order::where('user_id', $user_id)->orderBy('created_at', 'desc')->paginate(10);
         return view('guests.orders', compact('orders'));
     }
 
+    /**
+     * Display detail of order
+     * @param int $order_id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function order_detail($order_id)
     {
         $order = Order::find($order_id);
         return view('guests.order_detail', compact('order'));
     }
 
+    /**
+     * Allow customer to cancel an onder when it's status is 'Đang dặt hàng'
+     * @param int $order_id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function cancelOrder($order_id)
     {
         $order = Order::find($order_id);

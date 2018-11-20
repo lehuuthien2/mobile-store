@@ -19,7 +19,7 @@
     <script defer src="{{asset('js/jquery.flexslider.js')}}"></script>
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/responsiveslides.min.js') }}"></script>
-    <script src="{{asset('js/imagezoom.js')}}"></script>
+    {{--<script src="{{asset('js/imagezoom.js')}}"></script>--}}
     <script>
         // You can also use "$(window).load(function() {"
         $(function () {
@@ -35,7 +35,7 @@
         $(window).load(function () {
             $('.flexslider').flexslider({
                 animation: "slide",
-                controlNav: "thumbnails"
+                controlNav: "true",
             });
         });
     </script>
@@ -82,7 +82,7 @@
 </div>
 <!-- Scripts -->
 {{--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>--}}
-<script src="{{asset('js\jquery-ui.min.js')}}"></script>
+<script src="{{asset('js/jquery-ui.min.js')}}"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 <script>
     $(function () {
