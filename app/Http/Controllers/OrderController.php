@@ -14,6 +14,9 @@ use Cart;
 
 class OrderController extends Controller
 {
+    /**
+     * OrderController constructor.
+     */
     public function __construct()
     {
         $this->middleware('admin')->only('destroy');
@@ -48,7 +51,7 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  OrderRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(OrderRequest $request)
@@ -180,6 +183,10 @@ class OrderController extends Controller
     }
 
 
+    /**
+     * Display shopping cart of customer
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function cart()
     {
         $cart = Cart::content();
@@ -187,6 +194,12 @@ class OrderController extends Controller
         return view('guests.cart', compact('cart', 'subtotal'));
     }
 
+    /**
+     * Allow customer to add a product into shopping cart
+     * @param Product $product
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function addCart(Product $product, Request $request)
     {
         if (isset($product->promotion))
@@ -208,18 +221,33 @@ class OrderController extends Controller
         return back();
     }
 
+    /**
+     * Update quantity of specified product of shopping cart
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function updateCart(Request $request)
     {
         Cart::update($request['rowId'], $request['qty']);
         return back();
     }
 
+    /**
+     * Remove a product from shopping cart
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function remove(Request $request)
     {
         Cart::remove($request['rowId']);
         return back();
     }
 
+    /**
+     * Display a listing of orders for result of search (keyword is order_id of order)
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function search(Request $request){
         $c = 1;
         $keyword = $request->keyword;

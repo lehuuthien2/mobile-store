@@ -12,6 +12,9 @@ use Auth;
 class ProductController extends Controller
 {
 
+    /**
+     * ProductController constructor.
+     */
     public function __construct()
     {
         $this->middleware('admin')->only('destroy');
@@ -103,7 +106,7 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  object $product
+     * @param  Product $product
      * @return \Illuminate\Http\Response
      */
     public function show(Product $product)
@@ -122,7 +125,7 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  object $product
+     * @param  Product $product
      * @return \Illuminate\Http\Response
      */
     public function edit(Product $product)
@@ -150,7 +153,7 @@ class ProductController extends Controller
         $product = Product::find($id);
         $product->picture = json_decode($product->picture);
         $product->picture = array_filter($product->picture);
-//        dd($product->picture);
+
         $data = [];
         $data['name'] = $request->name;
         $data['factory_id'] = $request->factory_id;
@@ -167,6 +170,11 @@ class ProductController extends Controller
                 $pictures[] = $picture;
             }
             $product->picture = array_merge($product->picture, $pictures);
+        }
+
+        //Kiểm tra phần tử của mảng picture, nếu bé hơn 3 sẽ báo lỗi
+        if (count($product->picture) < 3){
+            return back()->withErrors(['3pic' => 'phải có ít nhất 3 hình'] );
         }
 
         $data['picture'] = json_encode($product->picture);
@@ -208,6 +216,11 @@ class ProductController extends Controller
         return redirect(route('products.index'));
     }
 
+    /**
+     * Display a listing of products for result of search (keyword is name of product, in admin template)
+     * @param Illuminate\Http\Request $request
+     * @return Response
+     */
     public
     function search(Request $request)
     {
@@ -217,6 +230,11 @@ class ProductController extends Controller
         return view('manages/products.index', compact('products', 'c'));
     }
 
+    /**
+     * Allow Sale to remove a picture from product
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public
     function removeImage(Request $request)
     {
@@ -233,6 +251,11 @@ class ProductController extends Controller
         return back();
     }
 
+    /**
+     * Allow Sale to add a picture into product
+     * @param int $product_id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public
     function addImage($product_id)
     {

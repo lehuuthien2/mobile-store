@@ -2,8 +2,8 @@
 
 @section('content')
     <style>
-        .required{
-            color:red;
+        .required {
+            color: red;
             font-size: 1.5em;
         }
     </style>
@@ -17,8 +17,10 @@
                             <li><a href="{{ route('guests.index') }}">Trang chủ</a><img
                                     src="{{asset('images/arrow.png')}}" alt="">
                             </li>
-                            <li><a href="{{route('guests.factory', $product->factory->slug)}}">{{$product->factory->name}}</a><img src="{{asset('images/arrow.png')}}"
-                                                                                alt=""></li>
+                            <li>
+                                <a href="{{route('guests.factory', $product->factory->slug)}}">{{$product->factory->name}}</a><img
+                                    src="{{asset('images/arrow.png')}}"
+                                    alt=""></li>
                             <li><a href="{{route('guests.product_detail', $product->slug)}}">{{$product->name}}</a></li>
                         </ul>
                     </div>
@@ -41,15 +43,21 @@
                         {!! Form::open(['url' => 'addCart/'. $product->product_id]) !!}
                         <h3 style="font-size: 200%;">{{$product->name}}</h3>
                         <ul>
-                            <li>Giá:</li>
-                            @if(isset($product->promotion))
-                                <li><span style="text-decoration: line-through">{{number_format($product->price, 0, ',' ,'.')}}
-                                        VND</span></li>
+                            @if($product->in_stock == 0)
                                 <li>
-                                    <h5 style="font-size: 1.25em;">{{number_format($product->price - ($product->price * $product->promotion / 100) , 0 ,',','.')}}
-                                        VND</h5></li>
-                            @else <h5>{{number_format($product->price, 0 ,',','.')}} VND</h5>
-                            @endif
+                                    Đã hết hàng
+                                </li>
+                            @else
+                                <li>Giá:</li>
+                                @if(isset($product->promotion))
+                                    <li><span style="text-decoration: line-through">{{number_format($product->price, 0, ',' ,'.')}}
+                                            VND</span></li>
+                                    <li>
+                                        <h5 style="font-size: 1.25em;">{{number_format($product->price - ($product->price * $product->promotion / 100) , 0 ,',','.')}}
+                                            VND</h5></li>
+                                @else <h5>{{number_format($product->price, 0 ,',','.')}} VND</h5>
+                                @endif
+
                         </ul>
                         <br>
                         <label>Chọn màu :</label>
@@ -77,13 +85,9 @@
 
                         <p> -DÙNG THỬ 10 NGÀY MIẾN PHÍ</p>
 
-                        <p> -Trợ giá mua tai nghe AKG với giá chỉ 99.000đ</p>
-
                         <p> -Tặng ngay gậy selfie mini trị giá 150.000 VNĐ</p>
 
                         <p> -Tặng ngay Que chọc sim cao cấp trị giá :20.000đ</p>
-
-                        <p> ♥ Freeship khi khách hàng đặt hàng ONLINE chuyển khoản 100% giá trị sản phẩm.</p>
 
                         <p> KHUYẾN MÃI HOT:</p>
 
@@ -93,6 +97,7 @@
 
                         {!! Form::submit('Thêm vào giỏ hàng',['class' => 'btn btn-danger']) !!}
                         {!! Form::close() !!}
+                        @endif
                     </div>
                     <div class="clear"></div>
 

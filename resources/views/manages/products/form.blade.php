@@ -135,15 +135,20 @@
                                         <strong>{{ $errors->first('pic.*') }}</strong>
                                     </span>
                 @endif
+                @if ($errors->any())
+                    <div class="invalid-feedback required">
+                        {{$errors->first('3pic')}}
+                    </div>
+                @endif
                 @if(($product->picture[$k]) != '')
                     <img src="{{asset($product->picture[$k])}}" alt="Ảnh {{$i}}" width="150px" height="150px">
-                    <a href="{{route('removeImage', ['product_id' => $product->product_id, 'image' => $product->picture[$k]])}} "
-                       onclick="return confirm('Bạn muốn xoá hình này?')"
-                       class="btn btn-danger removeImage" style="margin-left:50px; margin-bottom: 10px;">
-                        <span>X</span>
+                    <a href="javascript:void(0)" onclick="if(confirm('Bạn muốn xoá ảnh này?'))
+                        {location.href='{{route('removeImage',
+['product_id' => $product->product_id, 'image' => $product->picture[$k]])}}'}"
+                     class="btn btn-danger removeImage"  style="margin-left:50px; "><span>X</span>
                     </a>
                 @else
-                    <div style="width:150px; height: 160px;"></div>
+                    <div style="width:150px; height: 190px;"></div>
                 @endif
             </div>
         @endfor
@@ -261,8 +266,8 @@
     <input type="button" name="clear" value="Nhập lại" onclick="clearForm(this.form);" class="btn btn-default">
 </div>
 
-<script type="application/javascript">
 
+<script type="application/javascript">
     $(document).ready(function () {
         $('a.removeImage').click(function (event) {
             event.preventDefault();
