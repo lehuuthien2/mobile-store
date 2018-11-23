@@ -18,7 +18,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->permission != 4 & Auth::user()->permission != 3) {
+        if (!Auth::check() || Auth::user()->permission != 4 & Auth::user()->permission != 3) {
             return redirect()
                 ->route('manages.index')
                 ->withError('Access denied');
@@ -74,7 +74,7 @@ class CommentController extends Controller
      */
     public function show($comment_id)
     {
-        if (Auth::user()->permission != 4 & Auth::user()->permission != 3) {
+        if (!Auth::check() || Auth::user()->permission != 4 & Auth::user()->permission != 3) {
             return redirect()
                 ->route('manages.index')
                 ->withError('Access denied');
@@ -98,10 +98,10 @@ class CommentController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  $comment_id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $comment_id)
     {
         //
     }
@@ -129,6 +129,19 @@ class CommentController extends Controller
         $keyword = $request->keyword;
         $comments = Comment::where('content', 'like' ,'%'. $keyword .'%')->paginate(20);
         return view('manages/comments.index', compact('comments','c'));
+    }
+
+    /**
+     * Update status for comment
+     * @param $comment_id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function display($comment_id)
+    {
+        $comment = Comment::find($comment_id);
+        $comment->status = 2;
+        $comment->update();
+        return redirect(route('comments.index'));
     }
 
 }

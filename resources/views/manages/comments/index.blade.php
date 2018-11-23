@@ -29,6 +29,7 @@
                             <th><i class="icon_profile"></i> Người bình luận</th>
                             <th>Sản phẩm</th>
                             <th><i class=""></i> nội dung</th>
+                            <th>Trạng thái</th>
                             <th><i class="icon_cogs"></i> Action</th>
                         </tr>
                         @php $i = 1 @endphp
@@ -43,6 +44,15 @@
                                     <a href="{{route('comments.show', $comment->comment_id)}}">{{str_limit($comment->content, 25)}}</a>
                                 </td>
                                 <td>
+                                    @if($comment->status == 1)
+                                        Chờ xử lí
+                                    @else Được phép hiển thị
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($comment->status == 1)
+                                    <a href="{{route('display', $comment->comment_id)}}" class="btn btn-success">OK</a>
+                                    @endif
                                     <div class="btn-group">
                                         <form action="{{route('comments.destroy', $comment->comment_id)}}"
                                               method="POST" onsubmit="return confirm('Are you sure?');"

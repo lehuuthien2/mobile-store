@@ -13,7 +13,7 @@
 
                             <div class="form-group row">
                                 <label for="username"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Tài khoản') }}
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Username') }}
                                     <span style="color: red;">*</span></label>
 
                                 <div class="col-md-6">
@@ -31,7 +31,7 @@
 
                             <div class="form-group row">
                                 <label for="password"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Mật khẩu') }} <span
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Password') }} <span
                                         style="color: red;">*</span></label>
 
                                 <div class="col-md-6">
@@ -49,7 +49,7 @@
 
                             <div class="form-group row">
                                 <label for="password-confirm"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Xác nhận mật khẩu') }} <span
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Password Confirm') }} <span
                                         style="color: red;">*</span></label>
 
                                 <div class="col-md-6">
@@ -60,7 +60,7 @@
 
                             <div class="form-group row">
                                 <label for="email"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Địa chỉ email') }}
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Email') }}
                                     <span style="color: red;">*</span></label>
 
                                 <div class="col-md-6">

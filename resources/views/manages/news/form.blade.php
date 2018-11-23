@@ -1,7 +1,7 @@
 <div class="form-group">
     {!! Form::label('title', 'Tiêu đề <span class="required">*</span>' ,['class' => 'control-label col-sm-2'], false) !!}
     <div class="col-sm-10">
-        {!! Form::text('title', old('name', isset($news) ? $news->title : null) , ['class' => 'form-control']) !!}
+        {!! Form::text('title', old('title', isset($news) ? $news->title : null) , ['class' => 'form-control']) !!}
         @if ($errors->has('title'))
             <span class="invalid-feedback required" role="alert">
                                         <strong>{{ $errors->first('title') }}</strong>

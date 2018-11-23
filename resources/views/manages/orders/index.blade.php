@@ -49,7 +49,9 @@
                                 <td>{{$order->user_name}}</td>
                                 <td>{{str_limit($order->address,30)}}</td>
                                 <td>{{number_format($order->total,0,',','.')}} VND</td>
-                                <td>{{STATUS[$order->status]}}</td>
+                                <td @if($order->status == 1) style="color:red;" @elseif ($order->status == 2) style="color:blue;"
+                                    @elseif ($order->status == 0) style="color:black; text-decoration: line-through" @endif>
+                                    {{STATUS[$order->status]}}</td>
                                 <td>
                                     <div class="btn-group">
                                         <a class="btn btn-success" href="{{route('orders.edit', $order->order_id)}}"><i

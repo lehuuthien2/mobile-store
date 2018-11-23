@@ -305,7 +305,7 @@ body{
 	margin: 1% 0 1% 1%;
 	
 }
-.grid_1_of_4:first-child { 
+.grid_1_of_4:nth-child(4n+1) {
 	margin-left: 0; 
 } 
 .images_1_of_4 {
