@@ -16,7 +16,7 @@ class NewsController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->permission != 4 & Auth::user()->permission != 3) {
+        if (!Auth::check() || Auth::user()->permission != 4 & Auth::user()->permission != 3) {
             return redirect()
                 ->route('manages.index')
                 ->withError('Access denied');
@@ -32,7 +32,7 @@ class NewsController extends Controller
      */
     public function create()
     {
-        if (Auth::user()->permission != 4 & Auth::user()->permission != 3) {
+        if (!Auth::check() || Auth::user()->permission != 4 & Auth::user()->permission != 3) {
             return redirect()
                 ->route('manages.index')
                 ->withError('Access denied');
@@ -67,7 +67,7 @@ class NewsController extends Controller
      */
     public function show($news_id)
     {
-        if (Auth::user()->permission != 4 & Auth::user()->permission != 3) {
+        if (!Auth::check() || Auth::user()->permission != 4 & Auth::user()->permission != 3) {
             return redirect()
                 ->route('manages.index')
                 ->withError('Access denied');
@@ -84,7 +84,7 @@ class NewsController extends Controller
      */
     public function edit(News $news)
     {
-        if (Auth::user()->permission != 4 & Auth::user()->permission != 3) {
+        if (!Auth::check() || Auth::user()->permission != 4 & Auth::user()->permission != 3) {
             return redirect()
                 ->route('manages.index')
                 ->withError('Access denied');

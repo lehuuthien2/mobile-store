@@ -38,17 +38,17 @@ Route::get('manages/products/addImage/{id}',[
    'uses' => 'ProductController@addImage',
    'as' => 'addImage'
 ]);
-//Route::get('manages/users',[
-//    'uses' => 'UserController@user_index',
-//    'as' => 'users.index',
-//]);
+Route::get('manages/comments/display/{id}', [
+    'uses' => 'CommentController@display',
+    'as' => 'display'
+]);
 Route::resource('manages/users','UserController');
 
 Route::resource('manages/products', 'ProductController');
 Route::resource('manages/news', 'NewsController');
 Route::resource('manages/orders', 'OrderController');
 Route::resource('manages/comments', 'CommentController');
-
+Route::resource('manages/factories', 'FactoryController');
 Route::get('manages/customers',[
     'uses' => 'UserController@customer_index',
     'as' => 'users.customer',

@@ -21,6 +21,7 @@ class CreateCommentsTable extends Migration
             $table->integer('product_id')->unsigned();
             $table->foreign('product_id')->references('product_id')->on('products');
             $table->string('content', 255);
+            $table->tinyInteger('status')->default(1); //1. chờ xử lí, 2. được phép hiển thị
             $table->timestamps();
         });
     }

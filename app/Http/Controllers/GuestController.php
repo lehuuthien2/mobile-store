@@ -157,6 +157,7 @@ class GuestController extends Controller
 //        dd($product);
         $product->color = json_decode($product->color);
         $data = Comment::where('product_id', $product->product_id)
+            ->where('status', 2)
             ->orderBy('parent_id', 'asc')
             ->orderBy('created_at', 'desc')
             ->get();
@@ -182,7 +183,8 @@ class GuestController extends Controller
 
         $pagins = DB::table('comments')->where([
             ['product_id', $product->product_id],
-            ['parent_id', null]
+            ['parent_id', null],
+            ['status', 2]
         ])->orderBy('created_at', 'desc')
             ->paginate(15);
 

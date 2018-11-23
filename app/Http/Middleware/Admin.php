@@ -4,6 +4,7 @@ namespace mobileS\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class Admin
 {

@@ -2,14 +2,17 @@
 
 @section('content')
     <style>
-        label{
-            float:left;
-            width:10em;
+        label {
+            float: left;
+            width: 10em;
         }
     </style>
     <p class="wrapper">
         <a href="{{route('comments.index')}}" class="btn btn-success">Quay lại</a>
     <h2>Người bình luận: {{$comment->user->name}}</h2>
+    @if($comment->status == 1)
+        <a href="{{route('display', $comment->comment_id)}}" class="btn btn-success">OK</a>
+    @endif
     <form action="{{route('comments.destroy', $comment->comment_id)}}"
           method="POST" onsubmit="return confirm('Are you sure?');" style="display: inline-block;">
         <input type="hidden" name="_method" value="DELETE">

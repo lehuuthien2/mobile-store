@@ -16,7 +16,7 @@
     <!-- bootstrap theme -->
     <link href="{{asset('css/bootstrap-theme.css')}}" rel="stylesheet">
     <!--external css-->
-    <link href="{{asset('css/select2.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('css/select2.min.css')}}" rel="stylesheet"/>
 
     <!-- font icon -->
     <link href="{{asset('css/elegant-icons-style.css')}}" rel="stylesheet"/>
@@ -25,7 +25,7 @@
     <link href="{{asset('css/admin_style.css')}}" rel="stylesheet">
     <link href="{{asset('css/style-responsive.css')}}" rel="stylesheet"/>
 
-{{--    <link href="{{asset('css/jquery-ui-1.10.4.min.css')}}" rel="stylesheet">--}}
+    {{--    <link href="{{asset('css/jquery-ui-1.10.4.min.css')}}" rel="stylesheet">--}}
     <link rel="stylesheet" href="{{asset('css/jquery-ui.css')}}">
 
     <script src="{{asset('js/jquery-1.12.4.js')}}"></script>
@@ -35,7 +35,6 @@
 
     <script src="{{asset('js/jquery-ui.min.js')}}"></script>
     <script src="{{ asset('js/common.js') }}"></script>
-
 
 
     <!-- =======================================================
@@ -87,10 +86,12 @@
                     </a>
                     <ul class="dropdown-menu extended logout">
                         <div class="log-arrow-up"></div>
-                        <li class="eborder-top">
-                            <a href="{{route('users.show', Auth::user()->user_id)}}"><i class="icon_profile"></i> My
-                                Profile</a>
-                        </li>
+                        @if(Auth::user()->permission == 4)
+                            <li class="eborder-top">
+                                <a href="{{route('users.show', Auth::user()->user_id)}}"><i class="icon_profile"></i> My
+                                    Profile</a>
+                            </li>
+                        @endif
                         <li>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
@@ -133,6 +134,17 @@
                         <li><a class="" href="{{route('users.index')}}">Staffs Table</a></li>
                         <li><a class="" href="{{route('users.customer')}}">Customers Table</a></li>
                         <li><a class="" href="{{route('users.create')}}">Create staff</a></li>
+                    </ul>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:;" class="">
+                        <i class="icon_house"></i>
+                        <span>Factories</span>
+                        <span class="menu-arrow arrow_carrot-right"></span>
+                    </a>
+                    <ul class="sub">
+                        <li><a class="" href="{{route('factories.index')}}">Factories Table</a></li>
+                        <li><a class="" href="{{route('factories.create')}}">Create factory</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
@@ -229,7 +241,7 @@
 
 <script src="{{asset('js/select2.min.js')}}"></script>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('.js-example-basic-multiple').select2();
     });
 
@@ -239,7 +251,6 @@
 
     CKEDITOR.config.extraPlugins = 'justify';
 </script>
-
 
 
 </body>
