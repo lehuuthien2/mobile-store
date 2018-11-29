@@ -26,33 +26,36 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('manages',[
-    'uses' => 'UserController@manage_index',
-    'as' => 'manages.index',
-]);
-Route::get('manages/products/removeImage/',[
-    'uses' => 'ProductController@removeImage',
-    'as' => 'removeImage'
-]);
-Route::get('manages/products/addImage/{id}',[
-   'uses' => 'ProductController@addImage',
-   'as' => 'addImage'
-]);
-Route::get('manages/comments/display/{id}', [
-    'uses' => 'CommentController@display',
-    'as' => 'display'
-]);
-Route::resource('manages/users','UserController');
+Route::group(['prefix' => '/manages'], function () {
+    Route::get('/', [
+        'uses' => 'UserController@manage_index',
+        'as' => 'manages.index',
+    ]);
+    Route::get('/products/removeImage/', [
+        'uses' => 'ProductController@removeImage',
+        'as' => 'removeImage'
+    ]);
+    Route::get('/products/addImage/{id}', [
+        'uses' => 'ProductController@addImage',
+        'as' => 'addImage'
+    ]);
+    Route::get('/comments/display/{id}', [
+        'uses' => 'CommentController@display',
+        'as' => 'display'
+    ]);
+    Route::resource('/users', 'UserController');
+    Route::resource('/products', 'ProductController');
+    Route::resource('/news', 'NewsController');
+    Route::resource('/orders', 'OrderController');
+    Route::resource('/comments', 'CommentController');
+    Route::resource('/factories', 'FactoryController');
+    Route::get('/customers', [
+        'uses' => 'UserController@customer_index',
+        'as' => 'users.customer',
+    ]);
+    Route::get('/statistics', ['uses' => 'StatisticController@index', 'as' => 'statistic.index']);
 
-Route::resource('manages/products', 'ProductController');
-Route::resource('manages/news', 'NewsController');
-Route::resource('manages/orders', 'OrderController');
-Route::resource('manages/comments', 'CommentController');
-Route::resource('manages/factories', 'FactoryController');
-Route::get('manages/customers',[
-    'uses' => 'UserController@customer_index',
-    'as' => 'users.customer',
-]);
+});
 
 Route::get('news', [
     'uses' => 'GuestController@news',
@@ -82,70 +85,74 @@ Route::get('contact', [
     'uses' => 'GuestController@contact',
     'as' => 'guests.contact'
 ]);
-Route::post('addCart/{product}',[
-   'uses' => 'OrderController@addCart',
-   'as' => 'addCart' ,
+//add product into cart
+Route::post('addCart/{product}', [
+    'uses' => 'OrderController@addCart',
+    'as' => 'addCart',
 ]);
-Route::post('Cart/{rowId}',[
+//update quantity of product
+Route::post('Cart/{rowId}', [
     'uses' => 'OrderController@updateCart',
     'as' => 'updateCart'
 ]);
-Route::delete('Cart/{rowId}',[
+//remove product from cart
+Route::delete('Cart/{rowId}', [
     'uses' => 'OrderController@remove',
     'as' => 'remove'
 ]);
 Route::post('success', [
-   'uses' => 'OrderController@store',
-   'as' => 'makeOrder'
+    'uses' => 'OrderController@store',
+    'as' => 'makeOrder'
 ]);
 Route::post('/comment', [
-   'uses' => 'CommentController@store',
-   'as' => 'comment'
+    'uses' => 'CommentController@store',
+    'as' => 'comment'
 ]);
 Route::get('user/{id}', [
-   'uses' => 'GuestController@user_info',
-   'as' => 'user'
+    'uses' => 'GuestController@user_info',
+    'as' => 'user'
 ]);
 Route::put('user/{id}', [
     'uses' => 'GuestController@updateCustomer',
     'as' => 'updateCustomer'
 ]);
 Route::get('user/{id}/orders', [
-   'uses' => 'GuestController@orders',
-   'as'=> 'guests.orders'
+    'uses' => 'GuestController@orders',
+    'as' => 'guests.orders'
 ]);
-Route::get('orders/detail/{id}',[
-   'uses' => 'GuestController@order_detail',
-   'as' => 'guests.order_detail'
+Route::get('orders/detail/{id}', [
+    'uses' => 'GuestController@order_detail',
+    'as' => 'guests.order_detail'
 ]);
 Route::get('cancelOrder/{id}', [
-   'uses' => 'GuestController@cancelOrder',
-   'as' => 'guests.cancel'
+    'uses' => 'GuestController@cancelOrder',
+    'as' => 'guests.cancel'
 ]);
 
-Route::get('search/products', [
-   'uses' => 'ProductController@search',
-   'as' => 'searchProduct'
-]);
-Route::get('search/users', [
-    'uses' => 'UserController@search',
-    'as' => 'searchUser'
-]);
-Route::get('search/orders', [
-    'uses' => 'OrderController@search',
-    'as' => 'searchOrder'
-]);
-Route::get('search/comments', [
-    'uses' => 'CommentController@search',
-    'as' => 'searchComment'
-]);
-Route::get('search/news', [
-    'uses' => 'NewsController@search',
-    'as' => 'searchNews'
-]);
-Route::get('search/customers', [
-    'uses' => 'UserController@searchCustomers',
-    'as' => 'searchCustomer'
-]);
-
+Route::group(['prefix' => '/search'], function () {
+    Route::get('/products', [
+        'uses' => 'ProductController@search',
+        'as' => 'searchProduct'
+    ]);
+    Route::get('/users', [
+        'uses' => 'UserController@search',
+        'as' => 'searchUser'
+    ]);
+    Route::get('/orders', [
+        'uses' => 'OrderController@search',
+        'as' => 'searchOrder'
+    ]);
+    Route::get('/comments', [
+        'uses' => 'CommentController@search',
+        'as' => 'searchComment'
+    ]);
+    Route::get('/news', [
+        'uses' => 'NewsController@search',
+        'as' => 'searchNews'
+    ]);
+    Route::get('/customers', [
+        'uses' => 'UserController@searchCustomers',
+        'as' => 'searchCustomer'
+    ]);
+});
 

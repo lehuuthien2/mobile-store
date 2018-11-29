@@ -19,9 +19,9 @@
                                     <ul>
                                         <li>Giá:</li>
                                         @if(isset($product->promotion))
-                                            <li><span>{{number_format($product->price,0 ,',','.')}} VND</span></li>
+                                            <li><span style="text-decoration: line-through">{{number_format($product->price,0 ,',','.')}} VND</span></li>
                                             <li>
-                                                <h5>{{number_format($product->price - ($product->price * $product->promtion / 100), 0 ,',' ,'.')}}
+                                                <h5>{{number_format($product->price - ($product->price * $product->promotion / 100) , 0 ,',','.')}}
                                                     VND</h5></li>
                                         @else <h5>{{number_format($product->price,0 ,',','.')}} VND</h5>
                                         @endif

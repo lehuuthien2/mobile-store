@@ -2,18 +2,18 @@
 <html>
 <head>
     <title>T&M Mobile</title>
+	<meta name="keywords"
+          content="Mobilestore iphone web template, Android web template, Smartphone web template, free webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design"/>
     <link rel="shortcut icon" href="{{asset('images/icons/favicon.ico')}}">
+	
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}"/>
     <link href="{{asset('css/style.css')}}" rel="stylesheet" type="text/css" media="all"/>
-    <meta name="keywords"
-          content="Mobilestore iphone web template, Android web template, Smartphone web template, free webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design"/>
     <link rel="stylesheet" href="{{asset('css/responsiveslides.css')}}">
-    <meta name="keywords"
-          content="Mobilestore iphone web template, Android web template, Smartphone web template, free webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design"/>
     <link href='//fonts.googleapis.com/css?family=Londrina+Solid|Coda+Caption:800|Open+Sans' rel='stylesheet'
           type='text/css'>
     <link rel="stylesheet" href="{{asset('css/flexslider.css')}}" type="text/css" media="screen"/>
 
+    <link rel="stylesheet" href="{{asset('css/jquery-ui.css')}}">
     <!-- FlexSlider -->
 
     <script defer src="{{asset('js/jquery.flexslider.js')}}"></script>

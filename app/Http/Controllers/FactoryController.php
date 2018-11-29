@@ -10,13 +10,20 @@ use Validator;
 class FactoryController extends Controller
 {
     /**
+     * FactoryController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('admin')->only('destroy');
+    }
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        if (!Auth::check() || Auth::user()->permission != 4) {
+        if (!Auth::check() || Auth::user()->permission != 4 && Auth::user()->permission != 2) {
             return redirect()
                 ->route('manages.index')
                 ->withError('Access denied');
@@ -32,7 +39,7 @@ class FactoryController extends Controller
      */
     public function create()
     {
-        if (!Auth::check() || Auth::user()->permission != 4) {
+        if (!Auth::check() || Auth::user()->permission != 4 && Auth::user()->permission != 2) {
             return redirect()
                 ->route('manages.index')
                 ->withError('Access denied');
@@ -87,7 +94,7 @@ class FactoryController extends Controller
      */
     public function edit($factory_id)
     {
-        if (!Auth::check() || Auth::user()->permission != 4) {
+        if (!Auth::check() || Auth::user()->permission != 4 && Auth::user()->permission != 2) {
             return redirect()
                 ->route('manages.index')
                 ->withError('Access denied');
