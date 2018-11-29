@@ -29,7 +29,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        if (!Auth::check() || Auth::user()->permission != 4 & Auth::user()->permission != 2) {
+        if (!Auth::check() || Auth::user()->permission != 4 && Auth::user()->permission != 2) {
             return redirect()
                 ->route('manages.index')
                 ->withError('Access denied');
@@ -116,7 +116,7 @@ class OrderController extends Controller
      */
     public function show($order_id)
     {
-        if (!Auth::check() || Auth::user()->permission != 4 & Auth::user()->permission != 2) {
+        if (!Auth::check() || Auth::user()->permission != 4 && Auth::user()->permission != 2) {
             return redirect()
                 ->route('manages.index')
                 ->withError('Access denied');
@@ -133,7 +133,7 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        if (!Auth::check() || Auth::user()->permission != 4 & Auth::user()->permission != 2) {
+        if (!Auth::check() || Auth::user()->permission != 4 && Auth::user()->permission != 2) {
             return redirect()
                 ->route('manages.index')
                 ->withError('Access denied');

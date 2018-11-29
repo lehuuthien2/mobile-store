@@ -170,6 +170,16 @@
                 </li>
                 <li class="sub-menu">
                     <a href="javascript:;" class="">
+                        <i class="icon_comment"></i>
+                        <span>Comments</span>
+                        <span class="menu-arrow arrow_carrot-right"></span>
+                    </a>
+                    <ul class="sub">
+                        <li><a class="" href="{{route('comments.index')}}">Comments Table</a></li>
+                    </ul>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:;" class="">
                         <i class="icon_pencil"></i>
                         <span>News</span>
                         <span class="menu-arrow arrow_carrot-right"></span>
@@ -180,14 +190,7 @@
                     </ul>
                 </li>
                 <li class="sub-menu">
-                    <a href="javascript:;" class="">
-                        <i class="icon_comment"></i>
-                        <span>Comments</span>
-                        <span class="menu-arrow arrow_carrot-right"></span>
-                    </a>
-                    <ul class="sub">
-                        <li><a class="" href="{{route('comments.index')}}">Comments Table</a></li>
-                    </ul>
+                    <a href="{{route('statistic.index')}}"><i class="icon_balance"></i><span>Statistics</span></a>
                 </li>
             </ul>
             <!-- sidebar menu end-->

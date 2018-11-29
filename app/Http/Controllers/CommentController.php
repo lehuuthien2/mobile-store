@@ -18,7 +18,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-        if (!Auth::check() || Auth::user()->permission != 4 & Auth::user()->permission != 3) {
+        if (!Auth::check() || Auth::user()->permission != 4 & Auth::user()->permission != 2) {
             return redirect()
                 ->route('manages.index')
                 ->withError('Access denied');
@@ -74,7 +74,7 @@ class CommentController extends Controller
      */
     public function show($comment_id)
     {
-        if (!Auth::check() || Auth::user()->permission != 4 & Auth::user()->permission != 3) {
+        if (!Auth::check() || Auth::user()->permission != 4 & Auth::user()->permission != 2) {
             return redirect()
                 ->route('manages.index')
                 ->withError('Access denied');

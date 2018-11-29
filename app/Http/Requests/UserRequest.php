@@ -53,7 +53,7 @@ class UserRequest extends FormRequest
             'required' => 'Trường :attribute là bắt buộc.',
             'unique' => 'Trường :attribute đã bị trùng.',
             'numeric' => 'Trường :attribute phải là kiểu số.',
-            'date_format' => 'Trường :attribute định dạng chưa đúng kiểu "Y-m-d"',
+            'date_format' => 'Trường :attribute phải thuộc định dạng "Y-m-d"',
             'regex' => 'Trường :attribute định dạng không đúng.',
             'currency_size' => 'Trường :attribute độ dài phải lớn hơn :min và nhỏ hơn :max.',
             'confirmed' => 'Mật khẩu xác nhận không chính xác'

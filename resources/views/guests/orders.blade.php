@@ -22,7 +22,9 @@
                     <td><a href="{{route('guests.order_detail', $order->order_id)}}">Chi tiết</a></td>
                     <td>{{STATUS[$order->status]}}
                         @if($order->status == 1)
-                            <a href="{{route('guests.cancel', $order->order_id)}}">Huỷ</a>
+                            <a href="javascript:void(0)" onclick="if(confirm('Bạn muốn huỷ đơn hàng này?'))
+                                {location.href='{{route('guests.cancel', $order->order_id)}}'}"
+                               class="btn btn-danger">Huỷ</a>
                         @endif
                     </td>
 

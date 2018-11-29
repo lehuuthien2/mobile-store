@@ -29,7 +29,7 @@
                         </div>
                     @endforeach
                     <div class="clear"></div>
-                    <div class="pagination">
+                    <div class="pagination" style="float: right;">
                         {{$news->links()}}
                     </div>
                 </div>

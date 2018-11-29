@@ -69,29 +69,19 @@
             <p style="font-size: 1.5em; color: red; font-weight: bold; padding-left: 20px;">Thông tin khách hàng </p>
             <br>
             <div class="info">
-                @if(Auth::check())
+{{--                @if(Auth::check())--}}
                     <label>Họ và tên:<span>*</span></label>
                     <input type="text" name="user_name" placeholder="Nhập họ và tên"
-                           value="{{old('user_name', Auth::user()->name)}}">
+                           value="{{old('user_name', isset(Auth::user()->user_id) ? Auth::user()->name : null)}}">
                     <label>Số điện thoại:<span>*</span></label>
                     <input type="text" name="tel" placeholder="Nhập số điện thoại"
-                           value="{{old('tel',Auth::user()->tel)}}">
+                           value="{{old('tel',isset(Auth::user()->user_id) ? Auth::user()->tel : null)}}">
                     <label>Địa chỉ:<span>*</span></label>
                     <input type="text" name="address" placeholder="Nhập địa chỉ"
-                           value="{{old('address', Auth::user()->address)}}">
+                           value="{{old('address', isset(Auth::user()->user_id) ? Auth::user()->address : null)}}">
                     <label>Ghi chú :</label><textarea name="note-text" placeholder="Ghi chú ..."
                                                       style="width: 75%; height: 100px; float: right;">{{old('note')}}</textarea>
-                    <input type="hidden" name="user_id" value="{{Auth::user()->user_id}}">
-                @else
-                    <label>Họ và tên:<span>*</span></label>
-                    <input type="text" name="user_name" placeholder="Nhập họ và tên" value="{{old('user_name')}}">
-                    <label>Số điện thoại:<span>*</span></label>
-                    <input type="text" name="tel" placeholder="Nhập số điện thoại" value="{{old('tel')}}">
-                    <label>Địa chỉ:<span>*</span></label>
-                    <input type="text" name="address" placeholder="Nhập địa chỉ" value="{{old('address')}}">
-                    <label>Ghi chú :</label><textarea name="note-text" placeholder="Ghi chú ..."
-                                                      style="width: 75%; height: 100px; float: right;">{{old('note')}}</textarea>
-                @endif
+                    <input type="hidden" name="user_id" value="{{isset(Auth::user()->user_id) ? Auth::user()->user_id : null}}">
             </div>
             <div class="clear"></div>
             {!! Form::submit('Đặt hàng', ['class' => 'btn btn-success', 'style' => 'margin-left:40%; margin-top: 2%;']) !!}
