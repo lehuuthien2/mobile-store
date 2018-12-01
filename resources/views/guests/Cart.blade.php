@@ -79,7 +79,7 @@
                     <label>Địa chỉ:<span>*</span></label>
                     <input type="text" name="address" placeholder="Nhập địa chỉ"
                            value="{{old('address', isset(Auth::user()->user_id) ? Auth::user()->address : null)}}">
-                    <label>Ghi chú :</label><textarea name="note-text" placeholder="Ghi chú ..."
+                    <label>Ghi chú :</label><textarea name="note" placeholder="Ghi chú ..."
                                                       style="width: 75%; height: 100px; float: right;">{{old('note')}}</textarea>
                     <input type="hidden" name="user_id" value="{{isset(Auth::user()->user_id) ? Auth::user()->user_id : null}}">
             </div>

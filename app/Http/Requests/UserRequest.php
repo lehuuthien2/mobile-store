@@ -30,7 +30,7 @@ class UserRequest extends FormRequest
             'name' => 'required:max:50',
             'birthday' => 'required|date_format:"Y-m-d',
             'gender' => 'required',
-            'tel' => 'required|max:11',
+            'tel' => 'required|digits_between:10,11',
             'email' => 'required|max:255|unique:users,email',
             'address' => 'required|max:255',
             'avatar' => 'image|max:3072'
@@ -56,7 +56,8 @@ class UserRequest extends FormRequest
             'date_format' => 'Trường :attribute phải thuộc định dạng "Y-m-d"',
             'regex' => 'Trường :attribute định dạng không đúng.',
             'currency_size' => 'Trường :attribute độ dài phải lớn hơn :min và nhỏ hơn :max.',
-            'confirmed' => 'Mật khẩu xác nhận không chính xác'
+            'confirmed' => 'Mật khẩu xác nhận không chính xác',
+            'digits_between' => 'Trường :attribute phải có số ký tự là :min hoặc :max',
         ];
     }
     public function attributes()

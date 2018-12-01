@@ -55,7 +55,7 @@ class RegisterController extends Controller
             'name' => 'required|max:255',
             'tel' => 'required|digits_between:10,11',
             'address' => 'required|max:255',
-            'birthday' => 'date_format:"Y-m-d',
+            'birthday' => 'nullable|date_format:"Y-m-d"',
             'gender' => 'numeric'
         ],
             [
@@ -65,7 +65,8 @@ class RegisterController extends Controller
                 'unique' => 'Trường :attribute đã bị trùng',
                 'email' => 'Trường :attribute phải là kiểu email',
                 'digits_between' => 'Trường :attribute phải có số ký tự là 10 hoặc 11',
-                'date_format' => 'Trường :attribute phải thuộc định dạng "Y-m-d"',
+                'date_format' => 'Trường :attribute phải thuộc định dạng :format',
+                'numeric' => 'Trường :attribute phải là kiểu số'
             ],
             [
                 'name' => 'họ và tên',
@@ -91,7 +92,7 @@ class RegisterController extends Controller
             'tel' => $data['tel'],
             'address' => $data['address'],
             'birthday' => $data['birthday'],
-            'gender' => $data['gender'],
+            'gender' => $data['gender']
         ]);
     }
 }

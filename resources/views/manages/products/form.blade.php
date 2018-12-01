@@ -142,8 +142,7 @@
                 @endif
                 @if(($product->picture[$k]) != '')
                     <img src="{{asset($product->picture[$k])}}" alt="Ảnh {{$i}}" width="150px" height="150px">
-                    <a href="javascript:void(0)" onclick="if(confirm('Bạn muốn xoá ảnh này?'))
-                        {location.href='{{route('removeImage',
+                    <a href="javascript:;" onclick="if(confirm('Bạn muốn xoá ảnh này?')){location.href='{{route('removeImage',
 ['product_id' => $product->product_id, 'image' => $product->picture[$k]])}}'}"
                      class="btn btn-danger removeImage"  style="margin-left:50px; "><span>X</span>
                     </a>
@@ -273,7 +272,9 @@
             event.preventDefault();
 
             var url = $(this).attr('href');
-
+            // var str = $(this).attr('onclick');
+            // var u = str.substr(52);
+            // var url = u.split("'")[0];
             $.ajax({
                 method: 'GET',
                 url: url,
@@ -287,6 +288,7 @@
             // return false;
         });
     });
+
     $(document).ready(function () {
         $('a.addImage').click(function (event) {
             event.preventDefault();
