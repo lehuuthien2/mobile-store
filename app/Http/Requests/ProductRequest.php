@@ -30,7 +30,7 @@ class ProductRequest extends FormRequest
             $product = Product::find($product_id);
             $product->picture = json_decode($product->picture);
             $count =  count(array_filter($product->picture));
-//        }
+        }
 
         $rules = [
             'name' => 'required|max:100|unique:products,name',
@@ -57,7 +57,6 @@ class ProductRequest extends FormRequest
             if($count >= 3){
                 $rules['pic'] = '';
             }
-        }
         }
 
         return $rules;

@@ -3,6 +3,7 @@
 namespace mobileS\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class StatisticController extends Controller
@@ -14,6 +15,12 @@ class StatisticController extends Controller
      */
     public function index(Request $request)
     {
+        if (!Auth::check() || Auth::user()->permission != 4 && Auth::user()->permission != 2) {
+            return redirect()
+                ->route('manages.index')
+                ->withError('Access denied');
+        }
+
         if(empty($request->month)){
             $request->month = date('m');
         }

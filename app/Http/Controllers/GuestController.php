@@ -224,7 +224,7 @@ class GuestController extends Controller
     public function search(Request $request)
     {
         $keyword = $request->keyword;
-        $products = Product::where('name', 'like', '%' . $keyword . '%')->paginate(10);
+        $products = Product::where('name', 'like', '%' . $keyword . '%')->paginate(4);
         foreach ($products as $product) {
             $product->picture = json_decode($product->picture, true);
         }

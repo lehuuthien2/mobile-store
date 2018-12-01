@@ -21,7 +21,7 @@
     </div>
 </div>
 <div class="form-group">
-    {!! Form::label('password-confirm ', 'Password <span class="required">*</span>' ,['class' => 'control-label col-sm-2'],
+    {!! Form::label('password-confirm ', 'Password Confirm<span class="required">*</span>' ,['class' => 'control-label col-sm-2'],
     false) !!}
     <div class="col-sm-10">
         {!! Form::password('password_confirmation', ['class' => 'form-control'], old('password', isset($user) ? $user->password :
@@ -65,7 +65,7 @@
 <div class="form-group">
     {!! Form::label('tel', 'Số điện thoại <span class="required">*</span>' ,['class' => 'control-label col-sm-2'], false) !!}
     <div class="col-sm-10">
-        {!! Form::text('tel', old('tel', isset($user) ? $user->tel : null), ['class' => 'form-control']) !!}
+        {!! Form::number('tel', old('tel', isset($user) ? $user->tel : null), ['class' => 'form-control']) !!}
         @if ($errors->has('tel'))
             <span class="invalid-feedback required" role="alert">
                                         <strong>{{ $errors->first('tel') }}</strong>

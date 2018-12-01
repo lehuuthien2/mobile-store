@@ -99,11 +99,16 @@
                                        class="col-md-4 col-form-label text-md-right">{{ __('Ngày sinh') }} </label>
 
                                 <div class="col-md-6">
-                                    {!! Form::text('birthday', old('birthday', isset($user) ? $user->birthday : null), ['class' => 'form-control datepicker']) !!}
-                                    @if ($errors->has('birthday'))
+                                    <input id="birthday" type="text"
+                                           class="form-control{{ $errors->has('birthday') ? ' is-invalid' : '' }} datepicker"
+                                           name="birthday" value="{{ old('birthday') }}">
+
+
+                                @if ($errors->has('birthday'))
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('birthday') }}</strong>
                                     </span>
+
                                     @endif
                                 </div>
                             </div>
@@ -118,7 +123,7 @@
                                 </div>
 
                                 @if ($errors->has('gender'))
-                                    <span class="invalid-feedback" role="alert">
+                                    <span style="color: #e3342f; font-size: 80%" role="alert">
                                         <strong>{{ $errors->first('gender') }}</strong>
                                     </span>
                                 @endif
