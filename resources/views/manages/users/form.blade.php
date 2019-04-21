@@ -53,8 +53,8 @@
 <div class="form-group">
     {!! Form::label('gender', 'Giới tính <span class="required">*</span>' ,['class' => 'control-label col-sm-2'], false) !!}
     <div class="col-sm-6">
-        <label>{!! Form::radio('gender', MALE,true, ['id' => 'gender_male']) !!}Nam</label>
-        <label>{!! Form::radio('gender', FEMALE, false, ['id' => 'gender_female']) !!}Nữ</label>
+        <label>{!! Form::radio('gender', MALE, old('gender', isset($user) ? $user->gender : null), ['id' => 'gender_male']) !!}Nam</label>
+        <label>{!! Form::radio('gender', FEMALE, old('gender', isset($user) ? $user->gender : null), ['id' => 'gender_female']) !!}Nữ</label>
         @if ($errors->has('gender'))
             <span class="invalid-feedback required" role="alert">
                                         <strong>{{ $errors->first('gender') }}</strong>
@@ -87,7 +87,7 @@
 <div class="form-group">
     {!! Form::label('address', 'Địa chỉ <span class="required">*</span>' ,['class' => 'control-label col-sm-2'], false) !!}
     <div class="col-sm-10">
-        {!! Form::text('address', old('adđress', isset($user) ? $user->adđress : null), ['class' => 'form-control']) !!}
+        {!! Form::text('address', old('address', isset($user) ? $user->address : null), ['class' => 'form-control']) !!}
         @if ($errors->has('address'))
             <span class="invalid-feedback required" role="alert">
                                         <strong>{{ $errors->first('address') }}</strong>
